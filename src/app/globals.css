@@ -1,0 +1,110 @@
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #0d0d0d;
+  --neon-red: #ff0000;
+  --neon-red-light: #ff2a2a;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --glass-bg: rgba(13, 13, 13, 0.7);
+  --glass-border: rgba(255, 0, 0, 0.2);
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-orbitron), sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography Utilities */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-orbitron), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+p, span, div {
+  font-family: var(--font-rajdhani), sans-serif;
+}
+
+.code-font {
+  font-family: var(--font-share-tech-mono), monospace !important;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.neon-border {
+  border: 1px solid var(--neon-red);
+  box-shadow: 0 0 10px var(--neon-red-light), inset 0 0 10px var(--glass-border);
+}
+
+.neon-text {
+  text-shadow: 0 0 10px var(--neon-red), 0 0 20px var(--neon-red-light);
+}
+
+/* Devil Horn borders (custom clip-path or pseudo-elements) */
+.devil-horn-card {
+  position: relative;
+}
+.devil-horn-card::before, .devil-horn-card::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  width: 20px;
+  height: 20px;
+  border-top: 2px solid var(--neon-red);
+  border-left: 2px solid var(--neon-red);
+  box-shadow: -2px -2px 10px var(--neon-red);
+}
+.devil-horn-card::before {
+  left: -10px;
+  transform: rotate(-15deg);
+}
+.devil-horn-card::after {
+  right: -10px;
+  transform: scaleX(-1) rotate(-15deg);
+}
