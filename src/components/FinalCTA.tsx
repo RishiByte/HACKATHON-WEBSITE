@@ -1,9 +1,24 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
 
 export default function FinalCTA() {
+  const [particles, setParticles] = useState<{id: number, x: string, y: string, dur: number, delay: number}[]>([]);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setParticles(
+      Array.from({ length: 10 }).map((_, i) => ({
+        id: i,
+        x: Math.random() > 0.5 ? '100vw' : '-100vw',
+        y: `${Math.random() * 100}vh`,
+        dur: Math.random() * 2 + 1.5,
+        delay: Math.random() * 2
+      }))
+    );
+  }, []);
+
   return (
     <section className="relative py-32 px-6 min-h-[70vh] flex items-center justify-center overflow-hidden">
       {/* Background storm-like particles */}
@@ -11,13 +26,13 @@ export default function FinalCTA() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,0,0,0.15)_0%,transparent_60%)]" />
         
         {/* Converging red particles effect */}
-        {Array.from({ length: 30 }).map((_, i) => (
+        {particles.map((p) => (
           <motion.div
-            key={i}
+            key={p.id}
             className="absolute w-1 h-1 bg-neon-red rounded-full shadow-[0_0_10px_var(--neon-red)]"
             initial={{ 
-              x: Math.random() > 0.5 ? '100vw' : '-100vw',
-              y: Math.random() * window.innerHeight,
+              x: p.x,
+              y: p.y,
               opacity: 0
             }}
             animate={{ 
@@ -27,10 +42,10 @@ export default function FinalCTA() {
               scale: [1, 2, 0]
             }}
             transition={{
-              duration: Math.random() * 2 + 1.5,
+              duration: p.dur,
               repeat: Infinity,
               ease: "circIn",
-              delay: Math.random() * 2
+              delay: p.delay
             }}
           />
         ))}

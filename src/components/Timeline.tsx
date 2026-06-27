@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { cn } from '@/lib/utils';
 
 const phases = [
   { id: '01', title: 'Registration', desc: 'Secure your spot in the arena.' },

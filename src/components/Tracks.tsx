@@ -1,9 +1,8 @@
 'use client';
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { LayoutDashboard, Server, Layers, Bot, Shield, Cloud } from 'lucide-react';
+import { LayoutDashboard, Layers, Bot, Shield, Cloud } from 'lucide-react';
 import React from 'react';
-import { cn } from '@/lib/utils';
 
 const tracks = [
   {

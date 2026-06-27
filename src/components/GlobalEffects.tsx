@@ -4,17 +4,19 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 export default function GlobalEffects() {
-  const [particles, setParticles] = useState<{ id: number; x: number; y: number; size: number; duration: number }[]>([]);
+  const [particles, setParticles] = useState<{ id: number; x: number; y: number; size: number; duration: number; delay: number }[]>([]);
 
   useEffect(() => {
     // Generate static particles for ambient effect
-    const newParticles = Array.from({ length: 50 }).map((_, i) => ({
+    const newParticles = Array.from({ length: 20 }).map((_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
       size: Math.random() * 3 + 1,
       duration: Math.random() * 10 + 10,
+      delay: Math.random() * 5,
     }));
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setParticles(newParticles);
   }, []);
 
@@ -52,7 +54,7 @@ export default function GlobalEffects() {
             duration: p.duration,
             repeat: Infinity,
             ease: "linear",
-            delay: Math.random() * 5,
+            delay: p.delay,
           }}
         />
       ))}

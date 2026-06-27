@@ -3,15 +3,16 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import AntigravityBackground from './AntigravityBackground';
 
 const floatingIcons = [
-  { label: '</>', x: -300, y: -200, pathX: [0, -60, 40, 0], pathY: [0, 80, -50, 0], rot: [0, 10, -5, 0], dur: 15 },
-  { label: 'React', x: 350, y: -150, pathX: [0, 70, -30, 0], pathY: [0, -60, 40, 0], rot: [0, -10, 5, 0], dur: 18 },
-  { label: 'Node', x: -350, y: 200, pathX: [0, 50, -80, 0], pathY: [0, 40, -60, 0], rot: [0, 5, -10, 0], dur: 20 },
-  { label: 'API', x: 250, y: 250, pathX: [0, -50, 60, 0], pathY: [0, 70, -30, 0], rot: [0, -5, 10, 0], dur: 14 },
-  { label: 'MongoDB', x: 0, y: -280, pathX: [0, 60, -40, 0], pathY: [0, -30, 80, 0], rot: [0, 15, -15, 0], dur: 16 },
-  { label: 'Fullstack', x: 250, y: 60, pathX: [0, -80, 50, 0], pathY: [0, -50, 60, 0], rot: [0, -10, 5, 0], dur: 19 },
-  { label: 'AI', x: -150, y: 150, pathX: [0, -30, 60, 0], pathY: [0, 40, -20, 0], rot: [0, 15, -10, 0], dur: 17 },
+  { label: '</>', x: -450, y: -250, pathX: [0, -60, 40, 0], pathY: [0, 80, -50, 0], rot: [0, 10, -5, 0], dur: 15 },
+  { label: 'React', x: 400, y: -200, pathX: [0, 70, -30, 0], pathY: [0, -60, 40, 0], rot: [0, -10, 5, 0], dur: 18 },
+  { label: 'Node', x: -450, y: 150, pathX: [0, 50, -80, 0], pathY: [0, 40, -60, 0], rot: [0, 5, -10, 0], dur: 20 },
+  { label: 'API', x: 350, y: 250, pathX: [0, -50, 60, 0], pathY: [0, 70, -30, 0], rot: [0, -5, 10, 0], dur: 14 },
+  { label: 'MongoDB', x: 0, y: -350, pathX: [0, 60, -40, 0], pathY: [0, -30, 80, 0], rot: [0, 15, -15, 0], dur: 16 },
+  { label: 'Fullstack', x: 450, y: 50, pathX: [0, -80, 50, 0], pathY: [0, -50, 60, 0], rot: [0, -10, 5, 0], dur: 19 },
+  { label: 'AI', x: -250, y: 350, pathX: [0, -30, 60, 0], pathY: [0, 40, -20, 0], rot: [0, 15, -10, 0], dur: 17 },
 ];
 
 function Countdown() {
@@ -19,6 +20,7 @@ function Countdown() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const targetDate = new Date();
     targetDate.setDate(targetDate.getDate() + 30); // 30 days from now
@@ -61,7 +63,10 @@ function Countdown() {
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center pt-[100px] pb-[50px] overflow-hidden">
+    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center pt-[180px] pb-[80px] overflow-hidden">
+      
+      {/* Interactive Antigravity Particle Background */}
+      <AntigravityBackground />
       
       {/* Floating Tech Tags */}
       {floatingIcons.map((icon, i) => (
@@ -95,7 +100,7 @@ export default function Hero() {
       <div className="relative z-20 flex flex-col items-center">
         
         {/* Core */}
-        <div className="relative w-[250px] h-[250px] mb-8 group cursor-pointer">
+        <div id="reactor-logo" className="relative w-[250px] h-[250px] mb-8 group cursor-pointer">
           {/* Energy Rings */}
           <motion.div 
             animate={{ scale: [0.9, 1.2, 0.9], opacity: [0.3, 0.7, 0.3], rotate: [0, 180, 360] }}
@@ -121,7 +126,7 @@ export default function Hero() {
         <motion.h1 
           animate={{ opacity: [0, 1], y: [20, 0] }}
           transition={{ duration: 0.8 }}
-          className="neon-text text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-center mb-4 leading-tight text-text-primary tracking-tighter"
+          className="neon-text text-5xl sm:text-6xl md:text-7xl lg:text-8xl mt-12 text-center mb-4 leading-tight text-text-primary tracking-tighter"
         >
           CODE. THINK.<br/>CONQUER.
         </motion.h1>

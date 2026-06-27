@@ -17,7 +17,7 @@ function Terminal() {
   useEffect(() => {
     if (!isInView) return;
 
-    let timeouts: NodeJS.Timeout[] = [];
+    const timeouts: NodeJS.Timeout[] = [];
 
     terminalCommands.forEach(({ cmd, output, delay }) => {
       const t1 = setTimeout(() => {
@@ -82,7 +82,7 @@ export default function AboutTerminal() {
             ENTER THE ARENA
           </h2>
           <p style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-            DemonDie is proud to host the most intense Web Dev and Full Stack Hackathon of the year on Unstop. This is not just a coding competition; it's a battleground for the brightest minds to build the future.
+            DemonDie is proud to host the most intense Web Dev and Full Stack Hackathon of the year on Unstop. This is not just a coding competition; it&apos;s a battleground for the brightest minds to build the future.
           </p>
           <p style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
             Bring your ideas, assemble your squad, and conquer challenges that push the boundaries of modern technology. Do you have what it takes to survive the arena?

@@ -1,26 +1,24 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
+const count = 1500;
+const positions = new Float32Array(count * 3);
+for (let i = 0; i < count; i++) {
+  const theta = Math.random() * 2 * Math.PI;
+  const phi = Math.acos(Math.random() * 2 - 1);
+  const r = Math.random() * 12; // radius
+  positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+  positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+  positions[i * 3 + 2] = r * Math.cos(phi);
+}
+
 function Particles() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useRef<any>(null);
-  
-  const positions = useMemo(() => {
-    const count = 3000;
-    const pos = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      const theta = Math.random() * 2 * Math.PI;
-      const phi = Math.acos(Math.random() * 2 - 1);
-      const r = Math.random() * 12; // radius
-      pos[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      pos[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
-      pos[i * 3 + 2] = r * Math.cos(phi);
-    }
-    return pos;
-  }, []);
 
   useFrame((state, delta) => {
     if (ref.current) {
@@ -46,6 +44,7 @@ function Particles() {
 }
 
 function GridFloor() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const gridRef = useRef<any>(null);
 
   useFrame((state) => {
@@ -69,6 +68,8 @@ export default function ThreeBackground() {
         <GridFloor />
         <fog attach="fog" args={['#000000', 2, 12]} />
       </Canvas>
+      {/* 70% opacity background overlay to improve text readability */}
+      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0, 0, 0, 0.7)', pointerEvents: 'none' }} />
     </div>
   );
 }

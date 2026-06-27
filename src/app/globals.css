@@ -85,7 +85,7 @@ p, span, div {
 }
 
 .neon-text {
-  text-shadow: 0 0 10px var(--neon-red), 0 0 20px var(--neon-red-light);
+  text-shadow: 0 0 5px #fff, 0 0 10px var(--neon-red), 0 0 20px var(--neon-red), 0 0 40px var(--neon-red-light), 0 0 80px var(--neon-red-light);
 }
 
 /* Devil Horn borders (custom clip-path or pseudo-elements) */
