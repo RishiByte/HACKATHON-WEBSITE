@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const BOOT_SEQUENCE = [
-  "INITIALIZING DEMONDIE...",
+  "INITIALIZING OMNIKON...",
   "LOADING HACKATHON MODULES...",
   "CONNECTING PARTICIPANTS...",
   "PREPARING BATTLEFIELD...",

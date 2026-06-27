@@ -5,8 +5,8 @@ import { motion, useInView } from 'framer-motion';
 
 const terminalCommands = [
   { cmd: '$ npm install innovation', output: 'fetch: innovation@latest... OK\nbuilding future...', delay: 1000 },
-  { cmd: '$ git push origin hackathon', output: 'Compressing objects: 100% (4/4), done.\nWriting objects: 100% (4/4), 4.50 KiB | 4.50 MiB/s, done.\nTo https://github.com/demondie/hackathon\n   a1b2c3d..e4f5g6h  main -> main', delay: 3500 },
-  { cmd: '$ deploy future', output: 'Deploying to DemonDie Arena...\n\n[SUCCESS] Arena is live and waiting for contenders.', delay: 7000 }
+  { cmd: '$ git push origin hackathon', output: 'Compressing objects: 100% (4/4), done.\nWriting objects: 100% (4/4), 4.50 KiB | 4.50 MiB/s, done.\nTo https://github.com/omnikon/hackathon\n   a1b2c3d..e4f5g6h  main -> main', delay: 3500 },
+  { cmd: '$ deploy future', output: 'Deploying to Omnikon Arena...\n\n[SUCCESS] Arena is live and waiting for contenders.', delay: 7000 }
 ];
 
 function Terminal() {
@@ -40,14 +40,14 @@ function Terminal() {
         <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ff5f56' }} />
         <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ffbd2e' }} />
         <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#27c93f' }} />
-        <div style={{ margin: '0 auto', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>root@demondie:~</div>
+        <div style={{ margin: '0 auto', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>root@omnikon:~</div>
       </div>
       <div className="code-font" style={{ padding: '1.5rem', flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem', color: 'var(--text-primary)' }}>
         {lines.map((line, i) => (
           <div key={i}>
             {line.isCommand ? (
               <div>
-                <span style={{ color: 'var(--neon-red)' }}>root@demondie:~$</span> {line.text.substring(2)}
+                <span style={{ color: 'var(--neon-red)' }}>root@omnikon:~$</span> {line.text.substring(2)}
               </div>
             ) : (
               <div style={{ color: 'var(--text-secondary)', whiteSpace: 'pre-wrap', marginTop: '0.5rem' }}>
@@ -82,7 +82,7 @@ export default function AboutTerminal() {
             ENTER THE ARENA
           </h2>
           <p style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-            DemonDie is proud to host the most intense Web Dev and Full Stack Hackathon of the year on Unstop. This is not just a coding competition; it&apos;s a battleground for the brightest minds to build the future.
+            Omnikon is proud to host the most intense Web Dev and Full Stack Hackathon of the year on Unstop. This is not just a coding competition; it&apos;s a battleground for the brightest minds to build the future.
           </p>
           <p style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
             Bring your ideas, assemble your squad, and conquer challenges that push the boundaries of modern technology. Do you have what it takes to survive the arena?

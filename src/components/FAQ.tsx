@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const faqs = [
   { question: "Who can participate?", answer: "Any developer, designer, or creator passionate about building the future. Teams can have up to 4 members." },
-  { question: "Is it completely online?", answer: "Yes, DemonDie Hackathon is hosted 100% virtually on Unstop, so you can join the battle from anywhere in the world." },
+  { question: "Is it completely online?", answer: "Yes, Omnikon Hackathon is hosted 100% virtually on Unstop, so you can join the battle from anywhere in the world." },
   { question: "What are the rules?", answer: "All code must be written during the hackathon. Use of open-source libraries is permitted. Be respectful to fellow hackers." },
   { question: "Do I need an idea beforehand?", answer: "No! We will reveal specific themes and challenges at the start of the hackathon. You can brainstorm then." },
   { question: "How much does it cost?", answer: "Zero. Entry into the arena is completely free of charge." },

@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -13,6 +12,14 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const links = ['Home', 'About', 'Tracks', 'Timeline', 'Prizes', 'FAQs', 'Sponsors'];
 
@@ -35,30 +42,35 @@ export default function Navbar() {
       }}
     >
       <div style={{ fontWeight: 'bold', fontSize: '1.5rem', color: 'var(--neon-red)', textTransform: 'uppercase', letterSpacing: '2px' }}>
-        DemonDie
+        Omnikon
       </div>
       <ul style={{ display: 'flex', gap: '2.5rem', listStyle: 'none' }}>
-        {links.map((item) => (
-          <li key={item}>
-            <Link 
-              href={`#${item.toLowerCase()}`}
-              style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px', transition: 'color 0.3s' }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--neon-red)';
-                e.currentTarget.style.textShadow = '0 0 8px var(--neon-red)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'var(--text-primary)';
-                e.currentTarget.style.textShadow = 'none';
-              }}
-            >
-              {item}
-            </Link>
-          </li>
-        ))}
+        {links.map((item) => {
+          const targetId = `#${item.toLowerCase()}`;
+          return (
+            <li key={item}>
+              <a 
+                href={targetId}
+                onClick={(e) => handleScrollTo(e, targetId)}
+                style={{ fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px', transition: 'color 0.3s' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--neon-red)';
+                  e.currentTarget.style.textShadow = '0 0 8px var(--neon-red)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--text-primary)';
+                  e.currentTarget.style.textShadow = 'none';
+                }}
+              >
+                {item}
+              </a>
+            </li>
+          );
+        })}
       </ul>
       <a
         href="#register"
+        onClick={(e) => handleScrollTo(e, '#register')}
         className="neon-border devil-horn-card"
         style={{
           display: 'inline-block',

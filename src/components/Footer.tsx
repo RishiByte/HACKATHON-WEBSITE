@@ -52,7 +52,7 @@ export default function Footer() {
 
       <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem', borderTop: '1px solid var(--glass-border)', paddingTop: '3rem', position: 'relative', zIndex: 10 }}>
         <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--neon-red)', letterSpacing: '2px', textTransform: 'uppercase' }}>
-          DemonDie
+          Omnikon
         </div>
 
         <div style={{ display: 'flex', gap: '2rem' }}>
@@ -71,7 +71,7 @@ export default function Footer() {
         </div>
 
         <div className="code-font" style={{ color: 'var(--text-secondary)' }}>
-          © 2026 DemonDie Hackathon. All rights reserved.
+          © 2026 Omnikon Hackathon. All rights reserved.
         </div>
       </div>
     </footer>

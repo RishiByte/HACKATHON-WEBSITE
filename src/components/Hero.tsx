@@ -114,8 +114,8 @@ export default function Hero() {
           />
           
           <motion.img 
-            src="/LogoDemonDie.jpeg" 
-            alt="DemonDie Logo" 
+            src="/LogoOmnikon.jpeg" 
+            alt="Omnikon Logo" 
             className="w-full h-full object-cover rounded-full border-2 border-neon-red relative z-10 shadow-[0_0_40px_var(--neon-red)] group-hover:scale-105 group-hover:shadow-[0_0_80px_var(--neon-red)] transition-all duration-300"
             animate={{ scale: [1, 1.02, 1] }}
             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}

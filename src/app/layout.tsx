@@ -23,7 +23,7 @@ const shareTechMono = Share_Tech_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DemonDie Hackathon",
+  title: "Omnikon Hackathon",
   description: "The ultimate Web Dev & Full Stack Hackathon",
 };
 

@@ -6,46 +6,27 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const phases = [
-  { id: '01', title: 'Registration', desc: 'Secure your spot in the arena.' },
-  { id: '02', title: 'Team Formation', desc: 'Ally with elite hackers.' },
-  { id: '03', title: 'Build Phase', desc: '48 hours to code your MVP.' },
-  { id: '04', title: 'Submission', desc: 'Deploy your weapon.' },
-  { id: '05', title: 'Final Battle', desc: 'Present to the overlords.' }
+  { id: '01', date: '10 JUL 2026', title: 'Registration', desc: 'Official launch. Secure your spot.' },
+  { id: '02', date: '01 AUG 2026', title: 'Idea Submission', desc: 'Submit your problem statement and proposed solution.' },
+  { id: '03', date: '10 AUG 2026', title: 'Documentation', desc: 'Submit a detailed Phase 1 project proposal (PDF).' },
+  { id: '04', date: '17 AUG 2026', title: 'Presentation', desc: 'Project proposal presentation (PPT) for feedback.' },
+  { id: '05', date: '25 AUG 2026', title: 'Prototype', desc: 'Submit a working prototype for evaluation.' },
+  { id: '06', date: '01 SEP 2026', title: 'Results', desc: 'Winners announced and projects showcased.' }
 ];
 
 export default function Timeline() {
   const containerRef = useRef<HTMLDivElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
-  const scrollWrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    if (lineRef.current && containerRef.current && scrollWrapperRef.current) {
-      // Horizontal scrolling for the timeline container
-      const scrollWidth = scrollWrapperRef.current.scrollWidth;
-      const amountToScroll = scrollWidth - window.innerWidth + 100;
-
-      if (amountToScroll > 0 && window.innerWidth < 1024) {
-        // Mobile/Tablet horizontal scroll
-        gsap.to(scrollWrapperRef.current, {
-          x: -amountToScroll,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: 'top top+=100',
-            end: `+=${amountToScroll}`,
-            scrub: 1,
-            pin: true,
-          }
-        });
-      }
-
-      // Line progress animation
+    if (lineRef.current && containerRef.current) {
+      // Vertical line progress animation
       gsap.fromTo(lineRef.current, 
-        { width: '0%' }, 
+        { height: '0%' }, 
         {
-          width: '100%',
+          height: '100%',
           ease: 'none',
           scrollTrigger: {
             trigger: containerRef.current,
@@ -60,48 +41,57 @@ export default function Timeline() {
 
   return (
     <section id="timeline" className="py-24 px-6 min-h-[80vh] flex flex-col justify-center overflow-hidden" ref={containerRef}>
-      <div className="max-w-7xl mx-auto w-full mb-16">
+      <div className="max-w-7xl mx-auto w-full mb-20">
         <div className="text-center">
           <h2 className="neon-text text-5xl md:text-6xl text-text-primary mb-6">MISSION PROGRESS</h2>
           <div className="w-24 h-1 bg-neon-red mx-auto shadow-[0_0_15px_var(--neon-red)]" />
         </div>
       </div>
 
-      <div className="w-full max-w-7xl mx-auto relative mt-12 overflow-x-visible">
-        <div ref={scrollWrapperRef} className="flex lg:grid lg:grid-cols-5 gap-8 lg:gap-4 relative w-max lg:w-full px-6 lg:px-0">
-          
-          {/* Background subtle line */}
-          <div className="absolute top-8 left-6 lg:left-0 right-6 lg:right-0 h-[2px] bg-glass-border z-0" />
-          
-          {/* Animated red line */}
-          <div ref={lineRef} className="absolute top-8 left-6 lg:left-0 h-[2px] bg-neon-red shadow-[0_0_10px_var(--neon-red)] z-0" />
+      <div className="w-full max-w-5xl mx-auto relative">
+        {/* Background subtle line */}
+        <div className="absolute left-6 lg:left-1/2 top-0 bottom-0 w-[2px] bg-glass-border -translate-x-1/2 z-0" />
+        
+        {/* Animated red line */}
+        <div ref={lineRef} className="absolute left-6 lg:left-1/2 top-0 w-[2px] bg-neon-red shadow-[0_0_10px_var(--neon-red)] -translate-x-1/2 z-0" />
 
-          {phases.map((phase, index) => (
-            <motion.div 
-              key={phase.id} 
-              className="relative z-10 flex flex-col items-center w-[250px] lg:w-auto"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2, duration: 0.5 }}
-            >
-              {/* Node */}
-              <div className="w-16 h-16 rounded-full bg-black border-4 border-neon-red shadow-[0_0_15px_var(--neon-red)] flex items-center justify-center mb-6 group hover:scale-110 transition-transform cursor-pointer relative">
-                <span className="code-font text-neon-red font-bold text-lg">{phase.id}</span>
-                {/* Pulse effect */}
-                <div className="absolute inset-0 rounded-full border border-neon-red opacity-0 group-hover:animate-ping" />
-              </div>
-              
-              {/* Content */}
-              <div className="text-center glass neon-border p-6 rounded-lg group hover:-translate-y-2 transition-transform duration-300 w-full">
-                <div className="code-font text-neon-red text-sm mb-2 opacity-70">PHASE {phase.id}</div>
-                <h3 className="text-xl text-text-primary mb-2 font-bold">{phase.title}</h3>
-                <p className="text-text-secondary text-sm font-light">{phase.desc}</p>
-              </div>
-            </motion.div>
-          ))}
+        <div className="flex flex-col gap-12 lg:gap-16 relative">
+          {phases.map((phase, index) => {
+            const isLeft = index % 2 === 0;
+            return (
+              <motion.div 
+                key={phase.id} 
+                className={`relative z-10 flex items-center justify-between w-full flex-row ${isLeft ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6 }}
+              >
+                
+                {/* Empty Spacer for Desktop */}
+                <div className="hidden lg:block w-5/12" />
+
+                {/* Node */}
+                <div className="absolute left-6 lg:left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-black border-4 border-neon-red shadow-[0_0_15px_var(--neon-red)] flex items-center justify-center group hover:scale-110 transition-transform cursor-pointer">
+                  <span className="code-font text-neon-red font-bold text-lg">{phase.id}</span>
+                  <div className="absolute inset-0 rounded-full border border-neon-red opacity-0 group-hover:animate-ping" />
+                </div>
+                
+                {/* Content */}
+                <div className={`w-full pl-24 lg:pl-0 lg:w-5/12 flex ${isLeft ? 'lg:justify-end' : 'lg:justify-start'}`}>
+                  <div className={`text-left ${isLeft ? 'lg:text-right' : 'lg:text-left'} glass neon-border p-6 rounded-lg group hover:-translate-y-2 transition-transform duration-300 w-full lg:max-w-md`}>
+                    <div className="code-font text-neon-red text-sm mb-2 opacity-70">PHASE {phase.id} • {phase.date}</div>
+                    <h3 className="text-2xl text-text-primary mb-3 font-bold">{phase.title}</h3>
+                    <p className="text-text-secondary text-base font-light">{phase.desc}</p>
+                  </div>
+                </div>
+
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
+
