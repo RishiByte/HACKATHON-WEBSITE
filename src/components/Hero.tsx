@@ -5,22 +5,11 @@ import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import AntigravityBackground from './AntigravityBackground';
 
-const floatingIcons = [
-  { label: '</>', x: -450, y: -250, pathX: [0, -60, 40, 0], pathY: [0, 80, -50, 0], rot: [0, 10, -5, 0], dur: 15 },
-  { label: 'React', x: 400, y: -200, pathX: [0, 70, -30, 0], pathY: [0, -60, 40, 0], rot: [0, -10, 5, 0], dur: 18 },
-  { label: 'Node', x: -450, y: 150, pathX: [0, 50, -80, 0], pathY: [0, 40, -60, 0], rot: [0, 5, -10, 0], dur: 20 },
-  { label: 'API', x: 350, y: 250, pathX: [0, -50, 60, 0], pathY: [0, 70, -30, 0], rot: [0, -5, 10, 0], dur: 14 },
-  { label: 'MongoDB', x: 0, y: -350, pathX: [0, 60, -40, 0], pathY: [0, -30, 80, 0], rot: [0, 15, -15, 0], dur: 16 },
-  { label: 'Fullstack', x: 450, y: 50, pathX: [0, -80, 50, 0], pathY: [0, -50, 60, 0], rot: [0, -10, 5, 0], dur: 19 },
-  { label: 'AI', x: -250, y: 350, pathX: [0, -30, 60, 0], pathY: [0, 40, -20, 0], rot: [0, 15, -10, 0], dur: 17 },
-];
-
 function Countdown() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const targetDate = new Date();
     targetDate.setDate(targetDate.getDate() + 30); // 30 days from now
@@ -46,13 +35,13 @@ function Countdown() {
   if (!mounted) return null;
 
   return (
-    <div className="flex gap-6 sm:gap-12 mt-16">
+    <div className="flex gap-4 sm:gap-8 mt-12 z-20 relative">
       {Object.entries(timeLeft).map(([unit, value]) => (
-        <div key={unit} className="flex flex-col items-center group">
-          <div className="code-font neon-text text-4xl sm:text-6xl font-bold group-hover:scale-110 transition-transform duration-300">
+        <div key={unit} className="flex flex-col items-center group bg-black/50 border border-neon-red/30 px-4 py-3 sm:px-6 sm:py-4 rounded-sm hover:border-neon-red hover:shadow-[0_0_15px_rgba(255,0,0,0.4)] transition-all">
+          <div className="font-mono text-neon-red text-3xl sm:text-5xl font-bold">
             {value.toString().padStart(2, '0')}
           </div>
-          <div className="text-xs sm:text-sm uppercase tracking-[2px] text-neon-red mt-2 font-mono">
+          <div className="text-[10px] sm:text-xs uppercase tracking-[3px] text-text-secondary mt-2 font-mono">
             {unit}
           </div>
         </div>
@@ -63,99 +52,117 @@ function Countdown() {
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center pt-[180px] pb-[80px] overflow-hidden">
+    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-black">
       
-      {/* Interactive Antigravity Particle Background */}
-      <AntigravityBackground />
-      
-      {/* Floating Tech Tags */}
-      {floatingIcons.map((icon, i) => (
-        <motion.div
-          key={i}
-          animate={{
-            x: icon.pathX,
-            y: icon.pathY,
-            rotate: icon.rot
-          }}
-          transition={{
-            duration: icon.dur,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-          className={cn(
-            "absolute code-font glass text-lg font-bold z-10 px-4 py-2 rounded border border-neon-red",
-            "shadow-[0_0_15px_rgba(255,0,0,0.4),inset_0_0_10px_rgba(255,0,0,0.1)] pointer-events-none",
-            "tracking-wider text-text-primary text-shadow-sm hover:scale-110 transition-transform"
-          )}
-          style={{
-            left: `calc(50% + ${icon.x}px)`,
-            top: `calc(50% + ${icon.y}px)`,
-          }}
-        >
-          {icon.label}
-        </motion.div>
-      ))}
-
-      {/* Reactor Core Logo & Content */}
-      <div className="relative z-20 flex flex-col items-center">
+      {/* Background Layers */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Particle Background */}
+        <AntigravityBackground />
         
-        {/* Core */}
-        <div id="reactor-logo" className="relative w-[250px] h-[250px] mb-8 group cursor-pointer">
-          {/* Energy Rings */}
-          <motion.div 
-            animate={{ scale: [0.9, 1.2, 0.9], opacity: [0.3, 0.7, 0.3], rotate: [0, 180, 360] }}
-            transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] rounded-full border border-dashed border-neon-red opacity-30 group-hover:border-solid transition-all"
-          />
-          <motion.div 
-            animate={{ scale: [0.8, 1.1, 0.8], opacity: [0.4, 0.8, 0.4] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] rounded-full bg-[radial-gradient(circle,var(--neon-red)_0%,transparent_70%)] blur-[30px] z-0"
-          />
-          
-          <motion.img 
-            src="/LogoOmnikon.jpeg" 
-            alt="Omnikon Logo" 
-            className="w-full h-full object-cover rounded-full border-2 border-neon-red relative z-10 shadow-[0_0_40px_var(--neon-red)] group-hover:scale-105 group-hover:shadow-[0_0_80px_var(--neon-red)] transition-all duration-300"
-            animate={{ scale: [1, 1.02, 1] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-          />
+        {/* Subtle Grid */}
+        <div className="absolute inset-0 opacity-[0.15] bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        
+        {/* Circuit Traces (Simulated with radial gradients and repeating lines) */}
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,rgba(255,0,0,0.8)_0%,transparent_60%)]" />
+        
+        {/* Scanlines Effect */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay bg-[linear-gradient(rgba(0,0,0,0)_50%,rgba(0,0,0,0.5)_50%)] bg-[size:100%_4px]" />
+        
+        {/* Red Beam Spotlight from top */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60vw] h-[100vh] bg-[conic-gradient(from_180deg_at_50%_0%,transparent_0deg,rgba(255,0,0,0.15)_160deg,rgba(255,0,0,0.3)_180deg,rgba(255,0,0,0.15)_200deg,transparent_360deg)] opacity-70 blur-xl" />
+      </div>
+
+      {/* Hero Content */}
+      <div className="relative z-20 flex flex-col items-center w-full max-w-7xl px-4">
+        
+        {/* The Hero Logo with Morphing Wrapper */}
+        <div id="reactor-logo" className="relative w-48 h-48 sm:w-64 sm:h-64 mb-10 z-30 perspective-1000">
+          <motion.div
+            className="w-full h-full"
+            animate={{ 
+              y: [-10, 10, -10],
+              scale: [1, 1.02, 1],
+            }}
+            transition={{ 
+              duration: 6, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+          >
+            {/* Soft Neon Pulse behind logo */}
+            <motion.div 
+              animate={{ opacity: [0.5, 0.8, 0.5], scale: [1, 1.1, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute inset-[-20%] rounded-full bg-neon-red/30 blur-[30px] z-0 pointer-events-none"
+            />
+            
+            {/* The Logo itself */}
+            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-neon-red/60 shadow-[0_0_40px_rgba(255,0,0,0.8)] z-10 bg-black">
+              <img 
+                src="/LogoOmnikon.jpeg" 
+                alt="Omnikon Logo" 
+                className="w-full h-full object-cover opacity-90"
+              />
+              {/* Inner Scanline on Logo */}
+              <motion.div 
+                animate={{ y: ['-100%', '100%'] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                className="absolute inset-0 h-1 bg-white/50 shadow-[0_0_10px_#fff] mix-blend-overlay"
+              />
+            </div>
+          </motion.div>
         </div>
 
-        {/* Hero Text */}
-        <motion.h1 
-          animate={{ opacity: [0, 1], y: [20, 0] }}
-          transition={{ duration: 0.8 }}
-          className="neon-text text-5xl sm:text-6xl md:text-7xl lg:text-8xl mt-12 text-center mb-4 leading-tight text-text-primary tracking-tighter"
-        >
-          CODE. THINK.<br/>CONQUER.
-        </motion.h1>
-        
-        <motion.p 
-          animate={{ opacity: [0, 1] }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-xl sm:text-2xl text-text-secondary text-center max-w-3xl tracking-[2px] mt-4 font-light"
-        >
-          The ultimate Web Dev & Full Stack Hackathon
-        </motion.p>
-
-        {/* Buttons */}
+        {/* Typography */}
         <motion.div 
-          animate={{ opacity: [0, 1], y: [20, 0] }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          className="flex flex-wrap gap-6 sm:gap-8 mt-12 justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="text-center w-full z-20"
         >
-          <a href="#register" className="relative group overflow-hidden px-8 py-4 bg-neon-red text-black font-bold text-lg sm:text-xl uppercase tracking-[2px] devil-horn-card hover:shadow-[0_0_30px_var(--neon-red)] transition-shadow duration-300">
-            <span className="relative z-10">Register on Unstop</span>
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+          <div className="inline-block relative">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 uppercase mb-4 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
+              OMNIKON NATIONAL<br/>HACKATHON <span className="text-neon-red text-shadow-[0_0_15px_rgba(255,0,0,0.8)]">2026</span>
+            </h1>
+            {/* Glitch Overlay Effect */}
+            <h1 className="absolute top-0 left-0 w-full h-full text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-neon-red uppercase mb-4 opacity-0 hover:opacity-100 hover:animate-pulse transition-opacity duration-100 pointer-events-none clip-path-glitch mix-blend-screen">
+              OMNIKON NATIONAL<br/>HACKATHON 2026
+            </h1>
+          </div>
+          
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="flex items-center justify-center gap-4 mt-2"
+          >
+            <div className="w-8 sm:w-12 h-[1px] bg-neon-red/50" />
+            <p className="text-lg sm:text-2xl text-text-secondary tracking-[6px] sm:tracking-[10px] uppercase font-mono text-shadow-[0_0_8px_rgba(255,0,0,0.4)]">
+              Build. Innovate. Impact.
+            </p>
+            <div className="w-8 sm:w-12 h-[1px] bg-neon-red/50" />
+          </motion.div>
+        </motion.div>
+
+        {/* Action Buttons */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="flex flex-wrap gap-6 mt-12 justify-center z-20"
+        >
+          <a href="#register" className="relative group px-8 py-4 bg-black border border-neon-red overflow-hidden hover:shadow-[0_0_20px_rgba(255,0,0,0.6)] transition-all">
+            <span className="relative z-10 font-mono text-neon-red font-bold uppercase tracking-widest group-hover:text-black transition-colors duration-300">
+              Initialize Registration
+            </span>
+            <div className="absolute inset-0 bg-neon-red scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
           </a>
           
-          <a href="#rules" className="glass px-8 py-4 text-text-primary font-bold text-lg sm:text-xl uppercase tracking-[2px] hover:border-neon-red hover:text-neon-red transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,0,0,0.3)]">
-            Rulebook
-          </a>
-          
-          <a href="#discord" className="glass px-8 py-4 text-text-primary font-bold text-lg sm:text-xl uppercase tracking-[2px] hover:border-neon-red hover:text-neon-red transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,0,0,0.3)]">
-            Join Discord
+          <a href="#rules" className="relative group px-8 py-4 bg-transparent border border-white/20 hover:border-white/60 overflow-hidden transition-all">
+            <span className="relative z-10 font-mono text-text-secondary group-hover:text-white uppercase tracking-widest transition-colors duration-300">
+              Access Rulebook
+            </span>
+            <div className="absolute inset-0 bg-white/10 scale-y-0 group-hover:scale-y-100 origin-bottom transition-transform duration-300 ease-out" />
           </a>
         </motion.div>
 
