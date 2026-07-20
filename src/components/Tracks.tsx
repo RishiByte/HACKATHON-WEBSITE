@@ -136,14 +136,7 @@ function TrackCard({ track, index }: { track: typeof tracks[0]; index: number })
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ rotateX, rotateY, perspective: 1000 }}
-      whileHover="hover"
-      initial="initial"
-      variants={{
-        initial: { y: 0 },
-        hover: { y: -10 }
-      }}
-      transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-      className={`premium-card group relative flex flex-col overflow-hidden transition-all duration-300 transform-gpu bg-[#111111] ${track.featured ? 'lg:col-span-2 min-h-[480px]' : 'min-h-[440px]'}`}
+      className={`premium-card group relative flex flex-col overflow-hidden transition-all duration-300 transform-gpu bg-[#111111] ${track.featured ? 'lg:col-span-2 min-h-[480px] !border-[#ff1e1e]/30' : 'min-h-[440px]'}`}
     >
       {/* 3D background gradient spotlight */}
       <motion.div 
@@ -161,23 +154,16 @@ function TrackCard({ track, index }: { track: typeof tracks[0]; index: number })
         <div className="absolute inset-0 bg-gradient-to-br from-[#ff1e1e]/10 to-transparent pointer-events-none" />
       )}
       
-      {/* Glowing border and deep shadow */}
-      <div className={`absolute inset-0 rounded-2xl border-2 pointer-events-none transition-all duration-300 ${track.featured ? 'border-[#ff1e1e]/20 group-hover:border-[#ff1e1e]/60 group-hover:shadow-[0_20px_50px_rgba(255,30,30,0.2)]' : 'border-transparent group-hover:border-[#ff1e1e]/40 group-hover:shadow-[0_20px_40px_rgba(255,30,30,0.15)]'}`} />
-      
       <div className="relative z-10 flex h-full flex-col p-8 sm:p-10 pointer-events-none">
         
         {/* Header: Icon & Badge */}
         <div className="mb-8 flex items-start justify-between gap-4">
           <div className="flex items-center gap-6">
-            <motion.div 
-              className={`flex items-center justify-center rounded-xl border border-white/10 bg-[#0a0a0a] text-white shadow-[0_10px_30px_rgba(255,30,30,0.1)] group-hover:border-[#ff1e1e]/50 group-hover:text-[#ff1e1e] group-hover:shadow-[0_20px_40px_rgba(255,30,30,0.3)] transition-all duration-300 ${track.featured ? 'h-20 w-20' : 'h-16 w-16'}`}
-              variants={{ hover: { rotate: 5 } }}
-              transition={{ duration: 0.3 }}
+            <div 
+              className={`flex items-center justify-center rounded-xl border border-white/10 bg-[#0a0a0a] text-white shadow-[0_10px_30px_rgba(255,30,30,0.1)] group-hover:border-[#ff1e1e]/50 group-hover:text-[#ff1e1e] group-hover:shadow-[0_20px_40px_rgba(255,30,30,0.3)] group-hover:rotate-6 transition-all duration-300 ${track.featured ? 'h-20 w-20' : 'h-16 w-16'}`}
             >
-              <motion.div variants={{ hover: track.iconAnim as any }}>
-                <track.icon size={track.featured ? 36 : 32} />
-              </motion.div>
-            </motion.div>
+              <track.icon size={track.featured ? 36 : 32} />
+            </div>
             <div className="code-font text-2xl text-[#bdbdbd]/30 font-black group-hover:text-[#ff1e1e]/40 transition-colors duration-300">
               0{index + 1}
             </div>
@@ -200,13 +186,8 @@ function TrackCard({ track, index }: { track: typeof tracks[0]; index: number })
         </p>
 
         {/* Example Projects */}
-        <motion.div 
-          variants={{
-            initial: { opacity: 0, y: 15 },
-            hover: { opacity: 1, y: 0 }
-          }}
-          transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-          className="mt-6 flex flex-col gap-2"
+        <div 
+          className="mt-6 flex flex-col gap-2 opacity-80 group-hover:opacity-100 transition-opacity duration-300"
         >
           <div className="text-xs uppercase tracking-widest text-[#bdbdbd] code-font mb-1">Ideas to build</div>
           <ul className="flex flex-wrap gap-2">
@@ -217,7 +198,7 @@ function TrackCard({ track, index }: { track: typeof tracks[0]; index: number })
               </li>
             ))}
           </ul>
-        </motion.div>
+        </div>
         
         {/* Tags */}
         <div className="mt-auto pt-8 flex flex-wrap gap-2">
@@ -232,17 +213,12 @@ function TrackCard({ track, index }: { track: typeof tracks[0]; index: number })
         </div>
 
         {/* Awards Footer */}
-        <motion.div 
-          variants={{
-            initial: { opacity: 0 },
-            hover: { opacity: 1 }
-          }}
-          transition={{ duration: 0.3, delay: 0.1 }}
-          className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#ff1e1e]/10 bg-gradient-to-t from-[#ff1e1e]/10 to-transparent flex items-center justify-center gap-2"
+        <div 
+          className="absolute bottom-0 left-0 right-0 p-4 border-t border-[#ff1e1e]/10 bg-gradient-to-t from-[#ff1e1e]/10 to-transparent flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         >
           <Trophy size={16} className="text-[#ff1e1e]" />
           <span className="text-sm font-semibold text-white tracking-wide">{track.award}</span>
-        </motion.div>
+        </div>
 
       </div>
     </motion.article>

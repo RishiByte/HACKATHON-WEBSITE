@@ -158,11 +158,6 @@ export default function Footer() {
           <div className="code-font text-xs text-[#bdbdbd] uppercase tracking-widest text-center md:text-left">
             © 2026 Omnikon Hackathon. All rights reserved.
           </div>
-          <div className="flex gap-6 text-xs code-font text-[#bdbdbd] uppercase tracking-widest items-center">
-            <a href="#" className="hover:text-[#ff1e1e] transition-colors">Privacy Policy</a>
-            <span className="w-1 h-1 rounded-full bg-[#ff1e1e]" />
-            <a href="#" className="hover:text-[#ff1e1e] transition-colors">Terms of Service</a>
-          </div>
           
           <motion.button
             onClick={scrollToTop}
