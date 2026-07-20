@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion';
 import { Bot, Cloud, LayoutDashboard, Layers, Shield, Trophy } from 'lucide-react';
 import ScrollReveal, { ScrollRevealItem } from './animations/ScrollReveal';
+import TextReveal from './animations/TextReveal';
 
 const tracks = [
   {
@@ -290,7 +291,8 @@ export default function Tracks() {
         <ScrollRevealItem className="mb-12 max-w-4xl">
           <div className="eyebrow">Choose your build lane</div>
           <h2 className="section-title">
-            Tracks With Real <span className="text-[#ff1e1e]">Gravity</span>
+            <TextReveal text="Tracks With Real" delay={0.1} as="span" className="inline-block mr-2" />
+            <TextReveal text="Gravity" delay={0.2} as="span" className="text-[#ff1e1e] inline-block" />
           </h2>
           <p className="section-subtitle mt-6 max-w-3xl">
             Choose the track that matches your passion. Whether you're building AI applications, cloud infrastructure, secure systems, or polished user experiences, every track is judged independently and rewards creativity, technical excellence, and real-world impact.

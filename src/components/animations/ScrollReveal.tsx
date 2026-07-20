@@ -15,15 +15,17 @@ export const staggerContainer: Variants = {
 };
 
 export const slideUpVariant: Variants = {
-  hidden: { opacity: 0, y: 50, filter: 'blur(10px)', scale: 0.95 },
+  hidden: { opacity: 0, y: 50, filter: 'blur(12px)', scale: 0.95 },
   show: { 
     opacity: 1, 
     y: 0, 
     filter: 'blur(0px)', 
     scale: 1, 
     transition: { 
-      duration: 0.8, 
-      ease: [0.16, 1, 0.3, 1] // Apple-like easing
+      type: "spring",
+      stiffness: 80,
+      damping: 20,
+      mass: 1,
     } 
   }
 };

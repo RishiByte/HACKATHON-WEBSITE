@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, Variants, useMotionValue, useTransform } from 'framer-motion';
 import { ArrowRight, CalendarDays, MapPin } from 'lucide-react';
+import TextReveal from './animations/TextReveal';
 
 const targetDate = new Date('2026-08-15T23:59:59+05:30');
 
@@ -69,19 +70,7 @@ const itemVariants: Variants = {
   visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
 };
 
-// Title letter stagger
-const titleVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.04, delayChildren: 0.2 },
-  }
-};
 
-const letterVariants: Variants = {
-  hidden: { opacity: 0, y: 20, rotateX: -90 },
-  visible: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
-};
 
 export default function Hero() {
   const containerRef = useRef<HTMLElement>(null);
@@ -147,22 +136,10 @@ export default function Hero() {
           National Tech Hackathon 2026
         </motion.div>
         
-        <motion.h1 variants={titleVariants} className="text-[clamp(3.5rem,8vw,6.5rem)] font-black uppercase leading-[0.9] text-white tracking-tight mb-8 perspective-[1000px]">
-          <span className="block mb-2 text-[#bdbdbd]">
-            {"Build The".split('').map((char, i) => (
-              <motion.span key={i} variants={letterVariants} className="inline-block">
-                {char === ' ' ? '\u00A0' : char}
-              </motion.span>
-            ))}
-          </span>
-          <span className="block text-[#ff1e1e] neon-text">
-            {"Impossible".split('').map((char, i) => (
-              <motion.span key={i} variants={letterVariants} className="inline-block">
-                {char}
-              </motion.span>
-            ))}
-          </span>
-        </motion.h1>
+        <h1 className="text-[clamp(3.5rem,8vw,6.5rem)] font-black uppercase leading-[0.9] tracking-tight mb-8 perspective-[1000px]">
+          <TextReveal text="Build The" splitBy="letters" delay={0.1} className="block mb-2 text-[#bdbdbd]" />
+          <TextReveal text="Impossible" splitBy="letters" delay={0.5} className="block text-[#ff1e1e] neon-text" />
+        </h1>
         
         <motion.p variants={itemVariants} className="max-w-2xl text-lg sm:text-xl leading-relaxed text-[#bdbdbd] mb-10">
           Turn less than 1 month of coding into a product that matters. If you&apos;re a builder, designer, or creator with ideas, this is your arena.

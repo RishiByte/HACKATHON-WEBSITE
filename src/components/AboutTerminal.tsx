@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Braces, Gauge, Rocket, Users } from 'lucide-react';
 import ScrollReveal, { ScrollRevealItem } from './animations/ScrollReveal';
+import TextReveal from './animations/TextReveal';
 
 const pillars = [
   {
@@ -31,7 +32,8 @@ export default function AboutTerminal() {
         <ScrollRevealItem>
           <div className="eyebrow">Built for serious makers</div>
           <h2 className="section-title">
-            A Hackathon That Feels Like A <span className="text-[#ff1e1e]">Launchpad</span>
+            <TextReveal text="A Hackathon That Feels Like A" delay={0.1} as="span" className="inline-block mr-2" />
+            <TextReveal text="Launchpad" delay={0.3} as="span" className="text-[#ff1e1e] inline-block" />
           </h2>
           <p className="section-subtitle max-w-2xl mt-6">
             Omnikon brings together developers, designers, and builders for a focused online sprint. The goal is simple: form a sharp idea, build a clean product, and present it like something ready for the world.
@@ -94,10 +96,17 @@ export default function AboutTerminal() {
               </div>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
                 {telemetry.map((item, index) => (
-                  <div key={item} className="relative rounded-lg bg-[#151515] px-4 py-4 border border-white/5 hover:border-[#ff1e1e]/30 transition-colors">
+                  <motion.div
+                    key={item}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                    className="relative rounded-lg bg-[#151515] px-4 py-4 border border-white/5 hover:border-[#ff1e1e]/30 transition-colors"
+                  >
                     <div className="code-font text-xs text-[#ff1e1e] mb-1">0{index + 1}</div>
                     <div className="text-sm font-bold text-white leading-tight">{item}</div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>

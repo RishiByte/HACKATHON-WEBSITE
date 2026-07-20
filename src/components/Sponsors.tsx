@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import ScrollReveal, { ScrollRevealItem } from './animations/ScrollReveal';
+import TextReveal from './animations/TextReveal';
 
 export default function Sponsors() {
   return (
@@ -10,7 +11,8 @@ export default function Sponsors() {
         <ScrollRevealItem className="mx-auto mb-16 max-w-3xl text-center">
           <div className="eyebrow justify-center">Sponsors and partners</div>
           <h2 className="section-title">
-            Backed By <span className="text-[#ff1e1e]">Giants</span>
+            <TextReveal text="Backed By" delay={0.1} as="span" className="inline-block mr-2" />
+            <TextReveal text="Giants" delay={0.3} as="span" className="text-[#ff1e1e] inline-block" />
           </h2>
           <p className="section-subtitle mx-auto">
             Our incredible partners make this event possible, providing tools, resources, and career opportunities.

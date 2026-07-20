@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import ScrollReveal, { ScrollRevealItem } from './animations/ScrollReveal';
+import TextReveal from './animations/TextReveal';
 import { useRef } from 'react';
 
 const timeline = [
@@ -53,7 +54,8 @@ export default function Timeline() {
         <ScrollRevealItem className="mb-20 text-center">
           <div className="eyebrow mx-auto">The Roadmap</div>
           <h2 className="section-title">
-            Hackathon <span className="text-[#ff1e1e]">Timeline</span>
+            <TextReveal text="Hackathon" delay={0.1} as="span" className="inline-block mr-2" />
+            <TextReveal text="Timeline" delay={0.3} as="span" className="text-[#ff1e1e] inline-block" />
           </h2>
         </ScrollRevealItem>
 
