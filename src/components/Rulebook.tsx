@@ -30,7 +30,7 @@ const rules = [
 
 export default function Rulebook() {
   return (
-    <section id="rules" className="section-shell overflow-hidden bg-[#050505]">
+    <section id="rules" className="section-shell overflow-hidden">
       <ScrollReveal stagger className="section-inner">
         <div className="grid items-center gap-12 lg:grid-cols-[0.88fr_1.12fr]">
           <ScrollRevealItem>

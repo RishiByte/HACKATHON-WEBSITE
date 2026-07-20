@@ -163,7 +163,7 @@ function ReasonCard({ reason, index }: { reason: typeof reasons[0], index: numbe
 
 export default function WhyParticipate() {
   return (
-    <section id="why-participate" className="section-shell bg-[#030303] relative overflow-hidden">
+    <section id="why-participate" className="section-shell relative overflow-hidden">
       {/* Improved Background Effects */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-50" />
       

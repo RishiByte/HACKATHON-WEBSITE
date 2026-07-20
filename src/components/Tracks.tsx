@@ -227,7 +227,7 @@ function TrackCard({ track, index }: { track: typeof tracks[0]; index: number })
 
 export default function Tracks() {
   return (
-    <section id="tracks" className="section-shell overflow-hidden bg-[#050505] relative">
+    <section id="tracks" className="section-shell overflow-hidden relative">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-40" />
       

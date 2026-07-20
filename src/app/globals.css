@@ -211,6 +211,21 @@ p, span, div, button, a {
   box-shadow: 0 0 30px rgba(255, 30, 30, 0.2), inset 0 0 10px rgba(255, 30, 30, 0.1);
 }
 
+.neon-border-text {
+  -webkit-text-stroke: 1px rgba(255, 30, 30, 0.8);
+  text-shadow: 0 0 15px rgba(255, 30, 30, 0.5);
+}
+
+@keyframes gradient-slow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-slow {
+  animation: gradient-slow 8s ease infinite;
+}
+
 /* Scrollbar customization */
 ::-webkit-scrollbar {
   width: 8px;

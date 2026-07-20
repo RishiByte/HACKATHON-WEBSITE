@@ -5,7 +5,7 @@ import { ArrowRight, CalendarCheck } from 'lucide-react';
 
 export default function FinalCTA() {
   return (
-    <section id="register" className="section-shell overflow-hidden bg-[#0a0a0a]">
+    <section id="register" className="section-shell overflow-hidden">
       <div className="section-inner">
         <motion.div
           initial={{ opacity: 0, y: 28 }}

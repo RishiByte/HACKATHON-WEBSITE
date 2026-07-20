@@ -244,7 +244,7 @@ export default function PrizePool() {
   const BASE_DELAY = 1.0; 
 
   return (
-    <section ref={sectionRef} id="prizes" className="section-shell overflow-hidden bg-[#080808] relative">
+    <section ref={sectionRef} id="prizes" className="section-shell overflow-hidden relative">
       
       {/* Background Polish */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-50" />

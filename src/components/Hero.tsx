@@ -95,7 +95,7 @@ export default function Hero() {
   const parallaxY2 = useTransform(mouseY, [-1, 1], [30, -30]);
 
   return (
-    <section ref={containerRef} id="home" className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pb-20 pt-32 sm:px-8 bg-[#050505]">
+    <section ref={containerRef} id="home" className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 pb-20 pt-32 sm:px-8">
       {/* Background Orbs with Parallax */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div

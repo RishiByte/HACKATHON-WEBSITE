@@ -27,7 +27,7 @@ const telemetry = ['Idea validation', 'Prototype sprint', 'Mentor review', 'Fina
 
 export default function AboutTerminal() {
   return (
-    <section id="about" className="section-shell bg-[#0a0a0a]">
+    <section id="about" className="section-shell">
       <ScrollReveal stagger className="section-inner grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
         <ScrollRevealItem>
           <div className="eyebrow">Built for serious makers</div>

@@ -85,7 +85,7 @@ function AnimatedStat({ stat, index }: { stat: typeof stats[0], index: number })
 
 export default function PartnerWithUs() {
   return (
-    <section id="partner" className="section-shell border-t border-[#ff1e1e]/10 bg-[#080808]">
+    <section id="partner" className="section-shell border-t border-[#ff1e1e]/10">
       <div className="section-inner">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

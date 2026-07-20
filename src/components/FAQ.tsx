@@ -17,7 +17,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faqs" className="section-shell bg-[#080808]">
+    <section id="faqs" className="section-shell">
       <div className="section-inner grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
         <ScrollReveal>
           <ScrollRevealItem>

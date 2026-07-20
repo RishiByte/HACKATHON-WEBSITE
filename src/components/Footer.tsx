@@ -37,7 +37,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-[#030303] pt-24 pb-10 border-t border-[#ff1e1e]/20">
+    <footer className="relative overflow-hidden pt-24 pb-10 border-t border-[#ff1e1e]/20">
       {/* Cinematic Ambient Glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[500px] pointer-events-none opacity-[0.15] mix-blend-screen" style={{ background: 'radial-gradient(ellipse at bottom, #ff1e1e 0%, transparent 60%)' }} />
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,30,30,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,30,30,0.02)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none" />

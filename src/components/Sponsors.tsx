@@ -6,7 +6,7 @@ import TextReveal from './animations/TextReveal';
 
 export default function Sponsors() {
   return (
-    <section id="sponsors" className="section-shell overflow-hidden bg-[#050505]">
+    <section id="sponsors" className="section-shell overflow-hidden">
       <ScrollReveal stagger className="section-inner">
         <ScrollRevealItem className="mx-auto mb-16 max-w-3xl text-center">
           <div className="eyebrow justify-center">Sponsors and partners</div>

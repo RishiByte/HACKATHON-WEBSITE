@@ -135,7 +135,7 @@ export default function WhatYouBuild() {
   if (!mounted) return null;
 
   return (
-    <section id="problem-statements" className="section-shell relative overflow-hidden bg-[#030303]">
+    <section id="problem-statements" className="section-shell relative overflow-hidden">
       
       {/* Background Effects */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-30" />
