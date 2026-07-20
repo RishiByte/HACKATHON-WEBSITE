@@ -36,7 +36,7 @@ export default function FloatingDiscord() {
           animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
           exit={{ opacity: 0, y: 20, scale: 0.9, filter: "blur(10px)" }}
           transition={{ type: "spring", stiffness: 400, damping: 25 }}
-          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[100] w-[calc(100vw-2rem)] sm:w-80 premium-card bg-[#0a0a0a]/90 backdrop-blur-2xl border border-[#ff1e1e]/30 p-4 sm:p-5 rounded-2xl shadow-[0_10px_40px_rgba(255,30,30,0.15)] group"
+          className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-[100] w-[calc(100vw-2rem)] sm:w-80 premium-card bg-[#0a0a0a]/90 backdrop-blur-2xl border border-[#ff1e1e]/30 p-4 sm:p-5 rounded-2xl shadow-[0_10px_40px_rgba(255,30,30,0.15)] group"
           style={{ transformPerspective: 1000 }}
         >
           {/* Subtle hover glow */}
@@ -52,8 +52,8 @@ export default function FloatingDiscord() {
           
           <div className="flex items-start gap-4 relative z-10">
             <motion.div 
-              animate={{ rotate: [0, -10, 10, -10, 10, 0] }}
-              transition={{ duration: 0.5, delay: 4, repeat: Infinity, repeatDelay: 5 }}
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               className="w-12 h-12 shrink-0 rounded-xl bg-gradient-to-br from-[#ff1e1e]/20 to-[#ff1e1e]/5 border border-[#ff1e1e]/30 flex items-center justify-center text-[#ff1e1e] shadow-[0_0_15px_rgba(255,30,30,0.2)]"
             >
               <MessageSquare size={24} />

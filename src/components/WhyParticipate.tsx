@@ -29,7 +29,7 @@ const reasons = [
     icon: Code, 
     title: 'Open Source Experience', 
     desc: 'Publish your work on GitHub, collaborate with contributors, and strengthen your open-source profile.',
-    animation: { opacity: [1, 0, 1], transition: { duration: 0.8, repeat: Infinity, ease: 'steps(2)' } }
+    animation: { opacity: [1, 0, 1], transition: { duration: 0.8, repeat: Infinity, ease: 'easeInOut' } }
   },
   { 
     icon: Rocket, 
