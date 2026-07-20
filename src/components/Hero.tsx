@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import AntigravityBackground from './AntigravityBackground';
+import GlitchText from './animations/GlitchText';
 
 function Countdown() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -65,8 +66,12 @@ export default function Hero() {
         {/* Circuit Traces (Simulated with radial gradients and repeating lines) */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,rgba(255,0,0,0.8)_0%,transparent_60%)]" />
         
-        {/* Scanlines Effect */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay bg-[linear-gradient(rgba(0,0,0,0)_50%,rgba(0,0,0,0.5)_50%)] bg-[size:100%_4px]" />
+        {/* Animated Scanlines Effect */}
+        <motion.div 
+          animate={{ backgroundPosition: ['0px 0px', '0px 100px'] }}
+          transition={{ repeat: Infinity, duration: 4, ease: 'linear' }}
+          className="absolute inset-0 opacity-30 pointer-events-none mix-blend-overlay bg-[linear-gradient(rgba(0,0,0,0)_50%,rgba(0,0,0,0.5)_50%)] bg-[size:100%_4px]" 
+        />
         
         {/* Red Beam Spotlight from top */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60vw] h-[100vh] bg-[conic-gradient(from_180deg_at_50%_0%,transparent_0deg,rgba(255,0,0,0.15)_160deg,rgba(255,0,0,0.3)_180deg,rgba(255,0,0,0.15)_200deg,transparent_360deg)] opacity-70 blur-xl" />
@@ -121,13 +126,11 @@ export default function Hero() {
           className="text-center w-full z-20"
         >
           <div className="inline-block relative">
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 uppercase mb-4 drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
-              OMNIKON NATIONAL<br/>HACKATHON <span className="text-neon-red text-shadow-[0_0_15px_rgba(255,0,0,0.8)]">2026</span>
-            </h1>
-            {/* Glitch Overlay Effect */}
-            <h1 className="absolute top-0 left-0 w-full h-full text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-neon-red uppercase mb-4 opacity-0 hover:opacity-100 hover:animate-pulse transition-opacity duration-100 pointer-events-none clip-path-glitch mix-blend-screen">
-              OMNIKON NATIONAL<br/>HACKATHON 2026
-            </h1>
+            <GlitchText 
+              text="OMNIKON NATIONAL HACKATHON 2026" 
+              as="h1" 
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter uppercase mb-4 max-w-4xl leading-tight" 
+            />
           </div>
           
           <motion.div 
@@ -151,19 +154,19 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.8 }}
           className="flex flex-wrap gap-6 mt-12 justify-center z-20"
         >
-          <a href="#register" className="relative group px-8 py-4 bg-black border border-neon-red overflow-hidden hover:shadow-[0_0_20px_rgba(255,0,0,0.6)] transition-all">
+          <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="#register" className="relative group px-8 py-4 bg-black border border-neon-red overflow-hidden hover:shadow-[0_0_20px_rgba(255,0,0,0.6)] transition-all">
             <span className="relative z-10 font-mono text-neon-red font-bold uppercase tracking-widest group-hover:text-black transition-colors duration-300">
               Initialize Registration
             </span>
             <div className="absolute inset-0 bg-neon-red scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
-          </a>
+          </motion.a>
           
-          <a href="#rules" className="relative group px-8 py-4 bg-transparent border border-white/20 hover:border-white/60 overflow-hidden transition-all">
+          <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="#rules" className="relative group px-8 py-4 bg-transparent border border-white/20 hover:border-white/60 overflow-hidden transition-all">
             <span className="relative z-10 font-mono text-text-secondary group-hover:text-white uppercase tracking-widest transition-colors duration-300">
               Access Rulebook
             </span>
             <div className="absolute inset-0 bg-white/10 scale-y-0 group-hover:scale-y-100 origin-bottom transition-transform duration-300 ease-out" />
-          </a>
+          </motion.a>
         </motion.div>
 
         <Countdown />

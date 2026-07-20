@@ -7,23 +7,26 @@ import { cn } from '@/lib/utils';
 const prizes = [
   {
     title: 'Runner Up',
+    subtitle: '2nd Place',
     icon: Medal,
-    amount: '$1,500',
+    amount: '$3,000',
     color: '#c0c0c0', // Silver
     delay: 0.2
   },
   {
     title: 'Champion',
+    subtitle: '1st Place',
     icon: Trophy,
-    amount: '$3,000',
+    amount: '$5,000',
     color: '#ffd700', // Gold
     delay: 0,
     scale: 1.1
   },
   {
-    title: 'Special Awards',
+    title: '3rd Place',
+    subtitle: '',
     icon: Award,
-    amount: '$500',
+    amount: '$2,000',
     color: '#cd7f32', // Bronze
     delay: 0.4
   }
@@ -71,8 +74,9 @@ function VaultCard({ prize }: { prize: typeof prizes[0] }) {
             {prize.amount}
           </div>
           
-          <h3 className="text-2xl text-text-primary uppercase tracking-widest font-bold">
+          <h3 className="text-2xl text-text-primary uppercase tracking-widest font-bold text-center">
             {prize.title}
+            {prize.subtitle && <div className="text-sm font-normal text-gray-400 mt-1">{prize.subtitle}</div>}
           </h3>
         </div>
       </div>
@@ -101,22 +105,28 @@ function VaultCard({ prize }: { prize: typeof prizes[0] }) {
   );
 }
 
+import ScrollReveal, { ScrollRevealItem } from './animations/ScrollReveal';
+
 export default function PrizePool() {
   return (
     <section id="prizes" className="py-24 px-6 min-h-screen flex items-center justify-center relative overflow-hidden">
-      <div className="max-w-7xl mx-auto w-full relative z-10">
-        <div className="text-center mb-24">
+      <ScrollReveal stagger className="max-w-7xl mx-auto w-full relative z-10">
+        <ScrollRevealItem className="text-center mb-24">
           <h2 className="neon-text text-5xl md:text-6xl text-text-primary mb-6">THE PRIZE VAULT</h2>
           <div className="w-24 h-1 bg-neon-red mx-auto shadow-[0_0_15px_var(--neon-red)]" />
           <p className="text-text-secondary text-xl mt-6 font-light tracking-wide">Breach the vault. Claim the ultimate spoils.</p>
-        </div>
+        </ScrollRevealItem>
 
         <div className="flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-12">
           {prizes.map((prize) => (
-            <VaultCard key={prize.title} prize={prize} />
+            <ScrollRevealItem key={prize.title}>
+              <motion.div whileHover={{ scale: prize.scale ? 1.15 : 1.05 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
+                <VaultCard prize={prize} />
+              </motion.div>
+            </ScrollRevealItem>
           ))}
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

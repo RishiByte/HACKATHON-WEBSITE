@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
+import ScrollReveal, { ScrollRevealItem } from './animations/ScrollReveal';
 
 const terminalCommands = [
   { cmd: '$ npm install innovation', output: 'fetch: innovation@latest... OK\nbuilding future...', delay: 1000 },
@@ -67,39 +68,41 @@ function Terminal() {
 export default function AboutTerminal() {
   return (
     <section id="about" style={{ padding: '100px 2rem', minHeight: '80vh', display: 'flex', alignItems: 'center' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
-        
-        <div>
-          <h2 className="neon-text" style={{ fontSize: '3.5rem', marginBottom: '1.5rem', color: 'var(--neon-red)' }}>
-            ENTER THE ARENA
-          </h2>
-          <p style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-            Omnikon is proud to host the most intense Web Dev and Full Stack Hackathon of the year on Unstop. This is not just a coding competition; it&apos;s a battleground for the brightest minds to build the future.
-          </p>
-          <p style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-            Bring your ideas, assemble your squad, and conquer challenges that push the boundaries of modern technology. Do you have what it takes to survive the arena?
-          </p>
-          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-            <div className="glass neon-border" style={{ padding: '1.5rem', textAlign: 'center', flex: 1, minWidth: '120px' }}>
-              <div className="neon-text" style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>48H</div>
-              <div style={{ color: 'var(--neon-red)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Coding</div>
+      <ScrollReveal stagger className="w-full">
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
+          
+          <ScrollRevealItem>
+            <h2 className="neon-text" style={{ fontSize: '3.5rem', marginBottom: '1.5rem', color: 'var(--neon-red)' }}>
+              ENTER THE ARENA
+            </h2>
+            <p style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
+              Omnikon is proud to host the most intense Web Dev and Full Stack Hackathon of the year on Unstop. This is not just a coding competition; it&apos;s a battleground for the brightest minds to build the future.
+            </p>
+            <p style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+              Bring your ideas, assemble your squad, and conquer challenges that push the boundaries of modern technology. Do you have what it takes to survive the arena?
+            </p>
+            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+              <div className="glass neon-border" style={{ padding: '1.5rem', textAlign: 'center', flex: 1, minWidth: '120px' }}>
+                <div className="neon-text" style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>48H</div>
+                <div style={{ color: 'var(--neon-red)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Coding</div>
+              </div>
+              <div className="glass neon-border" style={{ padding: '1.5rem', textAlign: 'center', flex: 1, minWidth: '120px' }}>
+                <div className="neon-text" style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>$10K</div>
+                <div style={{ color: 'var(--neon-red)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Prizes</div>
+              </div>
+              <div className="glass neon-border" style={{ padding: '1.5rem', textAlign: 'center', flex: 1, minWidth: '120px' }}>
+                <div className="neon-text" style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>500+</div>
+                <div style={{ color: 'var(--neon-red)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Hackers</div>
+              </div>
             </div>
-            <div className="glass neon-border" style={{ padding: '1.5rem', textAlign: 'center', flex: 1, minWidth: '120px' }}>
-              <div className="neon-text" style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>$5K</div>
-              <div style={{ color: 'var(--neon-red)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Prizes</div>
-            </div>
-            <div className="glass neon-border" style={{ padding: '1.5rem', textAlign: 'center', flex: 1, minWidth: '120px' }}>
-              <div className="neon-text" style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>500+</div>
-              <div style={{ color: 'var(--neon-red)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Hackers</div>
-            </div>
-          </div>
-        </div>
+          </ScrollRevealItem>
 
-        <div>
-          <Terminal />
-        </div>
+          <ScrollRevealItem>
+            <Terminal />
+          </ScrollRevealItem>
 
-      </div>
+        </div>
+      </ScrollReveal>
     </section>
   );
 }

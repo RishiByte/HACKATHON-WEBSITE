@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import TerminalTypewriter from './animations/TerminalTypewriter';
 
 const faqs = [
   { question: "Who can participate?", answer: "Any developer, designer, or creator passionate about building the future. Teams can have up to 4 members." },
@@ -60,13 +61,7 @@ export default function FAQ() {
                       <div className="code-font p-6 text-text-secondary bg-black/80 border-t border-glass-border text-base md:text-lg leading-relaxed flex items-start gap-4">
                         <span className="text-neon-red whitespace-nowrap">system:~$</span>
                         <div className="relative">
-                          {faq.answer}
-                          {/* Blinking Cursor */}
-                          <motion.span 
-                            animate={{ opacity: [1, 0] }}
-                            transition={{ repeat: Infinity, duration: 0.8 }}
-                            className="inline-block w-2 h-4 bg-neon-red ml-1 align-middle"
-                          />
+                          <TerminalTypewriter text={faq.answer} speed={15} />
                         </div>
                       </div>
                     </motion.div>

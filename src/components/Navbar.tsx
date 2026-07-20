@@ -43,12 +43,19 @@ export default function Navbar() {
       }}
     >
       <div className="flex justify-between items-center px-6 md:px-16 py-4 w-full">
-        <div className="flex items-center gap-3 cursor-pointer" onClick={(e) => handleScrollTo(e as any, '#home')}>
-          <div className="relative w-8 h-8 rounded-full overflow-hidden border border-neon-red shadow-[0_0_10px_rgba(255,0,0,0.6)]">
-            <img src="/LogoOmnikon.jpeg" alt="Omnikon Minimal Logo" className="w-full h-full object-cover" />
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={(e) => handleScrollTo(e as any, '#home')}>
+            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-neon-red shadow-[0_0_10px_rgba(255,0,0,0.6)]">
+              <img src="/LogoOmnikon.jpeg" alt="Omnikon Minimal Logo" className="w-full h-full object-cover" />
+            </div>
+            <div style={{ fontWeight: 'bold', fontSize: '1.2rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '3px', textShadow: '0 0 5px rgba(255,255,255,0.4)' }}>
+              Omnikon
+            </div>
           </div>
-          <div style={{ fontWeight: 'bold', fontSize: '1.2rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '3px', textShadow: '0 0 5px rgba(255,255,255,0.4)' }}>
-            Omnikon
+          
+          <div className="hidden lg:flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full">
+            <span className="text-[10px] uppercase tracking-wider text-gray-400">Powered by</span>
+            <span className="text-xs font-bold text-white tracking-widest">UNSTOP</span>
           </div>
         </div>
         
