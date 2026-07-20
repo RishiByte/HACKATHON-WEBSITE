@@ -85,12 +85,12 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Newsletter Section */}
+        {/* Discord CTA Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="premium-card p-10 mb-16 flex flex-col lg:flex-row items-center justify-between gap-8 border-[#ff1e1e]/30 bg-[#0a0a0a]/80 backdrop-blur-xl group relative overflow-hidden"
+          className="premium-card p-10 mb-16 flex flex-col lg:flex-row items-center justify-between gap-8 border-[#ff1e1e]/30 bg-[#0a0a0a]/80 backdrop-blur-xl group relative overflow-hidden shadow-[0_0_40px_rgba(255,30,30,0.05)]"
         >
           {/* Animated gradient sweep */}
           <motion.div 
@@ -99,26 +99,38 @@ export default function Footer() {
             transition={{ duration: 3, repeat: Infinity, repeatDelay: 5, ease: 'easeInOut' }}
           />
 
-          <div className="relative z-10 w-full lg:w-auto text-center lg:text-left">
-            <h4 className="text-3xl font-black text-white mb-2 uppercase tracking-wide">Stay Updated</h4>
-            <p className="text-[#bdbdbd] text-lg">Get the latest announcements, API reveals, and event details directly in your inbox.</p>
+          <div className="relative z-10 w-full lg:w-auto text-center lg:text-left flex-1">
+            <h4 className="text-3xl font-black text-white mb-4 uppercase tracking-wide flex items-center justify-center lg:justify-start gap-3">
+              <MessageSquare size={28} className="text-[#ff1e1e]" />
+              Stay Connected
+            </h4>
+            <p className="text-[#bdbdbd] text-lg mb-6 max-w-2xl">
+              Join the official Omnikon Discord server to receive:
+            </p>
+            <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm text-[#bdbdbd]">
+              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-[#ff1e1e] rounded-full" /> Event announcements</li>
+              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-[#ff1e1e] rounded-full" /> Mentor support</li>
+              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-[#ff1e1e] rounded-full" /> Team formation</li>
+              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-[#ff1e1e] rounded-full" /> Live Q&A</li>
+              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-[#ff1e1e] rounded-full" /> Submission reminders</li>
+              <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 bg-[#ff1e1e] rounded-full" /> Winner announcements</li>
+            </ul>
           </div>
-          <div className="relative z-10 flex w-full lg:w-auto gap-3">
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
-              className="bg-[#151515] border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[#ff1e1e]/60 focus:shadow-[0_0_20px_rgba(255,30,30,0.15)] transition-all flex-1 min-w-[280px]"
-            />
-            <motion.button 
+          
+          <div className="relative z-10 flex w-full lg:w-auto justify-center lg:justify-end mt-6 lg:mt-0">
+            <motion.a 
+              href="https://discord.gg/yWtjK2Tb8T"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="magnetic-button primary-button !min-h-0 py-4 px-8 rounded-xl whitespace-nowrap group/btn shadow-[0_0_20px_rgba(255,30,30,0.3)]"
+              className="magnetic-button primary-button !min-h-0 py-4 px-10 rounded-xl whitespace-nowrap group/btn shadow-[0_0_20px_rgba(255,30,30,0.3)] flex items-center gap-2"
             >
-              Subscribe 
+              Join Discord
               <motion.span className="inline-block transition-transform group-hover/btn:translate-x-1">
                 <ArrowRight size={18} />
               </motion.span>
-            </motion.button>
+            </motion.a>
           </div>
         </motion.div>
 

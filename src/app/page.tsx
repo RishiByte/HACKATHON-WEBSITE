@@ -15,6 +15,8 @@ import FAQ from "@/components/FAQ";
 import PartnerWithUs from "@/components/PartnerWithUs";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import DiscordBanner from "@/components/DiscordBanner";
+import FloatingDiscord from "@/components/FloatingDiscord";
 
 export default function Home() {
   return (
@@ -26,6 +28,7 @@ export default function Home() {
       <WhyParticipate />
       <Tracks />
       <WhatYouBuild />
+      <DiscordBanner />
       <Mentors />
       <Timeline />
       <Rulebook />
@@ -36,6 +39,7 @@ export default function Home() {
       <PartnerWithUs />
       <FinalCTA />
       <Footer />
+      <FloatingDiscord />
     </main>
   );
 }

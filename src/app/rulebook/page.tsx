@@ -166,7 +166,7 @@ export default function RulebookPage() {
                       <div key={prize.title} className="premium-card p-5">
                         <div className="text-sm uppercase tracking-[0.16em] text-text-muted">{prize.place}</div>
                         <div className="mt-3 text-2xl font-bold text-white">{prize.title}</div>
-                        <div className="code-font mt-3 text-4xl font-black" style={{ color: prize.accent }}>{prize.amount}</div>
+                        <div className="code-font mt-2 text-2xl sm:text-3xl font-black" style={{ color: prize.accent }}>{prize.amountStr}</div>
                       </div>
                     ))}
                   </div>

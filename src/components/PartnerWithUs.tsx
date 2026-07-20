@@ -1,6 +1,87 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useInView, animate } from 'framer-motion';
+import { Trophy, Code2, Globe, CalendarDays } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+
+const stats = [
+  { icon: Trophy, value: 10000, prefix: '₹', suffix: '', label: 'PRIZE POOL' },
+  { icon: Code2, value: 5, prefix: '', suffix: '', label: 'INNOVATION TRACKS' },
+  { icon: Globe, value: 100, prefix: '', suffix: '%', label: 'ONLINE' },
+  { icon: CalendarDays, value: 1, prefix: '', suffix: ' MONTH', label: 'BUILD CYCLE' },
+];
+
+function AnimatedStat({ stat, index }: { stat: typeof stats[0], index: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(0, stat.value, {
+        duration: 1.5,
+        delay: 0.12 * index,
+        ease: "easeOut",
+        onUpdate: (val) => setCount(Math.round(val))
+      });
+      return controls.stop;
+    }
+  }, [isInView, index, stat.value]);
+
+  const displayValue = stat.value >= 1000 ? count.toLocaleString('en-IN') : count;
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: 0.12 * index, ease: "easeOut" }}
+      whileHover="hover"
+      variants={{
+        hover: { y: -4, scale: 1.03 }
+      }}
+      className="relative group p-6 flex flex-col items-center justify-center text-center rounded-2xl transition-all duration-300 hover:bg-[#0c0c0c] hover:shadow-[0_15px_30px_rgba(255,30,30,0.05)] border border-transparent hover:border-[#ff1e1e]/10"
+    >
+      {/* Soft red glow briefly appears after counting finishes */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={isInView ? { opacity: [0, 1, 0], scale: [0.8, 1.2, 1] } : {}}
+        transition={{ duration: 1.2, delay: 0.12 * index + 1.2, times: [0, 0.5, 1], ease: "easeInOut" }}
+        className="absolute inset-0 bg-[#ff1e1e]/15 blur-2xl rounded-full z-0 pointer-events-none"
+      />
+
+      {/* Hover red glow */}
+      <div className="absolute inset-0 bg-[#ff1e1e]/0 group-hover:bg-[#ff1e1e]/5 blur-xl rounded-full z-0 pointer-events-none transition-colors duration-300" />
+
+      {/* Icon */}
+      <motion.div 
+        className="relative z-10 mb-4 text-[#bdbdbd] group-hover:text-[#ff1e1e] transition-colors duration-300"
+        variants={{
+          hover: { scale: 1.1, opacity: [1, 0.7, 1], transition: { duration: 2, repeat: Infinity, ease: "easeInOut" } }
+        }}
+      >
+        <stat.icon size={36} strokeWidth={1.5} />
+      </motion.div>
+
+      {/* Number */}
+      <div className="relative z-10 code-font text-4xl sm:text-5xl font-black text-white group-hover:brightness-125 transition-all duration-300 neon-text flex items-center">
+        {stat.prefix}
+        <span>{displayValue}</span>
+        {stat.suffix}
+      </div>
+
+      {/* Label fades in after numbers finish */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.6, delay: 0.12 * index + 1.4 }} 
+        className="relative z-10 text-xs sm:text-sm text-[#bdbdbd] uppercase tracking-widest mt-4 font-semibold group-hover:text-white transition-colors duration-300"
+      >
+        {stat.label}
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export default function PartnerWithUs() {
   return (
@@ -64,26 +145,13 @@ export default function PartnerWithUs() {
           </motion.div>
         </div>
 
-        {/* Community Numbers */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 pt-10 border-t border-[#151515]">
-          {[
-            { num: '50+', label: 'Colleges' },
-            { num: '10k+', label: 'Community' },
-            { num: '30+', label: 'Partners' },
-            { num: '100+', label: 'Projects' },
-          ].map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="text-center"
-            >
-              <div className="code-font text-3xl font-bold text-white neon-text">{stat.num}</div>
-              <div className="text-xs text-[#bdbdbd] uppercase tracking-widest mt-2">{stat.label}</div>
-            </motion.div>
-          ))}
+        {/* Real Event Statistics */}
+        <div className="mt-24 pt-12 border-t border-[#151515]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {stats.map((stat, i) => (
+              <AnimatedStat key={stat.label} stat={stat} index={i} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
