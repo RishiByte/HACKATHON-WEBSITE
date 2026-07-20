@@ -89,6 +89,11 @@ export default function WhatYouBuild() {
   const y = useMotionValue(0);
   const mouseXSpring = useSpring(x, { stiffness: 300, damping: 20 });
   const mouseYSpring = useSpring(y, { stiffness: 300, damping: 20 });
+  
+  const background = useTransform(
+    [mouseXSpring, mouseYSpring],
+    ([xPos, yPos]) => `radial-gradient(800px circle at ${(xPos as number) * 100}% ${(yPos as number) * 100}%, rgba(255, 30, 30, 0.15), transparent 60%)`
+  );
 
   useEffect(() => {
     setMounted(true);
@@ -169,12 +174,7 @@ export default function WhatYouBuild() {
               {/* Mouse-following soft radial glow */}
               <motion.div 
                 className="absolute inset-0 z-0 pointer-events-none mix-blend-screen opacity-50"
-                style={{
-                  background: useTransform(
-                    [mouseXSpring, mouseYSpring],
-                    ([xPos, yPos]) => `radial-gradient(800px circle at ${(xPos as number) * 100}% ${(yPos as number) * 100}%, rgba(255, 30, 30, 0.15), transparent 60%)`
-                  )
-                }}
+                style={{ background }}
               />
 
               {/* Release Badge */}

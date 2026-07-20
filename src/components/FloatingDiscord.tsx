@@ -10,7 +10,13 @@ export default function FloatingDiscord() {
   useEffect(() => {
     // Check if user previously dismissed the reminder in this session or entirely
     // We'll use a simple localStorage check
-    const isDismissed = localStorage.getItem('omnikon_discord_dismissed');
+    let isDismissed = false;
+    try {
+      isDismissed = localStorage.getItem('omnikon_discord_dismissed') === 'true';
+    } catch (e) {
+      // Ignore if localStorage is blocked
+    }
+    
     
     // Slight delay before showing to not overwhelm immediately
     if (!isDismissed) {
@@ -23,7 +29,9 @@ export default function FloatingDiscord() {
 
   const handleDismiss = () => {
     setIsVisible(false);
-    localStorage.setItem('omnikon_discord_dismissed', 'true');
+    try {
+      localStorage.setItem('omnikon_discord_dismissed', 'true');
+    } catch (e) {}
   };
 
   return (
