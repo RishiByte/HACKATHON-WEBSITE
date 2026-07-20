@@ -5,13 +5,13 @@ import { Terminal, MessageCircle, Globe, Camera, ArrowRight, ArrowUpCircle, Mail
 import Image from 'next/image';
 
 const socials = [
-  { icon: Globe, href: 'https://omnikonhub.com', label: 'Website' },
+  { icon: '/WebsiteIconBar.png', href: 'https://omnikonhub.com', label: 'Website' },
   { icon: Mail, href: 'mailto:contact@omnikonhub.com', label: 'Email' },
-  { icon: Terminal, href: 'https://github.com/Omnikon-Org', label: 'GitHub' },
-  { icon: MessageSquare, href: 'https://discord.gg/yWtjK2Tb8T', label: 'Discord' },
-  { icon: Globe, href: 'https://www.linkedin.com/company/omnikon-org', label: 'LinkedIn' },
-  { icon: MessageCircle, href: 'https://x.com/OmnikonOrg', label: 'X (Twitter)' },
-  { icon: Camera, href: 'https://www.instagram.com/omnikonorg', label: 'Instagram' },
+  { icon: 'https://img.icons8.com/glyph-neue/64/FFFFFF/github.png', href: 'https://github.com/Omnikon-Org', label: 'GitHub' },
+  { icon: 'https://img.icons8.com/ios-filled/50/FFFFFF/discord-logo.png', href: 'https://discord.gg/yWtjK2Tb8T', label: 'Discord' },
+  { icon: 'https://img.icons8.com/ios-filled/50/FFFFFF/linkedin.png', href: 'https://www.linkedin.com/company/omnikon-org', label: 'LinkedIn' },
+  { icon: 'https://img.icons8.com/ios/50/FFFFFF/twitterx--v2.png', href: 'https://x.com/OmnikonOrg', label: 'X (Twitter)' },
+  { icon: 'https://img.icons8.com/windows/32/FFFFFF/instagram-new.png', href: 'https://www.instagram.com/omnikonorg', label: 'Instagram' },
 ];
 
 const links = [
@@ -66,9 +66,13 @@ export default function Footer() {
                   aria-label={social.label}
                   whileHover={{ scale: 1.1, y: -5 }}
                   whileTap={{ scale: 0.9 }}
-                  className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-[#151515] text-[#bdbdbd] transition-colors hover:text-[#ff1e1e] hover:border-[#ff1e1e]/50 hover:bg-[#ff1e1e]/10 hover:shadow-[0_10px_20px_rgba(255,30,30,0.2)]"
+                  className="group flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-[#151515] text-[#bdbdbd] transition-colors hover:text-[#ff1e1e] hover:border-[#ff1e1e]/50 hover:bg-[#ff1e1e]/10 hover:shadow-[0_10px_20px_rgba(255,30,30,0.2)]"
                 >
-                  <social.icon size={20} />
+                  {typeof social.icon === 'string' ? (
+                    <img src={social.icon} alt={social.label} className="w-5 h-5 object-contain opacity-70 group-hover:opacity-100 transition-opacity" />
+                  ) : (
+                    <social.icon size={20} />
+                  )}
                 </motion.a>
               ))}
             </div>
