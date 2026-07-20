@@ -7,9 +7,10 @@ interface TerminalTypewriterProps {
   text: string;
   delay?: number;
   speed?: number;
+  className?: string;
 }
 
-export default function TerminalTypewriter({ text, delay = 0, speed = 30 }: TerminalTypewriterProps) {
+export default function TerminalTypewriter({ text, delay = 0, speed = 30, className = "" }: TerminalTypewriterProps) {
   const [displayedText, setDisplayedText] = useState("");
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function TerminalTypewriter({ text, delay = 0, speed = 30 }: Term
   }, [text, delay, speed]);
 
   return (
-    <div className="relative inline-block font-mono">
+    <div className={`relative inline-block font-mono ${className}`}>
       <span>{displayedText}</span>
       <motion.span
         animate={{ opacity: [1, 0] }}
