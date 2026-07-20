@@ -22,10 +22,8 @@ export const slideUpVariant: Variants = {
     filter: 'blur(0px)', 
     scale: 1, 
     transition: { 
-      type: "spring",
-      stiffness: 80,
-      damping: 20,
-      mass: 1,
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1]
     } 
   }
 };

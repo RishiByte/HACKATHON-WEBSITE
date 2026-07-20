@@ -162,7 +162,7 @@ function PrizeCard({ prize, isInView, baseDelay }: { prize: typeof prizes[0]; is
               }
               transition={
                 prize.featured 
-                  ? { duration: 0.6, delay: sweepDelay, type: "spring", stiffness: 300 }
+                  ? { duration: 0.6, delay: sweepDelay, ease: "easeInOut" }
                   : { duration: 0.3, ease: [0.25, 1, 0.5, 1] }
               }
             >
