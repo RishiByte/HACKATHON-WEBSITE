@@ -8,7 +8,7 @@ export default function GlobalEffects() {
   return (
     <>
       <motion.div
-        className="fixed left-0 right-0 top-0 z-[9998] h-[3px] origin-left bg-gradient-to-r from-accent-cyan via-accent-gold to-neon-red pointer-events-none"
+        className="fixed left-0 right-0 top-0 z-[9998] h-[3px] origin-left bg-gradient-to-r from-[#ff1e1e]/20 via-[#ff1e1e] to-[#ff1e1e]/20 pointer-events-none"
         style={{ scaleX: scrollYProgress }}
       />
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">

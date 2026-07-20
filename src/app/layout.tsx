@@ -3,6 +3,8 @@ import { Orbitron, Rajdhani, Share_Tech_Mono } from "next/font/google";
 import "./globals.css";
 import LenisProvider from "@/components/LenisProvider";
 import GlobalEffects from "@/components/GlobalEffects";
+import LoadingScreen from "@/components/LoadingScreen";
+import SocialMedia from "@/components/SocialMedia";
 
 const orbitron = Orbitron({
   variable: "--font-orbitron",
@@ -34,6 +36,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${orbitron.variable} ${rajdhani.variable} ${shareTechMono.variable}`}>
       <body>
+        <LoadingScreen />
+        <SocialMedia />
         <LenisProvider>
           <GlobalEffects />
           {children}

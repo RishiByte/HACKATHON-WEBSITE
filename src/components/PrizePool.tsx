@@ -10,7 +10,7 @@ export const prizes = [
     place: '1st Place',
     icon: Trophy,
     amount: '₹5,000',
-    accent: 'var(--accent-gold)',
+    accent: '#ffffff', // Using white for 1st place in red/black theme
     perks: ['Winner showcase', 'Certificate', 'Top mentor feedback'],
     featured: true,
   },
@@ -19,7 +19,7 @@ export const prizes = [
     place: '2nd Place',
     icon: Medal,
     amount: '₹3,000',
-    accent: 'var(--accent-cyan)',
+    accent: '#bdbdbd', // Silver/Grey
     perks: ['Certificate', 'Project spotlight', 'Judge notes'],
   },
   {
@@ -27,53 +27,59 @@ export const prizes = [
     place: '3rd Place',
     icon: Award,
     amount: '₹2,000',
-    accent: 'var(--neon-red-light)',
+    accent: '#ff1e1e', // Red for 3rd/Accent
     perks: ['Certificate', 'Community feature', 'Demo feedback'],
   },
 ];
 
 export default function PrizePool() {
   return (
-    <section id="prizes" className="section-shell overflow-hidden">
+    <section id="prizes" className="section-shell overflow-hidden bg-[#080808]">
       <ScrollReveal stagger className="section-inner">
-        <ScrollRevealItem className="mx-auto mb-16 max-w-3xl text-center">
+        <ScrollRevealItem className="mx-auto mb-20 max-w-3xl text-center">
           <div className="eyebrow justify-center">Prize pool</div>
-          <h2 className="section-title">Rewards For Teams That Ship</h2>
-          <p className="section-subtitle">
+          <h2 className="section-title">
+            Rewards For <span className="text-[#ff1e1e]">Champions</span>
+          </h2>
+          <p className="section-subtitle mx-auto">
             Cash awards, recognition, and useful feedback for the strongest products across the Omnikon build arena.
           </p>
         </ScrollRevealItem>
 
-        <div className="grid items-end gap-5 lg:grid-cols-3">
+        <div className="grid items-end gap-6 lg:grid-cols-3">
           {prizes.map((prize) => (
             <ScrollRevealItem key={prize.title}>
               <motion.article
-                whileHover={{ y: -8 }}
-                className={`premium-card p-6 ${prize.featured ? 'lg:-mt-8 lg:min-h-[440px]' : 'lg:min-h-[400px]'}`}
+                whileHover={{ y: -12, scale: 1.02 }}
+                className={`premium-card relative p-8 group ${prize.featured ? 'lg:-mt-10 lg:min-h-[460px] border-[#ff1e1e]/40' : 'lg:min-h-[400px]'}`}
               >
+                {/* Animated Shine Effect */}
+                <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-[-20deg] group-hover:animate-[sheen_1.5s_ease-in-out_infinite]" />
+                
                 <div
-                  className="absolute inset-x-0 top-0 h-44 opacity-30 blur-2xl"
+                  className="absolute inset-x-0 top-0 h-44 opacity-20 blur-2xl transition-opacity duration-500 group-hover:opacity-40"
                   style={{ background: `radial-gradient(circle at 50% 0%, ${prize.accent}, transparent 70%)` }}
                 />
-                <div className="relative z-10 flex h-full flex-col">
-                  <div className="mb-8 flex items-center justify-between">
-                    <div className="code-font text-sm uppercase tracking-[0.16em] text-text-muted">{prize.place}</div>
-                    <div className="flex h-14 w-14 items-center justify-center rounded-lg border border-white/12 bg-white/7" style={{ color: prize.accent }}>
-                      <prize.icon size={28} />
+                
+                <div className="relative z-10 flex h-full flex-col items-center text-center">
+                  <div className="mb-6 flex flex-col items-center gap-4">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-2xl border border-white/10 bg-[#0a0a0a] shadow-[0_15px_35px_rgba(0,0,0,0.5)] group-hover:scale-110 transition-transform duration-500" style={{ color: prize.accent }}>
+                      <prize.icon size={36} />
                     </div>
+                    <div className="code-font text-xs uppercase tracking-[0.2em] text-[#bdbdbd]">{prize.place}</div>
                   </div>
 
-                  <h3 className="text-3xl font-bold text-white">{prize.title}</h3>
-                  <div className="code-font mt-5 text-5xl font-black" style={{ color: prize.accent }}>
+                  <h3 className="text-3xl font-bold text-white mb-2">{prize.title}</h3>
+                  <div className="code-font mt-2 text-5xl font-black neon-text transition-colors duration-300 group-hover:text-white" style={{ color: prize.accent }}>
                     {prize.amount}
                   </div>
 
-                  <div className="my-7 h-px w-full bg-gradient-to-r from-transparent via-white/18 to-transparent" />
+                  <div className="my-8 h-px w-full bg-gradient-to-r from-transparent via-[#ff1e1e]/30 to-transparent" />
 
-                  <ul className="mt-auto grid gap-3">
+                  <ul className="mt-auto grid gap-3 w-full text-left">
                     {prize.perks.map((perk) => (
-                      <li key={perk} className="flex items-center gap-3 text-lg text-text-secondary">
-                        <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: prize.accent, boxShadow: `0 0 12px ${prize.accent}` }} />
+                      <li key={perk} className="flex items-center gap-3 text-[#bdbdbd]">
+                        <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: prize.accent, boxShadow: `0 0 10px ${prize.accent}` }} />
                         {perk}
                       </li>
                     ))}

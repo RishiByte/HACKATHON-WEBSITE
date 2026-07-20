@@ -90,7 +90,7 @@ export default function BootSequence({ isLoaded, onComplete }: { isLoaded?: bool
                 key={idx}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="text-neon-red text-sm sm:text-base font-bold tracking-widest uppercase border-l-2 border-neon-red/50 pl-3"
+                className="text-[#ff1e1e] text-sm sm:text-base font-bold tracking-widest uppercase border-l-2 border-[#ff1e1e]/50 pl-3"
                 style={{ textShadow: "0 0 8px rgba(255,0,0,0.8)" }}
               >
                 &gt; {line}
@@ -99,7 +99,7 @@ export default function BootSequence({ isLoaded, onComplete }: { isLoaded?: bool
             <motion.div
               animate={{ opacity: [0, 1, 0] }}
               transition={{ repeat: Infinity, duration: 0.8 }}
-              className="w-3 h-5 bg-neon-red inline-block mt-2 ml-3"
+              className="w-3 h-5 bg-[#ff1e1e] inline-block mt-2 ml-3"
             />
           </div>
         </motion.div>

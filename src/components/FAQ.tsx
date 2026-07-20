@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import ScrollReveal, { ScrollRevealItem } from './animations/ScrollReveal';
 
 const faqs = [
   { question: 'Who can participate?', answer: 'Any developer, designer, or creator who wants to build. Teams can include up to 4 members.' },
@@ -16,47 +17,57 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faqs" className="section-shell">
-      <div className="section-inner grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-        <div>
-          <div className="eyebrow">Questions</div>
-          <h2 className="section-title">Everything Before You Register</h2>
-          <p className="section-subtitle">
-            Quick answers for teams deciding whether Omnikon is the right place to build their next project.
-          </p>
-        </div>
+    <section id="faqs" className="section-shell bg-[#0a0a0a]">
+      <div className="section-inner grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+        <ScrollReveal>
+          <ScrollRevealItem>
+            <div className="eyebrow">Questions</div>
+            <h2 className="section-title">
+              Everything Before You <span className="text-[#ff1e1e]">Register</span>
+            </h2>
+            <p className="section-subtitle mt-6">
+              Quick answers for teams deciding whether Omnikon is the right place to build their next project.
+            </p>
+          </ScrollRevealItem>
+        </ScrollReveal>
 
-        <div className="grid gap-3">
+        <div className="grid gap-4">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <div key={faq.question} className="premium-card">
-                <button
-                  type="button"
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="flex w-full items-center justify-between gap-4 p-5 text-left"
-                >
-                  <span className="text-xl font-bold text-white">{faq.question}</span>
-                  <motion.span animate={{ rotate: isOpen ? 180 : 0 }} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/12 bg-white/7 text-accent-cyan">
-                    <ChevronDown size={18} />
-                  </motion.span>
-                </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.24, ease: 'easeOut' }}
-                      className="overflow-hidden"
+              <ScrollRevealItem key={faq.question}>
+                <div className={`premium-card transition-all duration-300 ${isOpen ? 'border-[#ff1e1e]/40 shadow-[0_10px_30px_rgba(255,30,30,0.1)]' : 'hover:border-white/20'}`}>
+                  <button
+                    type="button"
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    className="flex w-full items-center justify-between gap-4 p-6 text-left"
+                  >
+                    <span className={`text-xl font-bold transition-colors ${isOpen ? 'text-[#ff1e1e]' : 'text-white'}`}>{faq.question}</span>
+                    <motion.span 
+                      animate={{ rotate: isOpen ? 180 : 0 }} 
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-colors ${isOpen ? 'border-[#ff1e1e]/30 bg-[#ff1e1e]/10 text-[#ff1e1e]' : 'border-white/10 bg-[#151515] text-[#bdbdbd]'}`}
                     >
-                      <p className="border-t border-white/10 px-5 pb-5 pt-4 text-lg leading-7 text-text-secondary">
-                        {faq.answer}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                      <ChevronDown size={20} />
+                    </motion.span>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: 'easeOut' }}
+                        className="overflow-hidden"
+                      >
+                        <p className="border-t border-[#ff1e1e]/10 px-6 pb-6 pt-5 text-lg leading-relaxed text-[#bdbdbd]">
+                          {faq.answer}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </ScrollRevealItem>
             );
           })}
         </div>

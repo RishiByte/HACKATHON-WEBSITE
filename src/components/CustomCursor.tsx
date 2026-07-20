@@ -56,9 +56,9 @@ export default function CustomCursor() {
         }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
-        <div className="absolute w-[2px] h-full bg-neon-red shadow-[0_0_8px_var(--neon-red)]" />
-        <div className="absolute w-full h-[2px] bg-neon-red shadow-[0_0_8px_var(--neon-red)]" />
-        {isHovering && <div className="absolute w-full h-full border border-neon-red/50 rounded-full" />}
+        <div className="absolute w-[2px] h-full bg-[#ff1e1e] shadow-[0_0_8px_#ff1e1e]" />
+        <div className="absolute w-full h-[2px] bg-[#ff1e1e] shadow-[0_0_8px_#ff1e1e]" />
+        {isHovering && <div className="absolute w-full h-full border border-[#ff1e1e]/50 rounded-full" />}
       </motion.div>
     </>
   );

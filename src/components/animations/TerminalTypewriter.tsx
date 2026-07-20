@@ -32,7 +32,7 @@ export default function TerminalTypewriter({ text, delay = 0, speed = 30 }: Term
       <motion.span
         animate={{ opacity: [1, 0] }}
         transition={{ repeat: Infinity, duration: 0.8 }}
-        className="inline-block w-2 h-4 bg-neon-red ml-1 align-middle"
+        className="inline-block w-2 h-4 bg-[#ff1e1e] ml-1 align-middle"
       />
     </div>
   );

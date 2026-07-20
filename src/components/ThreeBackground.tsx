@@ -32,7 +32,7 @@ function Particles() {
       <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
         <PointMaterial
           transparent
-          color="#66e8ff"
+          color="#ff1e1e"
           size={0.04}
           sizeAttenuation={true}
           depthWrite={false}
@@ -55,14 +55,14 @@ function GridFloor() {
 
   return (
     <group position={[0, -2, 0]}>
-      <gridHelper args={[80, 40, '#ff6b4a', '#101827']} ref={gridRef} />
+      <gridHelper args={[80, 40, '#ff1e1e', '#1a0000']} ref={gridRef} />
     </group>
   );
 }
 
 export default function ThreeBackground() {
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: -1, background: '#030306', pointerEvents: 'none' }}>
+    <div style={{ position: 'fixed', inset: 0, zIndex: -1, background: '#050505', pointerEvents: 'none' }}>
       <Canvas 
         camera={{ position: [0, 0, 5], fov: 60 }} 
         dpr={1} 
@@ -70,10 +70,9 @@ export default function ThreeBackground() {
       >
         <Particles />
         <GridFloor />
-        <fog attach="fog" args={['#000000', 2, 12]} />
+        <fog attach="fog" args={['#050505', 2, 12]} />
       </Canvas>
-      {/* 70% opacity background overlay to improve text readability */}
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(3,3,6,0.42), rgba(3,3,6,0.86))', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, transparent, #050505 80%)', pointerEvents: 'none' }} />
     </div>
   );
 }
