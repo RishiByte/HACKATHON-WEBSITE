@@ -45,28 +45,21 @@ export default function CustomCursor() {
         }}
       />
       
-      {/* Custom Pointer */}
+      {/* Custom Pointer (Crosshair Reticle) */}
       <motion.div
-        className="fixed top-0 left-0 w-4 h-4 bg-neon-red rounded-full pointer-events-none z-[9999] mix-blend-screen"
+        className="fixed top-0 left-0 w-6 h-6 pointer-events-none z-[9999] mix-blend-screen flex items-center justify-center"
         animate={{
-          x: mousePosition.x - 8,
-          y: mousePosition.y - 8,
-          scale: isHovering ? 2 : 1,
-          opacity: isHovering ? 0.5 : 1,
-        }}
-        transition={{ type: "tween", ease: "backOut", duration: 0.1 }}
-      />
-      
-      {/* Custom Trail */}
-      <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border border-neon-red rounded-full pointer-events-none z-[9999]"
-        animate={{
-          x: mousePosition.x - 16,
-          y: mousePosition.y - 16,
+          x: mousePosition.x - 12,
+          y: mousePosition.y - 12,
           scale: isHovering ? 1.5 : 1,
+          rotate: isHovering ? 90 : 0,
         }}
-        transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.5 }}
-      />
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      >
+        <div className="absolute w-[2px] h-full bg-neon-red shadow-[0_0_8px_var(--neon-red)]" />
+        <div className="absolute w-full h-[2px] bg-neon-red shadow-[0_0_8px_var(--neon-red)]" />
+        {isHovering && <div className="absolute w-full h-full border border-neon-red/50 rounded-full" />}
+      </motion.div>
     </>
   );
 }

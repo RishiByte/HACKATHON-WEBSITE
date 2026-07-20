@@ -36,17 +36,22 @@ function Countdown() {
   if (!mounted) return null;
 
   return (
-    <div className="flex gap-4 sm:gap-8 mt-12 z-20 relative">
-      {Object.entries(timeLeft).map(([unit, value]) => (
-        <div key={unit} className="flex flex-col items-center group bg-black/50 border border-neon-red/30 px-4 py-3 sm:px-6 sm:py-4 rounded-sm hover:border-neon-red hover:shadow-[0_0_15px_rgba(255,0,0,0.4)] transition-all">
-          <div className="font-mono text-neon-red text-3xl sm:text-5xl font-bold">
-            {value.toString().padStart(2, '0')}
+    <div className="flex flex-col items-center mt-12 z-20 relative w-full max-w-3xl mx-auto">
+      <div className="text-neon-red font-mono text-sm tracking-widest mb-4 uppercase">
+        Registration Closes In
+      </div>
+      <div className="flex flex-wrap justify-center gap-4 sm:gap-8 w-full">
+        {Object.entries(timeLeft).map(([unit, value]) => (
+          <div key={unit} className="flex flex-col items-center group bg-black/50 border border-neon-red/30 px-4 py-3 sm:px-6 sm:py-4 rounded-sm hover:border-neon-red hover:shadow-[0_0_15px_rgba(255,0,0,0.4)] transition-all flex-1 min-w-[80px] max-w-[120px]">
+            <div className="font-mono text-neon-red text-3xl sm:text-5xl font-bold">
+              {value.toString().padStart(2, '0')}
+            </div>
+            <div className="text-[10px] sm:text-xs uppercase tracking-[3px] text-text-secondary mt-2 font-mono">
+              {unit}
+            </div>
           </div>
-          <div className="text-[10px] sm:text-xs uppercase tracking-[3px] text-text-secondary mt-2 font-mono">
-            {unit}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
@@ -129,7 +134,7 @@ export default function Hero() {
             <GlitchText 
               text="OMNIKON NATIONAL HACKATHON 2026" 
               as="h1" 
-              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter uppercase mb-4 max-w-4xl leading-tight" 
+              className="text-white text-shadow-[0_0_15px_rgba(255,0,0,0.5)] text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-bold tracking-tighter uppercase mb-4 max-w-5xl leading-[1.1]" 
             />
           </div>
           
@@ -140,10 +145,29 @@ export default function Hero() {
             className="flex items-center justify-center gap-4 mt-2"
           >
             <div className="w-8 sm:w-12 h-[1px] bg-neon-red/50" />
-            <p className="text-lg sm:text-2xl text-text-secondary tracking-[6px] sm:tracking-[10px] uppercase font-mono text-shadow-[0_0_8px_rgba(255,0,0,0.4)]">
+            <p className="text-lg sm:text-xl text-text-secondary tracking-[6px] sm:tracking-[10px] uppercase font-mono text-shadow-[0_0_8px_rgba(255,0,0,0.4)]">
               Build. Innovate. Impact.
             </p>
             <div className="w-8 sm:w-12 h-[1px] bg-neon-red/50" />
+          </motion.div>
+
+          {/* Static Stat Badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.7 }}
+            className="flex flex-wrap justify-center gap-4 sm:gap-8 mt-8"
+          >
+            {[
+              { label: 'DURATION', value: '48H' },
+              { label: 'PRIZE POOL', value: '₹10K' },
+              { label: 'HACKERS', value: '500+' }
+            ].map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center bg-black/40 border border-white/10 px-6 py-2 rounded-sm backdrop-blur-sm">
+                <span className="text-white font-mono font-bold text-2xl">{stat.value}</span>
+                <span className="text-text-secondary font-mono text-[10px] uppercase tracking-widest">{stat.label}</span>
+              </div>
+            ))}
           </motion.div>
         </motion.div>
 
@@ -154,14 +178,14 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.8 }}
           className="flex flex-wrap gap-6 mt-12 justify-center z-20"
         >
-          <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="#register" className="relative group px-8 py-4 bg-black border border-neon-red overflow-hidden hover:shadow-[0_0_20px_rgba(255,0,0,0.6)] transition-all">
+          <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="#register" className="tier-1-glow relative group px-8 py-4 bg-black overflow-hidden transition-all">
             <span className="relative z-10 font-mono text-neon-red font-bold uppercase tracking-widest group-hover:text-black transition-colors duration-300">
               Initialize Registration
             </span>
             <div className="absolute inset-0 bg-neon-red scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
           </motion.a>
           
-          <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="#rules" className="relative group px-8 py-4 bg-transparent border border-white/20 hover:border-white/60 overflow-hidden transition-all">
+          <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="/rulebook" className="tier-3-glass relative group px-8 py-4 bg-transparent overflow-hidden transition-all">
             <span className="relative z-10 font-mono text-text-secondary group-hover:text-white uppercase tracking-widest transition-colors duration-300">
               Access Rulebook
             </span>

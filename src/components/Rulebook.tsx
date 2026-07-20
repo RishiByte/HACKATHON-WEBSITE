@@ -4,21 +4,24 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView, useAnimation } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
+import { nodeMappings } from '@/lib/rulebook-data';
+
 const rulesData = [
-  { id: '01', shortName: 'Eligibility', protocol: 'DIRECTIVE_01: ELIGIBILITY_SCAN', content: 'The hackathon is open to all eligible participants.\n\n> Participants must complete registration through the official form.\n> Only successfully registered participants will be allowed to participate.' },
-  { id: '02', shortName: 'Team Rules', protocol: 'DIRECTIVE_02: TEAM_STRUCTURE', content: 'Participants may register individually or as a team.\n\n> Team size must follow the limits mentioned in the registration form.\n> Team modifications after the registration deadline may not be allowed.' },
-  { id: '03', shortName: 'Originality', protocol: 'DIRECTIVE_03: ORIGINALITY', content: 'All projects must be built during the hackathon period.\n\n> Previously built projects, copied work, or reused submissions are strictly prohibited.' },
-  { id: '04', shortName: 'Fresh Repo', protocol: 'DIRECTIVE_04: NEW_REPO', content: 'Each team must create a new repository for the hackathon.\n\n> Existing repositories, cloned projects, or forked repositories will not be accepted.' },
-  { id: '05', shortName: 'Submission', protocol: 'DIRECTIVE_05: SUBMISSION_DATA', content: 'Every submission must include:\n\n> Source code repository link\n> Project documentation (README.md)\n> Problem statement & Solution explanation\n> Installation/setup guide\n> Demo video or live project link (if available)' },
-  { id: '06', shortName: 'Authenticity', protocol: 'DIRECTIVE_06: AUTHENTICITY', content: 'Teams must maintain proper commit history.\n\n> Organizers may verify commits and development timelines to ensure authenticity.' },
-  { id: '07', shortName: 'AI Usage', protocol: 'DIRECTIVE_07: AUTHORIZED_TOOLS', content: 'Participants are allowed to use:\n\n> Open-source libraries, APIs, Frameworks\n> AI tools for assistance\n\n[WARNING]: The final implementation must be understood entirely by the team.' },
-  { id: '08', shortName: 'Plagiarism', protocol: 'DIRECTIVE_08: ANTI_PLAGIARISM', content: 'Plagiarism in any form will lead to immediate disqualification.\n\n> Similarity checks may be conducted on all submissions.' },
-  { id: '09', shortName: 'Judging', protocol: 'DIRECTIVE_09: EVALUATION', content: 'Projects will be judged on:\n\n> Creativity & Innovation\n> Problem Solving & Technical Complexity\n> User Experience & Scalability\n> Presentation' },
-  { id: '10', shortName: 'Deadlines', protocol: 'DIRECTIVE_10: CHRONO_LIMITS', content: 'All submissions must be made before the deadline.\n\n> [ERROR_NO_EXCEPTION]: Late entries will not be accepted under any circumstances.' },
-  { id: '11', shortName: 'Presentation', protocol: 'DIRECTIVE_11: JUDGEMENT_DAY', content: 'Shortlisted teams may have to present their project before judges.\n\n> Every team member should be ready to explain their specific contribution.' },
-  { id: '12', shortName: 'Decision', protocol: 'DIRECTIVE_12: OVERLORD_DIR', content: 'The decision of the judges and organizing team will be final.\n\n> Organizers reserve the right to disqualify any participant violating the rules.' },
-  { id: '13', shortName: 'Conduct', protocol: 'DIRECTIVE_13: CODE_OF_CONDUCT', content: 'Respect all participants, mentors, and organizers.\n\n> Any misconduct, abusive behavior, or unethical activity may result in immediate disqualification.' }
+  { id: '01', shortName: 'Eligibility', protocol: 'DIRECTIVE_01: ELIGIBILITY_SCAN', content: nodeMappings['01'].content.join('\n\n') },
+  { id: '02', shortName: 'Team Rules', protocol: 'DIRECTIVE_02: TEAM_STRUCTURE', content: nodeMappings['02'].content.join('\n\n') },
+  { id: '03', shortName: 'Originality', protocol: 'DIRECTIVE_03: ORIGINALITY', content: nodeMappings['03'].content.join('\n\n') },
+  { id: '04', shortName: 'Fresh Repo', protocol: 'DIRECTIVE_04: NEW_REPO', content: nodeMappings['04'].content.join('\n\n') },
+  { id: '05', shortName: 'Submission', protocol: 'DIRECTIVE_05: SUBMISSION_DATA', content: nodeMappings['05'].content.join('\n\n') },
+  { id: '06', shortName: 'Authenticity', protocol: 'DIRECTIVE_06: AUTHENTICITY', content: nodeMappings['06'].content.join('\n\n') },
+  { id: '07', shortName: 'AI Usage', protocol: 'DIRECTIVE_07: AUTHORIZED_TOOLS', content: nodeMappings['07'].content.join('\n\n') },
+  { id: '08', shortName: 'Plagiarism', protocol: 'DIRECTIVE_08: ANTI_PLAGIARISM', content: nodeMappings['08'].content.join('\n\n') },
+  { id: '09', shortName: 'Judging', protocol: 'DIRECTIVE_09: EVALUATION', content: nodeMappings['09'].content.join('\n\n') },
+  { id: '10', shortName: 'Deadlines', protocol: 'DIRECTIVE_10: CHRONO_LIMITS', content: nodeMappings['10'].content.join('\n\n') },
+  { id: '11', shortName: 'Presentation', protocol: 'DIRECTIVE_11: JUDGEMENT_DAY', content: nodeMappings['11'].content.join('\n\n') },
+  { id: '12', shortName: 'Decision', protocol: 'DIRECTIVE_12: OVERLORD_DIR', content: nodeMappings['12'].content.join('\n\n') },
+  { id: '13', shortName: 'Conduct', protocol: 'DIRECTIVE_13: CODE_OF_CONDUCT', content: nodeMappings['13'].content.join('\n\n') }
 ];
+
 
 function TypewriterText({ text, speed = 15, onComplete }: { text: string, speed?: number, onComplete?: () => void }) {
   const [displayedText, setDisplayedText] = useState('');
@@ -89,9 +92,10 @@ export default function Rulebook() {
         setIsMobile(true);
       } else {
         setIsMobile(false);
-        if (window.innerWidth < 1024) setRadius(200); // Tablet
-        else if (window.innerWidth < 1280) setRadius(250); // Desktop
-        else setRadius(280); // Large screens
+        const minDim = Math.min(window.innerWidth, window.innerHeight);
+        if (window.innerWidth < 1024) setRadius(minDim * 0.35); // Tablet
+        else if (window.innerWidth < 1280) setRadius(minDim * 0.38); // Desktop
+        else setRadius(minDim * 0.42); // Large screens
       }
     };
     handleResize();
@@ -219,6 +223,12 @@ export default function Rulebook() {
               </div>
             ))}
           </div>
+
+          <div className="mt-12 text-center w-full z-50 pointer-events-auto pb-8">
+            <a href="/rulebook" className="font-mono text-neon-red/80 hover:text-neon-red uppercase tracking-[4px] text-sm md:text-base border-b border-neon-red/30 hover:border-neon-red transition-colors pb-1">
+              View Full Rulebook →
+            </a>
+          </div>
         </div>
       ) : (
         /* Desktop/Tablet View: The Living Eye & Orbit */
@@ -238,11 +248,14 @@ export default function Rulebook() {
                 const x = Math.cos(angle) * radius;
                 const y = Math.sin(angle) * radius;
                 const isActive = activeRule?.id === rule.id;
+                const isHovered = hoveredIndex === i;
                 return (
                   <g key={`path-${rule.id}`}>
                     <motion.line 
                       initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.1 }}
-                      x1={0} y1={0} x2={x} y2={y} stroke="rgba(255,0,0,0.15)" strokeWidth="1" 
+                      x1={0} y1={0} x2={x} y2={y} 
+                      stroke={isActive ? "rgba(255,0,0,1)" : isHovered ? "rgba(255,0,0,0.6)" : "rgba(255,0,0,0.15)"} 
+                      strokeWidth={isActive ? "2" : isHovered ? "1.5" : "1"} 
                     />
                     {isActive && (
                       <motion.line 
@@ -280,7 +293,7 @@ export default function Rulebook() {
 
             {/* Phase 3 & 4: Mechanical Eye */}
             {(phase === 'closed-eye' || phase === 'open-eye') && (
-              <div className="relative w-full h-full rounded-full bg-black overflow-hidden shadow-[0_0_60px_rgba(255,0,0,0.5)] border-4 border-neon-red/30">
+              <div className="relative w-full h-full rounded-full bg-black overflow-hidden shadow-[0_0_60px_rgba(255,0,0,0.5)] border-4 border-neon-red/30 z-20">
                 
                 {/* Inner Eye Components (Visible when open) */}
                 <motion.div className="absolute inset-0" initial={{ opacity: 0, scale: 0.5 }} animate={irisControls}>
@@ -330,6 +343,25 @@ export default function Rulebook() {
                 )}
               </div>
             )}
+            
+            {/* Outer Rotating Rings for the Core (Phase 3 & 4) */}
+            {(phase === 'closed-eye' || phase === 'open-eye') && (
+              <>
+                <motion.div 
+                  className="absolute inset-[-30%] rounded-full border border-dashed border-neon-red/20 z-10 pointer-events-none"
+                  animate={{ rotate: -360 }}
+                  transition={{ repeat: Infinity, duration: 20, ease: 'linear' }}
+                />
+                <motion.div 
+                  className="absolute inset-[-60%] rounded-full border border-neon-red/10 z-10 pointer-events-none"
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 30, ease: 'linear' }}
+                >
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-neon-red/40 rounded-full shadow-[0_0_10px_var(--neon-red)] -translate-y-1/2" />
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-neon-red/40 rounded-full shadow-[0_0_10px_var(--neon-red)] translate-y-1/2" />
+                </motion.div>
+              </>
+            )}
           </div>
 
           {/* Orbiting Rules Nodes */}
@@ -369,6 +401,20 @@ export default function Rulebook() {
               </motion.div>
             );
           })}
+          
+          {/* Full Rulebook Link Desktop */}
+          {phase === 'open-eye' && (
+            <motion.div 
+              className="absolute bottom-12 left-1/2 -translate-x-1/2 z-50 text-center w-full pointer-events-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 2, duration: 1 }}
+            >
+              <a href="/rulebook" className="font-mono text-neon-red/80 hover:text-neon-red uppercase tracking-[4px] text-sm md:text-base border-b border-neon-red/30 hover:border-neon-red transition-colors pb-1">
+                View Full Rulebook →
+              </a>
+            </motion.div>
+          )}
         </div>
       )}
 

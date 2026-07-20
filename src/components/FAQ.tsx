@@ -29,8 +29,8 @@ export default function FAQ() {
             return (
               <div 
                 key={i} 
-                className={`glass border transition-all duration-300 rounded-lg overflow-hidden ${
-                  isOpen ? 'border-neon-red shadow-[0_0_20px_rgba(255,0,0,0.3)]' : 'border-glass-border shadow-[0_0_10px_rgba(0,0,0,0.5)]'
+                className={`tier-3-glass transition-all duration-300 rounded-lg overflow-hidden ${
+                  isOpen ? 'border-neon-red shadow-[0_0_20px_rgba(255,0,0,0.3)]' : ''
                 }`}
               >
                 <button

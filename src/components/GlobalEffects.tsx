@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 
 export default function GlobalEffects() {
   const [particles, setParticles] = useState<{ id: number; x: number; y: number; size: number; duration: number; delay: number }[]>([]);
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     // Generate static particles for ambient effect
@@ -21,8 +22,15 @@ export default function GlobalEffects() {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Grid Overlay */}
+    <>
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-neon-red z-[9998] origin-left pointer-events-none"
+        style={{ scaleX: scrollYProgress, boxShadow: '0 0 10px var(--neon-red)' }}
+      />
+
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        {/* Grid Overlay */}
       <div 
         className="absolute inset-0 opacity-[0.03]"
         style={{
@@ -58,6 +66,7 @@ export default function GlobalEffects() {
           }}
         />
       ))}
-    </div>
+      </div>
+    </>
   );
 }

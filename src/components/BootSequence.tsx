@@ -4,9 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const BOOT_SEQUENCE = [
-  "Initializing Omnikon Hackathon...",
-  "Loading Neural Core...",
-  "Verifying Rules...",
+  "BOOTING ARENA...",
 ];
 
 export default function BootSequence({ isLoaded, onComplete }: { isLoaded?: boolean; onComplete: () => void }) {
@@ -25,7 +23,7 @@ export default function BootSequence({ isLoaded, onComplete }: { isLoaded?: bool
         clearInterval(interval);
         setSequenceDone(true);
       }
-    }, 800); // 800ms per line
+    }, 200); // 200ms per line
 
     return () => clearInterval(interval);
   }, []);
@@ -39,9 +37,9 @@ export default function BootSequence({ isLoaded, onComplete }: { isLoaded?: bool
         setFlashing(true);
         setTimeout(() => {
           setIsVisible(false);
-          setTimeout(onComplete, 1200); // Wait for transition
-        }, 300); // flash duration
-      }, 400);
+          setTimeout(onComplete, 400); // Wait for transition
+        }, 100); // flash duration
+      }, 150);
       return () => clearTimeout(timer);
     }
   }, [sequenceDone, isLoaded, onComplete]);
@@ -51,8 +49,8 @@ export default function BootSequence({ isLoaded, onComplete }: { isLoaded?: bool
       {isVisible && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 1.2, filter: "blur(20px)" }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
+          exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black overflow-hidden"
         >
           {/* Flash Effect */}
@@ -60,7 +58,7 @@ export default function BootSequence({ isLoaded, onComplete }: { isLoaded?: bool
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: [0, 1, 0] }} 
-              transition={{ duration: 0.3 }} 
+              transition={{ duration: 0.1 }} 
               className="absolute inset-0 bg-red-600 mix-blend-overlay z-50 pointer-events-none" 
             />
           )}
@@ -75,9 +73,9 @@ export default function BootSequence({ isLoaded, onComplete }: { isLoaded?: bool
 
             {/* Full Logo Fades In */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
               className="relative z-10 w-full h-full flex items-center justify-center"
             >
               <img src="/HackathonLogo.png" alt="Omnikon Hackathon" className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,0,0,0.6)]" />

@@ -48,7 +48,7 @@ export default function Sponsors() {
               {[...communityPartners, ...communityPartners].map((sponsor, i) => (
                 <div
                   key={i}
-                  className="group relative flex items-center justify-center min-w-[200px] md:min-w-[250px] h-[100px] rounded-xl glass cursor-pointer overflow-hidden border border-glass-border hover:border-white/50 transition-colors duration-500 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                  className="group relative flex items-center justify-center min-w-[200px] md:min-w-[250px] h-[100px] rounded-xl tier-3-glass cursor-pointer overflow-hidden transition-colors duration-500"
                 >
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.05)_50%,transparent_100%)] -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
                   <span className="code-font text-2xl font-bold text-gray-500 group-hover:text-white transition-all duration-300 z-10">

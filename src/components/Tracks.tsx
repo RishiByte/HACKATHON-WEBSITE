@@ -77,7 +77,7 @@ function TrackCard({ track, index }: { track: typeof tracks[0], index: number })
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className="relative h-full cursor-pointer glass neon-border devil-horn-card transition-colors duration-500 hover:bg-black/60"
+        className="relative h-full cursor-pointer tier-3-glass devil-horn-card transition-colors duration-500 hover:bg-black/60"
       >
         <div 
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_50%_50%,rgba(255,0,0,0.1)_0%,transparent_60%)] pointer-events-none" 

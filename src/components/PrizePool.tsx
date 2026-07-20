@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 import { Trophy, Medal, Award, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const prizes = [
+export const prizes = [
   {
     title: 'Runner Up',
     subtitle: '2nd Place',
     icon: Medal,
-    amount: '$3,000',
+    amount: '₹3,000',
     color: '#c0c0c0', // Silver
     delay: 0.2
   },
@@ -17,7 +17,7 @@ const prizes = [
     title: 'Champion',
     subtitle: '1st Place',
     icon: Trophy,
-    amount: '$5,000',
+    amount: '₹5,000',
     color: '#ffd700', // Gold
     delay: 0,
     scale: 1.1
@@ -26,19 +26,23 @@ const prizes = [
     title: '3rd Place',
     subtitle: '',
     icon: Award,
-    amount: '$2,000',
+    amount: '₹2,000',
     color: '#cd7f32', // Bronze
     delay: 0.4
   }
 ];
 
-function VaultCard({ prize }: { prize: typeof prizes[0] }) {
+export function VaultCard({ prize }: { prize: typeof prizes[0] }) {
   return (
     <div
       className={cn(
-        "relative group w-full sm:w-[320px] h-[400px] rounded-xl overflow-hidden cursor-pointer perspective-[1000px]",
+        "tier-2-glow relative group w-full sm:w-[320px] h-[400px] rounded-xl overflow-hidden cursor-pointer perspective-[1000px] bg-black",
         prize.scale && "lg:scale-110 z-10"
       )}
+      style={{
+        boxShadow: `0 0 15px ${prize.color}40, inset 0 0 20px ${prize.color}20`,
+        borderColor: `${prize.color}60`
+      }}
     >
       {/* Vault Inner Chamber (Revealed on Hover) */}
       <div className="absolute inset-0 bg-black flex flex-col items-center justify-center p-8 border border-gray-800 rounded-xl">
@@ -82,22 +86,38 @@ function VaultCard({ prize }: { prize: typeof prizes[0] }) {
       </div>
 
       {/* Vault Door (Left Half) */}
-      <div className="absolute top-0 left-0 w-1/2 h-full bg-[#111] border-r border-gray-700 flex flex-col justify-center items-end pr-2 group-hover:-translate-x-full transition-transform duration-700 ease-in-out shadow-[10px_0_20px_rgba(0,0,0,0.8)] z-20 overflow-hidden">
+      <div className="absolute top-0 left-0 w-1/2 h-full bg-[#0a0a0a] border-r border-gray-700 flex flex-col justify-center items-end pr-2 group-hover:-translate-x-full transition-transform duration-700 ease-in-out shadow-[10px_0_20px_rgba(0,0,0,0.8)] z-20 overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.05)_50%,transparent_75%)] bg-[length:100%_4px]" />
-        <Lock size={24} className="text-gray-500 mb-2 mr-2" />
-        <div className="w-1 h-12 bg-neon-red/50 rounded-full mr-4" />
+        
+        {/* Shimmer Effect */}
+        <motion.div 
+          className="absolute inset-0 w-[200%] h-full bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.15)_50%,transparent)] -skew-x-12"
+          animate={{ x: ['-100%', '100%'] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'linear', delay: prize.delay }}
+        />
+        
+        <Lock size={24} className="text-gray-500 mb-2 mr-2 relative z-10" />
+        <div className="w-1 h-12 rounded-full mr-4 relative z-10" style={{ backgroundColor: prize.color, boxShadow: `0 0 10px ${prize.color}` }} />
       </div>
 
       {/* Vault Door (Right Half) */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#111] border-l border-gray-700 flex flex-col justify-center items-start pl-2 group-hover:translate-x-full transition-transform duration-700 ease-in-out shadow-[-10px_0_20px_rgba(0,0,0,0.8)] z-20 overflow-hidden">
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#0a0a0a] border-l border-gray-700 flex flex-col justify-center items-start pl-2 group-hover:translate-x-full transition-transform duration-700 ease-in-out shadow-[-10px_0_20px_rgba(0,0,0,0.8)] z-20 overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.05)_50%,transparent_75%)] bg-[length:100%_4px]" />
-        <div className="text-[10px] code-font text-gray-500 tracking-widest ml-2 mb-2 rotate-90 origin-left">SECURE</div>
-        <div className="w-1 h-12 bg-neon-red/50 rounded-full ml-4" />
+        
+        {/* Shimmer Effect */}
+        <motion.div 
+          className="absolute inset-0 w-[200%] h-full bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.15)_50%,transparent)] -skew-x-12"
+          animate={{ x: ['-150%', '50%'] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'linear', delay: prize.delay }}
+        />
+
+        <div className="text-[10px] code-font tracking-widest ml-2 mb-2 rotate-90 origin-left relative z-10" style={{ color: prize.color }}>SECURE</div>
+        <div className="w-1 h-12 rounded-full ml-4 relative z-10" style={{ backgroundColor: prize.color, boxShadow: `0 0 10px ${prize.color}` }} />
       </div>
 
       {/* Warning Tape Overlay */}
-      <div className="absolute inset-x-0 top-8 h-8 flex -skew-y-6 bg-yellow-500/10 border-y border-yellow-500/20 z-30 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none items-center justify-center overflow-hidden">
-        <div className="text-yellow-500/30 font-bold text-xs tracking-[5px] uppercase whitespace-nowrap code-font">
+      <div className="absolute inset-x-0 top-8 h-8 flex -skew-y-6 border-y z-30 group-hover:opacity-0 transition-opacity duration-300 pointer-events-none items-center justify-center overflow-hidden" style={{ backgroundColor: `${prize.color}15`, borderColor: `${prize.color}30` }}>
+        <div className="font-bold text-xs tracking-[5px] uppercase whitespace-nowrap code-font" style={{ color: `${prize.color}50` }}>
           RESTRICTED ACCESS /// RESTRICTED ACCESS /// RESTRICTED ACCESS
         </div>
       </div>

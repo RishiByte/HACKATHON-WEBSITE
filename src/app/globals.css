@@ -77,6 +77,30 @@ p, span, div {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
+/* Tier 1 - Max Glow */
+.tier-1-glow {
+  border: 1px solid var(--neon-red);
+  box-shadow: 0 0 20px var(--neon-red), inset 0 0 15px var(--glass-border);
+}
+
+/* Tier 2 - Medium Glow */
+.tier-2-glow {
+  border: 1px solid var(--neon-red);
+  box-shadow: 0 0 10px rgba(255,0,0,0.5), inset 0 0 10px rgba(255,0,0,0.2);
+}
+
+/* Tier 3 - Subtle Border, Glow on Hover */
+.tier-3-glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+.tier-3-glass:hover {
+  border-color: var(--neon-red);
+  box-shadow: 0 0 15px var(--neon-red), inset 0 0 10px var(--glass-border);
+}
+
 .neon-border {
   border: 1px solid var(--neon-red);
   box-shadow: 0 0 10px var(--neon-red-light), inset 0 0 10px var(--glass-border);

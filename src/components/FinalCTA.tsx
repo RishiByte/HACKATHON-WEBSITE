@@ -52,10 +52,10 @@ export default function FinalCTA() {
       </div>
 
       <div 
-        className="relative z-10 w-full max-w-4xl mx-auto text-center bg-[#0a0a0a]/95 neon-border p-12 md:p-20 rounded-3xl overflow-hidden group"
+        className="relative z-10 w-full max-w-4xl mx-auto text-center bg-[#0a0a0a]/95 tier-1-glow p-12 md:p-20 rounded-3xl overflow-hidden group"
       >
         {/* Hover Glow */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_50%_50%,rgba(255,0,0,0.1)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(circle_at_50%_50%,rgba(255,0,0,0.2)_0%,transparent_70%)] pointer-events-none" />
 
         <h2 className="neon-text text-5xl md:text-7xl lg:text-8xl text-text-primary mb-8 font-bold tracking-tighter">
           ENTER THE<br />BATTLEFIELD
