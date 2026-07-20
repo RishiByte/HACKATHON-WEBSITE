@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion';
 import { Trophy, Award, Users, Code, Rocket, Target } from 'lucide-react';
 import ScrollReveal, { ScrollRevealItem } from './animations/ScrollReveal';
@@ -162,6 +162,9 @@ function ReasonCard({ reason, index }: { reason: typeof reasons[0], index: numbe
 }
 
 export default function WhyParticipate() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   return (
     <section id="why-participate" className="section-shell relative overflow-hidden">
       {/* Improved Background Effects */}
@@ -178,7 +181,7 @@ export default function WhyParticipate() {
       <div className="absolute top-[10%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#ff1e1e]/10 blur-[150px] rounded-full pointer-events-none mix-blend-screen" />
 
       {/* Floating Red Particles */}
-      {[...Array(10)].map((_, i) => (
+      {mounted && [...Array(10)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 bg-[#ff1e1e]/40 rounded-full blur-[1px]"

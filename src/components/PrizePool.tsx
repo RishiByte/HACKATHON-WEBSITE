@@ -240,6 +240,9 @@ export default function PrizePool() {
   const headingText = "REWARDS FOR CHAMPIONS";
   const headingLetters = headingText.split("");
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   // Base delay before cards start animating
   const BASE_DELAY = 1.0; 
 
@@ -257,7 +260,7 @@ export default function PrizePool() {
       />
 
       {/* Floating particles */}
-      {[...Array(15)].map((_, i) => (
+      {mounted && [...Array(15)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 bg-white/20 rounded-full blur-[1px]"

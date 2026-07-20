@@ -141,7 +141,7 @@ export default function Hero() {
           <TextReveal text="Impossible" splitBy="letters" delay={0.5} className="block text-[#ff1e1e] neon-text" />
         </h1>
         
-        <motion.p variants={itemVariants} className="max-w-2xl text-lg sm:text-xl leading-relaxed text-[#bdbdbd] mb-10">
+        <motion.p variants={itemVariants} className="max-w-2xl text-xl sm:text-2xl leading-relaxed text-white font-medium drop-shadow-md mb-10">
           Turn less than 1 month of coding into a product that matters. If you&apos;re a builder, designer, or creator with ideas, this is your arena.
         </motion.p>
 

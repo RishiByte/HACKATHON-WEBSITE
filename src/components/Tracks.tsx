@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion';
 import { Bot, Cloud, LayoutDashboard, Layers, Shield, Trophy } from 'lucide-react';
 import ScrollReveal, { ScrollRevealItem } from './animations/ScrollReveal';
@@ -30,6 +30,17 @@ const tracks = [
     iconAnim: { y: [0, -5, 0], transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' } }
   },
   {
+    title: 'Cloud & DevOps',
+    icon: Cloud,
+    tags: ['Docker', 'Kubernetes', 'AWS', 'CI/CD'],
+    desc: 'Deploy scalable cloud-native applications using containers, CI/CD, serverless platforms, and observability tools.',
+    badge: 'Advanced',
+    award: 'Best Cloud Architecture',
+    examples: ['Kubernetes Dashboard', 'CI/CD Pipeline'],
+    featured: false,
+    iconAnim: { x: [0, 5, -5, 0], transition: { duration: 3, repeat: Infinity, ease: 'easeInOut' } }
+  },
+  {
     title: 'AI & Machine Learning',
     icon: Bot,
     tags: ['Python', 'LLMs', 'Agents', 'RAG'],
@@ -50,17 +61,6 @@ const tracks = [
     examples: ['Password Manager', 'Secure File Vault'],
     featured: false,
     iconAnim: { rotateY: [0, 15, -15, 0], transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' } }
-  },
-  {
-    title: 'Cloud & DevOps',
-    icon: Cloud,
-    tags: ['Docker', 'Kubernetes', 'AWS', 'CI/CD'],
-    desc: 'Deploy scalable cloud-native applications using containers, CI/CD, serverless platforms, and observability tools.',
-    badge: 'Advanced',
-    award: 'Best Cloud Architecture',
-    examples: ['Kubernetes Dashboard', 'CI/CD Pipeline'],
-    featured: false,
-    iconAnim: { x: [0, 5, -5, 0], transition: { duration: 3, repeat: Infinity, ease: 'easeInOut' } }
   },
 ];
 
@@ -136,7 +136,7 @@ function TrackCard({ track, index }: { track: typeof tracks[0]; index: number })
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ rotateX, rotateY, perspective: 1000 }}
-      className={`premium-card group relative flex flex-col overflow-hidden transition-all duration-300 transform-gpu bg-[#111111] ${track.featured ? 'lg:col-span-2 min-h-[480px] !border-[#ff1e1e]/30' : 'min-h-[440px]'}`}
+      className={`premium-card group relative flex flex-col h-full overflow-hidden transition-all duration-300 transform-gpu bg-[#111111] ${track.featured ? 'lg:col-span-2 min-h-[480px] !border-[#ff1e1e]/30' : 'min-h-[440px]'}`}
     >
       {/* 3D background gradient spotlight */}
       <motion.div 
@@ -201,7 +201,7 @@ function TrackCard({ track, index }: { track: typeof tracks[0]; index: number })
         </div>
         
         {/* Tags */}
-        <div className="mt-auto pt-8 flex flex-wrap gap-2">
+        <div className="mt-auto pt-4 mb-12 flex flex-wrap gap-2">
           {track.tags.map((tag) => (
             <span 
               key={tag} 
@@ -226,6 +226,9 @@ function TrackCard({ track, index }: { track: typeof tracks[0]; index: number })
 }
 
 export default function Tracks() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   return (
     <section id="tracks" className="section-shell overflow-hidden relative">
       {/* Background Effects */}
@@ -241,7 +244,7 @@ export default function Tracks() {
       <div className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#ff1e1e]/15 blur-[150px] rounded-[100%] pointer-events-none mix-blend-screen" />
 
       {/* Floating Red Particles */}
-      {[...Array(12)].map((_, i) => (
+      {mounted && [...Array(12)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-1.5 h-1.5 bg-[#ff1e1e]/30 rounded-full blur-[1px]"
@@ -288,9 +291,9 @@ export default function Tracks() {
           </div>
         </ScrollRevealItem>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 perspective-[2000px]">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 perspective-[2000px] auto-rows-fr">
           {tracks.map((track, index) => (
-            <ScrollRevealItem key={track.title} className={track.featured ? 'lg:col-span-2' : ''}>
+            <ScrollRevealItem key={track.title} className={track.featured ? 'lg:col-span-2 h-full' : 'h-full'}>
               <TrackCard track={track} index={index} />
             </ScrollRevealItem>
           ))}

@@ -5,13 +5,13 @@ import { Terminal, MessageCircle, Globe, Camera, Mail, MessageSquare } from 'luc
 import { useRef } from 'react';
 
 const socials = [
-  { icon: Globe, href: 'https://omnikonhub.com', label: 'Website', target: "_blank" },
+  { icon: '/WebsiteIconBar.png', href: 'https://omnikonhub.com', label: 'Website', target: "_blank" },
   { icon: Mail, href: 'mailto:contact@omnikonhub.com', label: 'Email' },
-  { icon: Terminal, href: 'https://github.com/Omnikon-Org', label: 'GitHub', target: "_blank" },
-  { icon: MessageSquare, href: 'https://discord.gg/yWtjK2Tb8T', label: 'Discord', target: "_blank" },
-  { icon: Globe, href: 'https://www.linkedin.com/company/omnikon-org', label: 'LinkedIn', target: "_blank" },
-  { icon: MessageCircle, href: 'https://x.com/OmnikonOrg', label: 'X (Twitter)', target: "_blank" },
-  { icon: Camera, href: 'https://www.instagram.com/omnikonorg', label: 'Instagram', target: "_blank" },
+  { icon: 'https://img.icons8.com/glyph-neue/64/FFFFFF/github.png', href: 'https://github.com/Omnikon-Org', label: 'GitHub', target: "_blank" },
+  { icon: 'https://img.icons8.com/ios-filled/50/FFFFFF/discord-logo.png', href: 'https://discord.gg/yWtjK2Tb8T', label: 'Discord', target: "_blank" },
+  { icon: 'https://img.icons8.com/ios-filled/50/FFFFFF/linkedin-2--v1.png', href: 'https://www.linkedin.com/company/omnikon-org', label: 'LinkedIn', target: "_blank" },
+  { icon: 'https://img.icons8.com/ios/50/FFFFFF/twitterx--v2.png', href: 'https://x.com/OmnikonOrg', label: 'X (Twitter)', target: "_blank" },
+  { icon: 'https://img.icons8.com/external-tanah-basah-basic-outline-tanah-basah/48/FFFFFF/external-instagram-social-media-tanah-basah-basic-outline-tanah-basah.png', href: 'https://www.instagram.com/omnikonorg', label: 'Instagram', target: "_blank" },
 ];
 
 function DockItem({ item, mouseX }: { item: typeof socials[0], mouseX: any }) {
@@ -37,7 +37,11 @@ function DockItem({ item, mouseX }: { item: typeof socials[0], mouseX: any }) {
       style={{ width }}
       className="relative flex aspect-square items-center justify-center rounded-2xl bg-[#151515] border border-white/10 hover:border-[#ff1e1e]/50 hover:bg-[#ff1e1e]/10 hover:shadow-[0_0_20px_rgba(255,30,30,0.3)] transition-colors group"
     >
-      <item.icon className="w-1/2 h-1/2 text-[#bdbdbd] group-hover:text-[#ff1e1e] transition-colors" />
+      {typeof item.icon === 'string' ? (
+        <img src={item.icon} alt={item.label} className={`${item.label === 'Website' ? 'w-[80%] h-[80%]' : 'w-1/2 h-1/2'} object-contain opacity-70 group-hover:opacity-100 transition-opacity`} />
+      ) : (
+        <item.icon className="w-1/2 h-1/2 text-[#bdbdbd] group-hover:text-[#ff1e1e] transition-colors" />
+      )}
       
       {/* Tooltip */}
       <div className="absolute -top-10 px-3 py-1.5 bg-[#050505] border border-[#ff1e1e]/20 rounded-lg text-xs font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-[0_0_15px_rgba(0,0,0,0.8)]">
