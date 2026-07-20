@@ -3,8 +3,6 @@
 import { motion } from 'framer-motion';
 import ScrollReveal, { ScrollRevealItem } from './animations/ScrollReveal';
 
-const partners = ['Unstop', 'Upstox', 'GitHub', 'Vercel', 'AWS', 'Supabase', 'Figma'];
-
 export default function Sponsors() {
   return (
     <section id="sponsors" className="section-shell overflow-hidden bg-[#050505]">
@@ -20,27 +18,22 @@ export default function Sponsors() {
         </ScrollRevealItem>
 
         <ScrollRevealItem>
-          <div className="relative overflow-hidden py-10">
+          <div className="relative w-full max-w-4xl mx-auto">
             {/* Fade edges */}
             <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-[#050505] to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-[#050505] to-transparent" />
             
-            <motion.div
-              animate={{ x: ['0%', '-50%'] }}
-              transition={{ duration: 35, ease: 'linear', repeat: Infinity }}
-              className="flex w-max gap-8"
-            >
-              {[...partners, ...partners, ...partners].map((partner, index) => (
-                <div 
-                  key={`${partner}-${index}`} 
-                  className="premium-card flex h-32 min-w-[240px] items-center justify-center px-10 group transition-all duration-500 hover:border-[#ff1e1e]/50 hover:shadow-[0_0_30px_rgba(255,30,30,0.15)]"
-                >
-                  <span className="text-3xl font-black text-[#bdbdbd] grayscale group-hover:grayscale-0 group-hover:text-white transition-all duration-500 filter opacity-60 group-hover:opacity-100 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
-                    {partner}
-                  </span>
-                </div>
-              ))}
-            </motion.div>
+            <div className="premium-card py-12 px-6 flex flex-col sm:flex-row items-center justify-center gap-16 text-center overflow-hidden relative group">
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-b from-[#ff1e1e]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" 
+              />
+              <div className="relative z-10 text-4xl font-bold tracking-widest text-white group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] transition-all duration-300">
+                unstop
+              </div>
+              <div className="relative z-10 text-4xl font-black text-white group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] transition-all duration-300">
+                uplearn <span className="text-lg font-normal text-[#bdbdbd] tracking-widest">BY UPSTOX</span>
+              </div>
+            </div>
           </div>
         </ScrollRevealItem>
       </ScrollReveal>

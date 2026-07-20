@@ -8,23 +8,23 @@ import ScrollReveal, { ScrollRevealItem } from './animations/ScrollReveal';
 const rules = [
   {
     icon: Users,
-    title: 'Team Structure',
-    desc: 'Register officially, keep teams within the size limit, and make sure every contributor is eligible.',
-  },
-  {
-    icon: Sparkles,
-    title: 'Original Work',
-    desc: 'Build during the hackathon window. Open-source libraries and AI tools are allowed with transparent use.',
+    title: 'Eligibility & Teams',
+    desc: '1-2 members per team. Must be enrolled students. Register before creating your GitHub repo on or after Aug 15.',
   },
   {
     icon: FileText,
-    title: 'Clear Submissions',
-    desc: 'Submit documentation, presentation, repository, demo video, and working prototype by the listed deadlines.',
+    title: 'Submission Rounds',
+    desc: 'Round 1: 10-page PDF idea report. Round 2: PPT presentation, 2-5 min showcase video, and a live deployed service.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Original & Open Source',
+    desc: 'Work must start post-registration. Projects must be public, open-source under Omnikon Org, and include proper licenses.',
   },
   {
     icon: ShieldCheck,
-    title: 'Fair Conduct',
-    desc: 'Respect other teams, avoid plagiarism, and follow the code of conduct throughout the event.',
+    title: 'Conduct & Integrity',
+    desc: 'No plagiarism. AI tools are allowed but must be disclosed. Clear documentation (README, SECURITY) is mandatory.',
   },
 ];
 

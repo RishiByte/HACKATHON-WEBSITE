@@ -8,7 +8,7 @@ const reasons = [
   { icon: Award, title: 'Certificates', desc: 'Get verifiable certificates from industry leaders for your participation and victories.' },
   { icon: Users, title: 'Networking', desc: 'Connect with mentors, sponsors, and thousands of like-minded developers.' },
   { icon: Code, title: 'Open Source', desc: 'Contribute to meaningful open-source projects that make a real difference.' },
-  { icon: Laptop, title: 'Real Projects', desc: 'Build actual products that solve real-world problems over 48 hours.' },
+  { icon: Laptop, title: 'Real Projects', desc: 'Build actual products that solve real-world problems in less than 1 month.' },
   { icon: Briefcase, title: 'Career Opportunities', desc: 'Land internships and full-time roles directly from our sponsor companies.' },
 ];
 

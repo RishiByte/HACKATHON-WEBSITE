@@ -8,15 +8,24 @@ export const staggerContainer: Variants = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
     }
   }
 };
 
 export const slideUpVariant: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  hidden: { opacity: 0, y: 50, filter: 'blur(10px)', scale: 0.95 },
+  show: { 
+    opacity: 1, 
+    y: 0, 
+    filter: 'blur(0px)', 
+    scale: 1, 
+    transition: { 
+      duration: 0.8, 
+      ease: [0.16, 1, 0.3, 1] // Apple-like easing
+    } 
+  }
 };
 
 interface ScrollRevealProps {
@@ -32,7 +41,7 @@ export default function ScrollReveal({ children, className = "", stagger = false
         variants={staggerContainer}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, margin: "-100px", amount: 0.1 }}
         className={className}
       >
         {children}
@@ -45,7 +54,7 @@ export default function ScrollReveal({ children, className = "", stagger = false
       variants={slideUpVariant}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, margin: "-100px", amount: 0.1 }}
       className={className}
     >
       {children}

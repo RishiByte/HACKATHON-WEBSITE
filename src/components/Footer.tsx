@@ -1,14 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Terminal, MessageCircle, Globe, Camera, ArrowRight } from 'lucide-react';
+import { Terminal, MessageCircle, Globe, Camera, ArrowRight, ArrowUpCircle, Mail, MessageSquare } from 'lucide-react';
 import Image from 'next/image';
 
 const socials = [
-  { icon: Terminal, href: '#', label: 'GitHub' },
-  { icon: MessageCircle, href: '#', label: 'X (Twitter)' },
-  { icon: Globe, href: '#', label: 'LinkedIn' },
-  { icon: Camera, href: '#', label: 'Instagram' },
+  { icon: Globe, href: 'https://omnikonhub.com', label: 'Website' },
+  { icon: Mail, href: 'mailto:contact@omnikonhub.com', label: 'Email' },
+  { icon: Terminal, href: 'https://github.com/Omnikon-Org', label: 'GitHub' },
+  { icon: MessageSquare, href: 'https://discord.gg/yWtjK2Tb8T', label: 'Discord' },
+  { icon: Globe, href: 'https://www.linkedin.com/company/omnikon-org', label: 'LinkedIn' },
+  { icon: MessageCircle, href: 'https://x.com/OmnikonOrg', label: 'X (Twitter)' },
+  { icon: Camera, href: 'https://www.instagram.com/omnikonorg', label: 'Instagram' },
 ];
 
 const links = [
@@ -18,90 +21,135 @@ const links = [
 ];
 
 export default function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <footer className="relative overflow-hidden bg-[#030303] pt-20 pb-10 border-t border-[#ff1e1e]/20">
-      <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(ellipse_at_bottom,#ff1e1e,transparent_50%)]" />
-      
+    <footer className="relative overflow-hidden bg-[#030303] pt-24 pb-10 border-t border-[#ff1e1e]/20">
+      {/* Cinematic Ambient Glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[500px] pointer-events-none opacity-[0.15] mix-blend-screen" style={{ background: 'radial-gradient(ellipse at bottom, #ff1e1e 0%, transparent 60%)' }} />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,30,30,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,30,30,0.02)_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none" />
+
       <div className="mx-auto max-w-7xl px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-20">
           <div className="lg:col-span-2">
-            <a href="#home" className="flex items-center gap-3 group inline-flex mb-6">
-              <span className="relative h-12 w-12 overflow-hidden rounded-xl border border-[#ff1e1e]/30 bg-[#151515] group-hover:border-[#ff1e1e] transition-colors">
-                <Image src="/LogoOmnikon.jpeg" alt="Omnikon logo" fill sizes="48px" className="object-cover" />
+            <a href="#home" className="flex items-center gap-4 group inline-flex mb-8">
+              <span className="relative h-16 w-16 overflow-hidden rounded-2xl border border-[#ff1e1e]/30 bg-[#151515] group-hover:border-[#ff1e1e] group-hover:shadow-[0_0_20px_rgba(255,30,30,0.4)] transition-all duration-300">
+                <Image src="/LogoOmnikon.jpeg" alt="Omnikon logo" fill sizes="64px" className="object-cover" />
               </span>
               <span className="leading-none">
-                <span className="block text-2xl font-black uppercase tracking-widest text-white group-hover:text-[#ff1e1e] transition-colors">Omnikon</span>
-                <span className="code-font block text-[0.65rem] uppercase tracking-[0.2em] text-[#bdbdbd]">National Hackathon</span>
+                <span className="block text-3xl font-black uppercase tracking-widest text-white group-hover:text-[#ff1e1e] group-hover:drop-shadow-[0_0_10px_rgba(255,30,30,0.8)] transition-all duration-300">Omnikon</span>
+                <span className="code-font block text-xs mt-1 uppercase tracking-[0.3em] text-[#bdbdbd]">National Hackathon</span>
               </span>
             </a>
-            <p className="text-[#bdbdbd] mb-8 max-w-sm leading-relaxed">
-              The premier 48-hour build arena for developers who want to push boundaries, craft premium products, and shape the future of technology.
+            <p className="text-[#bdbdbd] mb-8 max-w-sm leading-relaxed text-lg">
+              The premier build arena for developers who want to push boundaries, craft premium products, and shape the future of technology in less than 1 month.
             </p>
             <div className="flex gap-4">
               {socials.map((social, index) => (
-                <a
+                <motion.a
                   key={index}
                   href={social.href}
+                  target="_blank" rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-[#151515] text-[#bdbdbd] transition-all hover:text-[#ff1e1e] hover:border-[#ff1e1e]/50 hover:shadow-[0_0_15px_rgba(255,30,30,0.2)]"
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-[#151515] text-[#bdbdbd] transition-colors hover:text-[#ff1e1e] hover:border-[#ff1e1e]/50 hover:bg-[#ff1e1e]/10 hover:shadow-[0_10px_20px_rgba(255,30,30,0.2)]"
                 >
-                  <social.icon size={18} />
-                </a>
+                  <social.icon size={20} />
+                </motion.a>
               ))}
             </div>
           </div>
 
-          {links.map((col) => (
-            <div key={col.title}>
-              <h4 className="text-white font-bold mb-6 text-lg">{col.title}</h4>
-              <ul className="grid gap-4">
+          {links.map((col, idx) => (
+            <motion.div 
+              key={col.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 * idx }}
+            >
+              <h4 className="text-white font-bold mb-6 text-xl">{col.title}</h4>
+              <ul className="grid gap-5">
                 {col.items.map((item) => (
                   <li key={item}>
-                    <a href="#" className="text-[#bdbdbd] hover:text-[#ff1e1e] transition-colors text-sm code-font tracking-wide">
+                    <a href="#" className="text-[#bdbdbd] hover:text-[#ff1e1e] transition-all hover:translate-x-2 inline-block text-[15px] tracking-wide">
                       {item}
                     </a>
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Newsletter Section */}
-        <div className="premium-card p-8 mb-16 flex flex-col md:flex-row items-center justify-between gap-8 border-[#ff1e1e]/20 bg-[#0a0a0a]">
-          <div>
-            <h4 className="text-2xl font-bold text-white mb-2">Stay Updated</h4>
-            <p className="text-[#bdbdbd]">Get the latest announcements, API reveals, and event details directly in your inbox.</p>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="premium-card p-10 mb-16 flex flex-col lg:flex-row items-center justify-between gap-8 border-[#ff1e1e]/30 bg-[#0a0a0a]/80 backdrop-blur-xl group relative overflow-hidden"
+        >
+          {/* Animated gradient sweep */}
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-[#ff1e1e]/10 to-transparent -translate-x-full skew-x-[-20deg]"
+            animate={{ translateX: ['-200%', '200%'] }}
+            transition={{ duration: 3, repeat: Infinity, repeatDelay: 5, ease: 'easeInOut' }}
+          />
+
+          <div className="relative z-10 w-full lg:w-auto text-center lg:text-left">
+            <h4 className="text-3xl font-black text-white mb-2 uppercase tracking-wide">Stay Updated</h4>
+            <p className="text-[#bdbdbd] text-lg">Get the latest announcements, API reveals, and event details directly in your inbox.</p>
           </div>
-          <div className="flex w-full md:w-auto gap-2">
+          <div className="relative z-10 flex w-full lg:w-auto gap-3">
             <input 
               type="email" 
               placeholder="Enter your email" 
-              className="bg-[#151515] border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#ff1e1e]/50 transition-colors flex-1 min-w-[250px]"
+              className="bg-[#151515] border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[#ff1e1e]/60 focus:shadow-[0_0_20px_rgba(255,30,30,0.15)] transition-all flex-1 min-w-[280px]"
             />
-            <button className="magnetic-button primary-button !min-h-0 py-3 px-6 rounded-lg whitespace-nowrap">
-              Subscribe <ArrowRight size={16} />
-            </button>
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="magnetic-button primary-button !min-h-0 py-4 px-8 rounded-xl whitespace-nowrap group/btn shadow-[0_0_20px_rgba(255,30,30,0.3)]"
+            >
+              Subscribe 
+              <motion.span className="inline-block transition-transform group-hover/btn:translate-x-1">
+                <ArrowRight size={18} />
+              </motion.span>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Animated Divider */}
-        <div className="h-px w-full bg-[#151515] mb-8 relative overflow-hidden">
+        <div className="h-[2px] w-full bg-[#151515] mb-8 relative overflow-hidden rounded-full">
           <motion.div 
-            className="absolute top-0 left-0 h-full w-1/3 bg-gradient-to-r from-transparent via-[#ff1e1e] to-transparent"
+            className="absolute top-0 left-0 h-full w-1/3 bg-gradient-to-r from-transparent via-[#ff1e1e] to-transparent shadow-[0_0_10px_#ff1e1e]"
             animate={{ x: ['-100%', '300%'] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
           />
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="code-font text-xs text-[#bdbdbd] uppercase tracking-widest">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="code-font text-xs text-[#bdbdbd] uppercase tracking-widest text-center md:text-left">
             © 2026 Omnikon Hackathon. All rights reserved.
           </div>
-          <div className="flex gap-6 text-xs code-font text-[#bdbdbd] uppercase tracking-widest">
+          <div className="flex gap-6 text-xs code-font text-[#bdbdbd] uppercase tracking-widest items-center">
             <a href="#" className="hover:text-[#ff1e1e] transition-colors">Privacy Policy</a>
+            <span className="w-1 h-1 rounded-full bg-[#ff1e1e]" />
             <a href="#" className="hover:text-[#ff1e1e] transition-colors">Terms of Service</a>
           </div>
+          
+          <motion.button
+            onClick={scrollToTop}
+            whileHover={{ scale: 1.1, y: -2 }}
+            whileTap={{ scale: 0.9 }}
+            className="hidden md:flex items-center gap-2 text-[#ff1e1e] hover:text-white transition-colors uppercase code-font text-xs tracking-widest font-bold"
+          >
+            Back to top
+            <ArrowUpCircle size={16} />
+          </motion.button>
         </div>
       </div>
     </footer>

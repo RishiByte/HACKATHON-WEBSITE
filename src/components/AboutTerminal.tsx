@@ -39,7 +39,7 @@ export default function AboutTerminal() {
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
-              ['48H', 'core sprint'],
+              ['<1M', 'core sprint'],
               ['5', 'tracks'],
               ['₹10K', 'rewards'],
             ].map(([value, label]) => (

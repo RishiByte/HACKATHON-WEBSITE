@@ -1,16 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-
-const projects = [
-  { title: 'AI Developer Assistant', category: 'Artificial Intelligence', img: '/placeholder1.png' },
-  { title: 'DeFi Lending Protocol', category: 'Web3 & Blockchain', img: '/placeholder2.png' },
-  { title: 'Cloud Infrastructure Manager', category: 'Cloud Computing', img: '/placeholder3.png' },
-];
+import { Sparkles, Terminal } from 'lucide-react';
 
 export default function WhatYouBuild() {
   return (
-    <section id="what-you-build" className="section-shell">
+    <section id="what-you-build" className="section-shell relative overflow-hidden">
       <div className="section-inner">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -26,35 +21,36 @@ export default function WhatYouBuild() {
           </p>
         </motion.div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, i) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ delay: i * 0.15, duration: 0.6 }}
-              className="premium-card group overflow-hidden"
+        {/* Coming Soon State */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+          whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-16 w-full max-w-4xl mx-auto premium-card p-8 sm:p-16 text-center group relative overflow-hidden border-[#ff1e1e]/20"
+        >
+          {/* Animated Background */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,30,30,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,30,30,0.02)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+          
+          <div className="relative z-10 flex flex-col items-center gap-6">
+            <motion.div 
+              whileHover={{ rotate: 180, scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 200, damping: 10 }}
+              className="w-24 h-24 rounded-2xl bg-[#151515] border border-[#ff1e1e]/20 flex items-center justify-center text-[#ff1e1e] shadow-[0_0_30px_rgba(255,30,30,0.1)] group-hover:border-[#ff1e1e]/50 group-hover:shadow-[0_0_40px_rgba(255,30,30,0.2)] transition-all duration-300"
             >
-              <div className="relative h-60 w-full overflow-hidden bg-[#0a0a0a]">
-                <div className="absolute inset-0 flex items-center justify-center text-[#ff1e1e]/20 border-b border-[#ff1e1e]/10">
-                  <span className="code-font text-xl">{'<IMAGE_PLACEHOLDER />'}</span>
-                </div>
-                {/* <Image src={project.img} alt={project.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" /> */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#151515] to-transparent opacity-80" />
-              </div>
-              <div className="p-6 relative">
-                <div className="absolute -top-6 right-6 bg-[#ff1e1e]/10 backdrop-blur-md border border-[#ff1e1e]/30 text-[#ff1e1e] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                  {project.category}
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
-                <p className="text-[#bdbdbd] text-sm">
-                  A revolutionary project built during the 48-hour hackathon, showcasing technical depth and innovation.
-                </p>
-              </div>
+              <Terminal size={40} />
             </motion.div>
-          ))}
-        </div>
+            
+            <div>
+              <h3 className="text-2xl sm:text-4xl font-black text-white tracking-tight mb-4 group-hover:text-[#ff1e1e] transition-colors duration-500">
+                Awaiting Innovation
+              </h3>
+              <p className="text-[#bdbdbd] max-w-lg mx-auto leading-relaxed text-lg">
+                This section will be populated with the incredible projects built during this hackathon. Get ready to show the world what you can create.
+              </p>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
