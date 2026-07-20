@@ -102,7 +102,7 @@ export default function PartnerWithUs() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -110,10 +110,10 @@ export default function PartnerWithUs() {
             className="premium-card p-8 text-center flex flex-col justify-between"
           >
             <div>
-              <h3 className="text-2xl font-bold text-white mb-4">Sponsor Us</h3>
-              <p className="text-[#bdbdbd] mb-8">Reach thousands of talented developers, showcase your APIs, and recruit top talent.</p>
+              <h3 className="text-2xl font-bold text-white mb-4">Email Us</h3>
+              <p className="text-[#bdbdbd] mb-8">Want to sponsor or partner with us? Send us an email and let's discuss.</p>
             </div>
-            <button className="magnetic-button primary-button w-full">View Prospectus</button>
+            <a href="mailto:contact@omnikonhub.com" className="magnetic-button primary-button w-full flex items-center justify-center">contact@omnikonhub.com</a>
           </motion.div>
 
           <motion.div
@@ -124,24 +124,10 @@ export default function PartnerWithUs() {
             className="premium-card p-8 text-center flex flex-col justify-between border-[#ff1e1e]/30 bg-[#ff1e1e]/5"
           >
             <div>
-              <h3 className="text-2xl font-bold text-[#ff1e1e] mb-4">Campus Ambassador</h3>
-              <p className="text-[#bdbdbd] mb-8">Lead your college community, organize local meetups, and get exclusive perks.</p>
+              <h3 className="text-2xl font-bold text-[#ff1e1e] mb-4">Join Discord</h3>
+              <p className="text-[#bdbdbd] mb-8">Reach out to the core team directly on our community Discord server.</p>
             </div>
-            <button className="magnetic-button secondary-button w-full border-[#ff1e1e]/50 hover:bg-[#ff1e1e] hover:text-black">Apply Now</button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="premium-card p-8 text-center flex flex-col justify-between"
-          >
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-4">Volunteer</h3>
-              <p className="text-[#bdbdbd] mb-8">Help us run the event smoothly, gain backstage experience, and network.</p>
-            </div>
-            <button className="magnetic-button secondary-button w-full">Join the Team</button>
+            <a href="https://discord.gg/yWtjK2Tb8T" target="_blank" rel="noopener noreferrer" className="magnetic-button secondary-button w-full flex items-center justify-center border-[#ff1e1e]/50 hover:bg-[#ff1e1e] hover:text-black transition-colors">Join Server</a>
           </motion.div>
         </div>
 

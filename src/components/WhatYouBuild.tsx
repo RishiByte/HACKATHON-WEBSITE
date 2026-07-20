@@ -234,12 +234,7 @@ export default function WhatYouBuild() {
                 transition={{ delay: 0.6 }}
                 className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10"
               >
-                <a href="#" className="btn-primary w-full sm:w-auto px-8 py-3 rounded-lg flex items-center justify-center gap-2 group overflow-hidden relative">
-                  <span className="relative z-10 flex items-center gap-2">
-                    <Bell size={18} />
-                    Notify Me
-                  </span>
-                </a>
+
                 
                 <a href="https://unstop.com/p/omnikon-national-hackathon-2026-omnikon-1715716" target="_blank" rel="noopener noreferrer" className="btn-secondary w-full sm:w-auto px-8 py-3 rounded-lg flex items-center justify-center gap-2 group">
                   Register Now

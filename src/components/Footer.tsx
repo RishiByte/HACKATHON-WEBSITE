@@ -15,9 +15,20 @@ const socials = [
 ];
 
 const links = [
-  { title: 'Quick Links', items: ['Home', 'About', 'Tracks', 'Timeline', 'Prizes'] },
-  { title: 'Resources', items: ['Rulebook', 'API Documentation', 'Design Assets', 'Code of Conduct'] },
-  { title: 'Contact', items: ['hello@omnikon.dev', 'Sponsorship', 'Help Center'] },
+  { title: 'Quick Links', items: [
+    { name: 'Home', href: '/' }, 
+    { name: 'About', href: '/#about' }, 
+    { name: 'Tracks', href: '/#tracks' }, 
+    { name: 'Timeline', href: '/#timeline' }, 
+    { name: 'Prizes', href: '/#prizes' }
+  ] },
+  { title: 'Resources', items: [
+    { name: 'Rulebook', href: '/rulebook' }
+  ] },
+  { title: 'Contact', items: [
+    { name: 'contact@omnikonhub.com', href: 'mailto:contact@omnikonhub.com' }, 
+    { name: 'Sponsorship', href: '/#partner' }
+  ] },
 ];
 
 export default function Footer() {
@@ -74,9 +85,9 @@ export default function Footer() {
               <h4 className="text-white font-bold mb-6 text-xl">{col.title}</h4>
               <ul className="grid gap-5">
                 {col.items.map((item) => (
-                  <li key={item}>
-                    <a href="#" className="text-[#bdbdbd] hover:text-[#ff1e1e] transition-all hover:translate-x-2 inline-block text-[15px] tracking-wide">
-                      {item}
+                  <li key={item.name}>
+                    <a href={item.href} className="text-[#bdbdbd] hover:text-[#ff1e1e] transition-all hover:translate-x-2 inline-block text-[15px] tracking-wide">
+                      {item.name}
                     </a>
                   </li>
                 ))}
