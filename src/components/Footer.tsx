@@ -1,37 +1,30 @@
-'use client';
+import { Camera, Code, Globe, MessageCircle } from 'lucide-react';
 
-import { motion } from 'framer-motion';
-import { Code, Globe, Camera, MessageCircle } from 'lucide-react';
+const icons = [Code, MessageCircle, Globe, Camera];
 
 export default function Footer() {
   return (
-    <footer style={{ position: 'relative', overflow: 'hidden', padding: '150px 2rem 50px', background: 'var(--bg-secondary)', borderTop: '2px solid var(--neon-red)', boxShadow: '0 -10px 30px rgba(255,0,0,0.2)' }}>
-      
-      {/* Footer Content */}
-
-      <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem', borderTop: '1px solid var(--glass-border)', paddingTop: '3rem', position: 'relative', zIndex: 10 }}>
-        <div style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--neon-red)', letterSpacing: '2px', textTransform: 'uppercase' }}>
-          Omnikon
+    <footer className="relative overflow-hidden border-t border-white/10 bg-black/40 px-6 py-10">
+      <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
+        <div>
+          <div className="text-3xl font-black uppercase text-white">Omnikon</div>
+          <div className="code-font mt-1 text-xs uppercase tracking-[0.22em] text-text-muted">National Hackathon 2026</div>
         </div>
 
-        <div style={{ display: 'flex', gap: '2rem' }}>
-          <a href="#" style={{ color: 'var(--text-secondary)', transition: 'color 0.3s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--neon-red)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
-            <Code size={30} />
-          </a>
-          <a href="#" style={{ color: 'var(--text-secondary)', transition: 'color 0.3s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--neon-red)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
-            <MessageCircle size={30} />
-          </a>
-          <a href="#" style={{ color: 'var(--text-secondary)', transition: 'color 0.3s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--neon-red)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
-            <Globe size={30} />
-          </a>
-          <a href="#" style={{ color: 'var(--text-secondary)', transition: 'color 0.3s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--neon-red)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}>
-            <Camera size={30} />
-          </a>
+        <div className="flex gap-3">
+          {icons.map((Icon, index) => (
+            <a
+              key={index}
+              href="#home"
+              aria-label={`Omnikon link ${index + 1}`}
+              className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-white/[0.045] text-text-secondary transition-colors hover:text-white"
+            >
+              <Icon size={20} />
+            </a>
+          ))}
         </div>
 
-        <div className="code-font" style={{ color: 'var(--text-secondary)' }}>
-          © 2026 Omnikon Hackathon. All rights reserved.
-        </div>
+        <div className="code-font text-sm text-text-muted">© 2026 Omnikon Hackathon. All rights reserved.</div>
       </div>
     </footer>
   );

@@ -1,71 +1,19 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { motion, useScroll } from 'framer-motion';
 
 export default function GlobalEffects() {
-  const [particles, setParticles] = useState<{ id: number; x: number; y: number; size: number; duration: number; delay: number }[]>([]);
   const { scrollYProgress } = useScroll();
-
-  useEffect(() => {
-    // Generate static particles for ambient effect
-    const newParticles = Array.from({ length: 20 }).map((_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 3 + 1,
-      duration: Math.random() * 10 + 10,
-      delay: Math.random() * 5,
-    }));
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setParticles(newParticles);
-  }, []);
 
   return (
     <>
-      {/* Scroll Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-neon-red z-[9998] origin-left pointer-events-none"
-        style={{ scaleX: scrollYProgress, boxShadow: '0 0 10px var(--neon-red)' }}
+        className="fixed left-0 right-0 top-0 z-[9998] h-[3px] origin-left bg-gradient-to-r from-accent-cyan via-accent-gold to-neon-red pointer-events-none"
+        style={{ scaleX: scrollYProgress }}
       />
-
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Grid Overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: 'linear-gradient(var(--neon-red) 1px, transparent 1px), linear-gradient(90deg, var(--neon-red) 1px, transparent 1px)',
-          backgroundSize: '50px 50px',
-        }}
-      />
-      
-      {/* Scanlines */}
-      <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px] opacity-20" />
-      
-      {/* Particles */}
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute bg-neon-red rounded-full"
-          style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: p.size,
-            height: p.size,
-            boxShadow: '0 0 10px var(--neon-red)',
-          }}
-          animate={{
-            y: ["0%", "-100%"],
-            opacity: [0, 0.8, 0],
-          }}
-          transition={{
-            duration: p.duration,
-            repeat: Infinity,
-            ease: "linear",
-            delay: p.delay,
-          }}
-        />
-      ))}
+        <div className="absolute inset-0 opacity-[0.08] bg-[linear-gradient(rgba(255,255,255,0.7)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.7)_1px,transparent_1px)] bg-[size:96px_96px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.08),transparent_42%)]" />
       </div>
     </>
   );

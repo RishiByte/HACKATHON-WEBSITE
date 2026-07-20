@@ -1,69 +1,58 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import TerminalTypewriter from './animations/TerminalTypewriter';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
 const faqs = [
-  { question: "Who can participate?", answer: "Any developer, designer, or creator passionate about building the future. Teams can have up to 4 members." },
-  { question: "Is it completely online?", answer: "Yes, Omnikon Hackathon is hosted 100% virtually on Unstop, so you can join the battle from anywhere in the world." },
-  { question: "What are the rules?", answer: "All code must be written during the hackathon. Use of open-source libraries is permitted. Be respectful to fellow hackers." },
-  { question: "Do I need an idea beforehand?", answer: "No! We will reveal specific themes and challenges at the start of the hackathon. You can brainstorm then." },
-  { question: "How much does it cost?", answer: "Zero. Entry into the arena is completely free of charge." },
+  { question: 'Who can participate?', answer: 'Any developer, designer, or creator who wants to build. Teams can include up to 4 members.' },
+  { question: 'Is Omnikon fully online?', answer: 'Yes. The hackathon runs virtually on Unstop, so teams can participate from anywhere.' },
+  { question: 'Can we use open-source libraries or AI tools?', answer: 'Yes, as long as your final work is original, transparent, and created during the hackathon window.' },
+  { question: 'Do we need an idea before the event?', answer: 'No. Themes and prompts are released during the program so every team starts with the same context.' },
+  { question: 'Is there a registration fee?', answer: 'No. Omnikon is free to enter.' },
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faqs" className="py-24 px-6 min-h-[60vh]">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="neon-text text-5xl md:text-6xl text-text-primary mb-6">TERMINAL_FAQ</h2>
-          <div className="w-24 h-1 bg-neon-red mx-auto shadow-[0_0_15px_var(--neon-red)]" />
+    <section id="faqs" className="section-shell">
+      <div className="section-inner grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <div className="eyebrow">Questions</div>
+          <h2 className="section-title">Everything Before You Register</h2>
+          <p className="section-subtitle">
+            Quick answers for teams deciding whether Omnikon is the right place to build their next project.
+          </p>
         </div>
 
-        <div className="flex flex-col gap-4">
-          {faqs.map((faq, i) => {
-            const isOpen = openIndex === i;
+        <div className="grid gap-3">
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
             return (
-              <div 
-                key={i} 
-                className={`tier-3-glass transition-all duration-300 rounded-lg overflow-hidden ${
-                  isOpen ? 'border-neon-red shadow-[0_0_20px_rgba(255,0,0,0.3)]' : ''
-                }`}
-              >
+              <div key={faq.question} className="premium-card">
                 <button
-                  onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="w-full bg-[#0a0a0a] border-none p-6 flex items-center justify-between cursor-pointer text-left font-orbitron uppercase tracking-widest transition-colors duration-300 hover:bg-[#111]"
+                  type="button"
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  className="flex w-full items-center justify-between gap-4 p-5 text-left"
                 >
-                  <span className={`flex items-center gap-4 text-lg md:text-xl ${isOpen ? 'text-neon-red' : 'text-text-primary'}`}>
-                    <span className="code-font text-gray-500">{`>`}</span>
-                    {faq.question}
-                  </span>
-                  <motion.span 
-                    animate={{ rotate: isOpen ? 180 : 0 }} 
-                    className="text-neon-red text-2xl"
-                  >
-                    ↓
+                  <span className="text-xl font-bold text-white">{faq.question}</span>
+                  <motion.span animate={{ rotate: isOpen ? 180 : 0 }} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/12 bg-white/7 text-accent-cyan">
+                    <ChevronDown size={18} />
                   </motion.span>
                 </button>
-
-                <AnimatePresence>
+                <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.24, ease: 'easeOut' }}
                       className="overflow-hidden"
                     >
-                      <div className="code-font p-6 text-text-secondary bg-black/80 border-t border-glass-border text-base md:text-lg leading-relaxed flex items-start gap-4">
-                        <span className="text-neon-red whitespace-nowrap">system:~$</span>
-                        <div className="relative">
-                          <TerminalTypewriter text={faq.answer} speed={15} />
-                        </div>
-                      </div>
+                      <p className="border-t border-white/10 px-5 pb-5 pt-4 text-lg leading-7 text-text-secondary">
+                        {faq.answer}
+                      </p>
                     </motion.div>
                   )}
                 </AnimatePresence>

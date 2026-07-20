@@ -15,14 +15,14 @@ export default function AntigravityBackground() {
     let width = canvas.width = rect.width;
     let height = canvas.height = rect.height;
 
-    let particles: any[] = [];
+    let particles: Particle[] = [];
     const particleCount = 150;
     
     // Global counter to limit orbiting particles to 15
     let globalOrbitCount = 0;
     
     // Mouse tracking - reduced radius so it doesn't attract everything
-    let mouse = { x: -1000, y: -1000, radius: 100 };
+    const mouse = { x: -1000, y: -1000, radius: 100 };
 
     const handleMouseMove = (e: MouseEvent) => {
       // Get mouse position relative to the hero section
@@ -46,7 +46,7 @@ export default function AntigravityBackground() {
       init();
     });
 
-    let logoCenter = { x: width / 2, y: height / 2 };
+    const logoCenter = { x: width / 2, y: height / 2 };
 
     function updateLogoCenter() {
       const logo = document.getElementById('reactor-logo');

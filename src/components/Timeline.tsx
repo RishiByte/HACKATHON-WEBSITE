@@ -2,80 +2,60 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import ScrollReveal, { ScrollRevealItem } from './animations/ScrollReveal';
-
 import { timelinePhases as phases } from '@/lib/timeline-data';
 
 export default function Timeline() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
+  const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start center", "end center"]
+    offset: ['start 70%', 'end 65%'],
   });
-
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <section id="timeline" className="py-24 px-6 min-h-[80vh] flex flex-col justify-center overflow-hidden" ref={containerRef}>
-      <ScrollReveal className="max-w-7xl mx-auto w-full mb-20">
-        <div className="text-center">
-          <h2 className="neon-text text-5xl md:text-6xl text-text-primary mb-6">MISSION PROGRESS</h2>
-          <div className="w-24 h-1 bg-neon-red mx-auto shadow-[0_0_15px_var(--neon-red)]" />
+    <section id="timeline" ref={containerRef} className="section-shell">
+      <div className="section-inner">
+        <div className="mx-auto mb-16 max-w-3xl text-center">
+          <div className="eyebrow justify-center">Program timeline</div>
+          <h2 className="section-title">From Registration To Results</h2>
+          <p className="section-subtitle">
+            A crisp sequence built for momentum: register, shape the idea, submit proof, present clearly, then ship.
+          </p>
         </div>
-      </ScrollReveal>
 
-      <div className="w-full max-w-5xl mx-auto relative">
-        {/* Background subtle line */}
-        <div className="absolute left-6 lg:left-1/2 top-0 bottom-0 w-[2px] bg-glass-border -translate-x-1/2 z-0" />
-        
-        {/* Animated red line */}
-        <motion.div 
-          style={{ height: lineHeight }} 
-          className="absolute left-6 lg:left-1/2 top-0 w-[2px] bg-neon-red shadow-[0_0_10px_var(--neon-red)] -translate-x-1/2 z-0 origin-top" 
-        />
+        <div className="relative mx-auto max-w-5xl">
+          <div className="absolute left-4 top-0 h-full w-px bg-white/12 md:left-1/2" />
+          <motion.div className="absolute left-4 top-0 w-px origin-top bg-gradient-to-b from-accent-cyan via-accent-gold to-neon-red md:left-1/2" style={{ height: lineHeight }} />
 
-        <div className="flex flex-col gap-12 lg:gap-16 relative">
-          {phases.map((phase, index) => {
-            const isLeft = index % 2 === 0;
-            return (
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                key={phase.id} 
-                className={`relative z-10 flex items-center justify-between w-full flex-row ${isLeft ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}
-              >
-                
-                {/* Empty Spacer for Desktop */}
-                <div className="hidden lg:block w-5/12" />
-
-                {/* Node */}
-                <motion.div 
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="absolute left-6 lg:left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-black border-4 border-neon-red shadow-[0_0_15px_var(--neon-red)] flex items-center justify-center group cursor-pointer"
+          <div className="grid gap-7">
+            {phases.map((phase, index) => {
+              const isLeft = index % 2 === 0;
+              return (
+                <motion.div
+                  key={phase.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 0.55, delay: index * 0.05 }}
+                  className={`relative grid md:grid-cols-2 ${isLeft ? '' : 'md:[&>div]:col-start-2'}`}
                 >
-                  <span className="code-font text-neon-red font-bold text-lg">{phase.id}</span>
-                  <div className="absolute inset-0 rounded-full border border-neon-red opacity-0 group-hover:animate-ping" />
+                  <div className={`pl-12 md:pl-0 ${isLeft ? 'md:pr-12' : 'md:pl-12'}`}>
+                    <div className="premium-card p-5">
+                      <div className="mb-3 flex items-center justify-between gap-4">
+                        <span className="code-font text-sm uppercase tracking-[0.16em] text-accent-cyan">{phase.date}</span>
+                        <span className="code-font text-xs text-text-muted">Phase {phase.id}</span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-white">{phase.title}</h3>
+                      <p className="mt-3 text-lg leading-7 text-text-secondary">{phase.desc}</p>
+                    </div>
+                  </div>
+                  <div className="absolute left-4 top-7 h-4 w-4 -translate-x-1/2 rounded-full border border-white/30 bg-bg-primary shadow-[0_0_0_6px_rgba(255,255,255,0.05)] md:left-1/2">
+                    <div className="absolute inset-1 rounded-full bg-accent-gold shadow-[0_0_18px_var(--accent-gold)]" />
+                  </div>
                 </motion.div>
-                
-                {/* Content */}
-                <div className={`w-full pl-24 lg:pl-0 lg:w-5/12 flex ${isLeft ? 'lg:justify-end' : 'lg:justify-start'}`}>
-                  <motion.div 
-                    whileHover={{ y: -8 }}
-                    className={`text-left ${isLeft ? 'lg:text-right' : 'lg:text-left'} glass neon-border p-6 rounded-lg transition-colors duration-300 w-full lg:max-w-md hover:border-neon-red hover:shadow-[0_0_20px_rgba(255,0,0,0.3)]`}
-                  >
-                    <div className="code-font text-neon-red text-sm mb-2 opacity-70">PHASE {phase.id} • {phase.date}</div>
-                    <h3 className="text-2xl text-text-primary mb-3 font-bold">{phase.title}</h3>
-                    <p className="text-text-secondary text-base font-light">{phase.desc}</p>
-                  </motion.div>
-                </div>
-
-              </motion.div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

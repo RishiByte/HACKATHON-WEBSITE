@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { rulebookData } from '@/lib/rulebook-data';
 import { timelinePhases } from '@/lib/timeline-data';
-import { VaultCard, prizes } from '@/components/PrizePool';
+import { prizes } from '@/components/PrizePool';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 
@@ -98,7 +98,7 @@ export default function RulebookPage() {
           </header>
 
           <div className="space-y-20">
-            {rulebookData.map((section, idx) => (
+            {rulebookData.map((section) => (
               <motion.section 
                 key={section.id}
                 id={`section-${section.id}`}
@@ -161,10 +161,12 @@ export default function RulebookPage() {
 
                 {/* Custom Rendering for Prizes */}
                 {section.id === "06" && (
-                  <div className="mt-12 flex flex-col md:flex-row flex-wrap gap-8 justify-center">
-                    {prizes.map((prize, i) => (
-                      <div key={i} className={i === 1 ? "md:-translate-y-4" : ""}>
-                        <VaultCard prize={prize} />
+                  <div className="mt-12 grid gap-4 md:grid-cols-3">
+                    {prizes.map((prize) => (
+                      <div key={prize.title} className="premium-card p-5">
+                        <div className="text-sm uppercase tracking-[0.16em] text-text-muted">{prize.place}</div>
+                        <div className="mt-3 text-2xl font-bold text-white">{prize.title}</div>
+                        <div className="code-font mt-3 text-4xl font-black" style={{ color: prize.accent }}>{prize.amount}</div>
                       </div>
                     ))}
                   </div>

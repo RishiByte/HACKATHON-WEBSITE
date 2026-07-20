@@ -1,107 +1,105 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { Braces, Gauge, Rocket, Users } from 'lucide-react';
 import ScrollReveal, { ScrollRevealItem } from './animations/ScrollReveal';
 
-const terminalCommands = [
-  { cmd: '$ npm install innovation', output: 'fetch: innovation@latest... OK\nbuilding future...', delay: 1000 },
-  { cmd: '$ git push origin hackathon', output: 'Compressing objects: 100% (4/4), done.\nWriting objects: 100% (4/4), 4.50 KiB | 4.50 MiB/s, done.\nTo https://github.com/omnikon/hackathon\n   a1b2c3d..e4f5g6h  main -> main', delay: 3500 },
-  { cmd: '$ deploy future', output: 'Deploying to Omnikon Arena...\n\n[SUCCESS] Arena is live and waiting for contenders.', delay: 7000 }
+const pillars = [
+  {
+    icon: Rocket,
+    title: 'Ship Real Products',
+    desc: 'Build working prototypes, demos, and product stories that judges can understand in minutes.',
+  },
+  {
+    icon: Users,
+    title: 'Team-First Format',
+    desc: 'Collaborate in squads of up to four with enough structure to move fast and enough freedom to be bold.',
+  },
+  {
+    icon: Gauge,
+    title: 'High-Signal Judging',
+    desc: 'Projects are evaluated on execution, usability, technical depth, creativity, and practical impact.',
+  },
 ];
 
-function Terminal() {
-  const [lines, setLines] = useState<{ text: string, isCommand: boolean }[]>([]);
-  const terminalRef = useRef(null);
-
-  useEffect(() => {
-
-    const timeouts: NodeJS.Timeout[] = [];
-
-    terminalCommands.forEach(({ cmd, output, delay }) => {
-      const t1 = setTimeout(() => {
-        setLines(prev => [...prev, { text: cmd, isCommand: true }]);
-      }, delay);
-      
-      const t2 = setTimeout(() => {
-        setLines(prev => [...prev, { text: output, isCommand: false }]);
-      }, delay + 800);
-
-      timeouts.push(t1, t2);
-    });
-
-    return () => timeouts.forEach(clearTimeout);
-  }, []);
-
-  return (
-    <div ref={terminalRef} className="glass neon-border" style={{ borderRadius: '10px', overflow: 'hidden', height: '450px', display: 'flex', flexDirection: 'column', boxShadow: '0 0 30px rgba(255,0,0,0.2)' }}>
-      <div style={{ background: 'var(--bg-secondary)', padding: '0.8rem 1rem', display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--glass-border)' }}>
-        <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ff5f56' }} />
-        <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ffbd2e' }} />
-        <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#27c93f' }} />
-        <div style={{ margin: '0 auto', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>root@omnikon:~</div>
-      </div>
-      <div className="code-font" style={{ padding: '1.5rem', flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem', color: 'var(--text-primary)' }}>
-        {lines.map((line, i) => (
-          <div key={i}>
-            {line.isCommand ? (
-              <div>
-                <span style={{ color: 'var(--neon-red)' }}>root@omnikon:~$</span> {line.text.substring(2)}
-              </div>
-            ) : (
-              <div style={{ color: 'var(--text-secondary)', whiteSpace: 'pre-wrap', marginTop: '0.5rem' }}>
-                {line.text}
-              </div>
-            )}
-          </div>
-        ))}
-        <motion.div 
-          animate={{ opacity: [1, 0] }} 
-          transition={{ repeat: Infinity, duration: 0.8 }}
-          style={{ width: '10px', height: '20px', background: 'var(--neon-red)', display: 'inline-block', marginTop: '0.5rem' }}
-        />
-      </div>
-    </div>
-  );
-}
+const telemetry = ['Idea validation', 'Prototype sprint', 'Mentor review', 'Final showcase'];
 
 export default function AboutTerminal() {
   return (
-    <section id="about" style={{ padding: '100px 2rem', minHeight: '80vh', display: 'flex', alignItems: 'center' }}>
-      <ScrollReveal stagger className="w-full">
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem', alignItems: 'center' }}>
-          
-          <ScrollRevealItem>
-            <h2 className="neon-text" style={{ fontSize: '3.5rem', marginBottom: '1.5rem', color: 'var(--neon-red)' }}>
-              ENTER THE ARENA
-            </h2>
-            <p style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-              Omnikon is proud to host the most intense Web Dev and Full Stack Hackathon of the year on Unstop. This is not just a coding competition; it&apos;s a battleground for the brightest minds to build the future.
-            </p>
-            <p style={{ fontSize: '1.2rem', lineHeight: '1.8', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-              Bring your ideas, assemble your squad, and conquer challenges that push the boundaries of modern technology. Do you have what it takes to survive the arena?
-            </p>
-            <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-              <div className="glass neon-border" style={{ padding: '1.5rem', textAlign: 'center', flex: 1, minWidth: '120px' }}>
-                <div className="neon-text" style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>48H</div>
-                <div style={{ color: 'var(--neon-red)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Coding</div>
+    <section id="about" className="section-shell">
+      <ScrollReveal stagger className="section-inner grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+        <ScrollRevealItem>
+          <div className="eyebrow">Built for serious makers</div>
+          <h2 className="section-title">A Hackathon That Feels Like A Launchpad</h2>
+          <p className="section-subtitle max-w-2xl">
+            Omnikon brings together developers, designers, and builders for a focused online sprint. The goal is simple: form a sharp idea, build a clean product, and present it like something ready for the world.
+          </p>
+
+          <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            {[
+              ['48H', 'core sprint'],
+              ['5', 'tracks'],
+              ['₹10K', 'rewards'],
+            ].map(([value, label]) => (
+              <div key={label} className="premium-card p-5">
+                <div className="code-font text-3xl font-bold text-white">{value}</div>
+                <div className="mt-1 text-sm uppercase tracking-[0.14em] text-text-muted">{label}</div>
               </div>
-              <div className="glass neon-border" style={{ padding: '1.5rem', textAlign: 'center', flex: 1, minWidth: '120px' }}>
-                <div className="neon-text" style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>$10K</div>
-                <div style={{ color: 'var(--neon-red)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Prizes</div>
+            ))}
+          </div>
+        </ScrollRevealItem>
+
+        <ScrollRevealItem>
+          <div className="premium-card p-5 sm:p-7">
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <div>
+                <div className="eyebrow text-[0.68rem]">Event operating system</div>
+                <h3 className="mt-2 text-2xl font-bold text-white">From concept to showcase</h3>
               </div>
-              <div className="glass neon-border" style={{ padding: '1.5rem', textAlign: 'center', flex: 1, minWidth: '120px' }}>
-                <div className="neon-text" style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>500+</div>
-                <div style={{ color: 'var(--neon-red)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Hackers</div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-white/12 bg-white/7 text-accent-cyan">
+                <Braces size={24} />
               </div>
             </div>
-          </ScrollRevealItem>
 
-          <ScrollRevealItem>
-            <Terminal />
-          </ScrollRevealItem>
+            <div className="grid gap-4">
+              {pillars.map((pillar, index) => (
+                <motion.div
+                  key={pillar.title}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  className="relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.035] p-5"
+                >
+                  <div className="flex gap-4">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-neon-red/25 to-accent-cyan/15 text-accent-gold">
+                      <pillar.icon size={22} />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold text-white">{pillar.title}</h4>
+                      <p className="mt-1 text-base leading-6 text-text-secondary">{pillar.desc}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
 
-        </div>
+            <div className="mt-6 overflow-hidden rounded-lg border border-white/10 bg-black/30 p-4">
+              <div className="mb-3 flex items-center justify-between">
+                <span className="code-font text-xs uppercase tracking-[0.18em] text-text-muted">Live workflow</span>
+                <span className="h-2 w-2 rounded-full bg-accent-cyan shadow-[0_0_18px_var(--accent-cyan)]" />
+              </div>
+              <div className="grid gap-3 sm:grid-cols-4">
+                {telemetry.map((item, index) => (
+                  <div key={item} className="relative rounded-md bg-white/[0.045] px-3 py-3">
+                    <div className="code-font text-xs text-accent-cyan">0{index + 1}</div>
+                    <div className="mt-1 text-sm font-semibold text-white">{item}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </ScrollRevealItem>
       </ScrollReveal>
     </section>
   );

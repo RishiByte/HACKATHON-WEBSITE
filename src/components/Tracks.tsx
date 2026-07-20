@@ -1,126 +1,99 @@
 'use client';
 
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { LayoutDashboard, Layers, Bot, Shield, Cloud } from 'lucide-react';
-import React from 'react';
+import { motion } from 'framer-motion';
+import { Bot, Cloud, LayoutDashboard, Layers, Shield } from 'lucide-react';
+import ScrollReveal, { ScrollRevealItem } from './animations/ScrollReveal';
 
 const tracks = [
   {
-    title: 'Frontend Arena',
+    title: 'Frontend Craft',
     icon: LayoutDashboard,
-    tags: ['React', 'Next.js', 'UI/UX'],
-    desc: 'Craft pixel-perfect, highly animated, and performant user interfaces.'
+    accent: 'from-accent-cyan/24 to-neon-red/16',
+    tags: ['React', 'Next.js', 'Design Systems'],
+    desc: 'Create polished interfaces with strong usability, clean motion, and production-ready component thinking.',
   },
   {
-    title: 'Fullstack Engineering',
+    title: 'Full Stack Products',
     icon: Layers,
-    tags: ['E2E Apps', 'Auth', 'Databases'],
-    desc: 'Build complete applications from the database to the browser.'
+    accent: 'from-accent-gold/24 to-neon-red/16',
+    tags: ['Auth', 'APIs', 'Databases'],
+    desc: 'Build complete web products with reliable backends, thoughtful flows, and deployable architecture.',
   },
   {
-    title: 'AI / ML',
+    title: 'AI Workflows',
     icon: Bot,
-    tags: ['LLMs', 'Agents', 'Workflows'],
-    desc: 'Integrate artificial intelligence to solve complex problems autonomously.'
+    accent: 'from-accent-cyan/24 to-accent-gold/16',
+    tags: ['LLMs', 'Agents', 'Automation'],
+    desc: 'Use intelligent systems to reduce friction, make better decisions, or unlock new user experiences.',
   },
   {
-    title: 'Web Security',
+    title: 'Security Systems',
     icon: Shield,
-    tags: ['Auth', 'Pentesting', 'Cryptography'],
-    desc: 'Find and patch vulnerabilities. Build impenetrable systems.'
+    accent: 'from-neon-red/24 to-accent-cyan/12',
+    tags: ['Auth', 'Threat Modeling', 'Privacy'],
+    desc: 'Design resilient systems that protect users, data, and trust from day one.',
   },
   {
-    title: 'Cloud',
+    title: 'Cloud Infrastructure',
     icon: Cloud,
-    tags: ['AWS', 'Docker', 'Serverless'],
-    desc: 'Architect scalable and resilient cloud infrastructure.'
-  }
+    accent: 'from-accent-gold/20 to-accent-cyan/14',
+    tags: ['Docker', 'Serverless', 'Scale'],
+    desc: 'Ship dependable cloud-native experiences with observability, performance, and deployment discipline.',
+  },
 ];
 
-function TrackCard({ track, index }: { track: typeof tracks[0], index: number }) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x);
-  const mouseYSpring = useSpring(y);
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
+function TrackCard({ track, index }: { track: typeof tracks[0]; index: number }) {
   return (
-    <div 
-      style={{ perspective: 1000 }}
-      className="group h-full"
+    <motion.article
+      variants={{
+        hidden: { opacity: 0, y: 26 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.55, delay: index * 0.04 } },
+      }}
+      whileHover={{ y: -8 }}
+      className="premium-card group h-full p-6"
     >
-      <motion.div
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d",
-        }}
-        className="relative h-full cursor-pointer tier-3-glass devil-horn-card transition-colors duration-500 hover:bg-black/60"
-      >
-        <div 
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_50%_50%,rgba(255,0,0,0.1)_0%,transparent_60%)] pointer-events-none" 
-          style={{ transform: "translateZ(-10px)" }} 
-        />
-        
-        <div className="p-8 md:p-10 flex flex-col h-full z-10 relative" style={{ transform: "translateZ(30px)" }}>
-          <div className="w-16 h-16 rounded-xl bg-red-900/20 flex items-center justify-center mb-6 border border-neon-red shadow-[0_0_15px_var(--neon-red-light)]">
-            <track.icon size={32} className="text-neon-red drop-shadow-[0_0_8px_rgba(255,0,0,0.8)]" />
+      <div className={`absolute inset-x-0 top-0 h-32 bg-gradient-to-br ${track.accent} opacity-80 blur-2xl transition-opacity group-hover:opacity-100`} />
+      <div className="relative z-10 flex h-full flex-col">
+        <div className="mb-8 flex items-start justify-between gap-4">
+          <div className="flex h-14 w-14 items-center justify-center rounded-lg border border-white/12 bg-white/7 text-white shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
+            <track.icon size={28} />
           </div>
-          <h3 className="neon-text text-2xl mb-4 text-text-primary tracking-wider">{track.title}</h3>
-          <p className="text-text-secondary mb-6 flex-1 text-lg font-light leading-relaxed">{track.desc}</p>
-          <div className="flex gap-2 flex-wrap mt-auto">
-            {track.tags.map(tag => (
-              <span key={tag} className="code-font bg-white/5 border border-glass-border px-3 py-1 rounded-full text-xs text-neon-red tracking-wider">
-                {tag}
-              </span>
-            ))}
-          </div>
+          <div className="code-font text-sm text-text-muted">0{index + 1}</div>
         </div>
-      </motion.div>
-    </div>
+        <h3 className="text-2xl font-bold text-white">{track.title}</h3>
+        <p className="mt-4 flex-1 text-lg leading-7 text-text-secondary">{track.desc}</p>
+        <div className="mt-7 flex flex-wrap gap-2">
+          {track.tags.map((tag) => (
+            <span key={tag} className="code-font rounded-full border border-white/10 bg-white/[0.045] px-3 py-1 text-xs text-text-secondary">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.article>
   );
 }
 
 export default function Tracks() {
   return (
-    <section id="tracks" className="py-24 px-6 md:px-12 min-h-screen relative overflow-hidden">
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div 
-          className="text-center mb-20"
-        >
-          <h2 className="neon-text text-5xl md:text-6xl text-text-primary mb-6">CHOOSE YOUR ARENA</h2>
-          <div className="w-24 h-1 bg-neon-red mx-auto shadow-[0_0_15px_var(--neon-red)]" />
-          <p className="text-text-secondary text-xl mt-6 font-light tracking-wide">Select your battlefield and claim victory.</p>
-        </div>
+    <section id="tracks" className="section-shell overflow-hidden">
+      <ScrollReveal stagger className="section-inner">
+        <ScrollRevealItem className="mb-14 max-w-3xl">
+          <div className="eyebrow">Choose your build lane</div>
+          <h2 className="section-title">Tracks With Real Product Gravity</h2>
+          <p className="section-subtitle">
+            Pick a direction, then make it undeniable. Every track rewards clean execution, thoughtful UX, and a working demo.
+          </p>
+        </ScrollRevealItem>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-          {tracks.map((track, i) => (
-            <TrackCard key={track.title} track={track} index={i} />
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {tracks.map((track, index) => (
+            <ScrollRevealItem key={track.title}>
+              <TrackCard track={track} index={index} />
+            </ScrollRevealItem>
           ))}
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

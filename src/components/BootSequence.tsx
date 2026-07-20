@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 const BOOT_SEQUENCE = [
   "BOOTING ARENA...",
@@ -78,7 +79,7 @@ export default function BootSequence({ isLoaded, onComplete }: { isLoaded?: bool
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="relative z-10 w-full h-full flex items-center justify-center"
             >
-              <img src="/HackathonLogo.png" alt="Omnikon Hackathon" className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,0,0,0.6)]" />
+              <Image src="/HackathonLogo.png" alt="Omnikon Hackathon" fill sizes="384px" className="object-contain drop-shadow-[0_0_30px_rgba(255,0,0,0.6)]" />
             </motion.div>
           </div>
 

@@ -1,199 +1,152 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { cn } from '@/lib/utils';
-import AntigravityBackground from './AntigravityBackground';
-import GlitchText from './animations/GlitchText';
+import { ArrowRight, CalendarDays, MapPin, Sparkles } from 'lucide-react';
+
+const targetDate = new Date('2026-08-15T23:59:59+05:30');
 
 function Countdown() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 30); // 30 days from now
+    const update = () => {
+      const difference = Math.max(targetDate.getTime() - Date.now(), 0);
+      setTimeLeft({
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      });
+    };
 
-    const interval = setInterval(() => {
-      const now = new Date();
-      const difference = targetDate.getTime() - now.getTime();
-      
-      if (difference <= 0) {
-        clearInterval(interval);
-      } else {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60),
-        });
-      }
-    }, 1000);
+    update();
+    const interval = setInterval(update, 1000);
     return () => clearInterval(interval);
   }, []);
 
-  if (!mounted) return null;
-
   return (
-    <div className="flex flex-col items-center mt-12 z-20 relative w-full max-w-3xl mx-auto">
-      <div className="text-neon-red font-mono text-sm tracking-widest mb-4 uppercase">
-        Registration Closes In
-      </div>
-      <div className="flex flex-wrap justify-center gap-4 sm:gap-8 w-full">
-        {Object.entries(timeLeft).map(([unit, value]) => (
-          <div key={unit} className="flex flex-col items-center group bg-black/50 border border-neon-red/30 px-4 py-3 sm:px-6 sm:py-4 rounded-sm hover:border-neon-red hover:shadow-[0_0_15px_rgba(255,0,0,0.4)] transition-all flex-1 min-w-[80px] max-w-[120px]">
-            <div className="font-mono text-neon-red text-3xl sm:text-5xl font-bold">
-              {value.toString().padStart(2, '0')}
-            </div>
-            <div className="text-[10px] sm:text-xs uppercase tracking-[3px] text-text-secondary mt-2 font-mono">
-              {unit}
-            </div>
+    <div className="grid w-full grid-cols-4 gap-2 sm:gap-3">
+      {Object.entries(timeLeft).map(([unit, value]) => (
+        <div key={unit} className="premium-card px-3 py-4 text-center">
+          <div className="code-font text-2xl font-bold text-white sm:text-4xl">
+            {value.toString().padStart(2, '0')}
           </div>
-        ))}
-      </div>
+          <div className="code-font mt-1 text-[0.62rem] uppercase tracking-[0.18em] text-text-secondary sm:text-xs">
+            {unit}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
 
+const stats = [
+  { label: 'Hours of building', value: '48' },
+  { label: 'Prize pool', value: '₹10K' },
+  { label: 'Hackers expected', value: '500+' },
+];
+
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-black">
-      
-      {/* Background Layers */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Particle Background */}
-        <AntigravityBackground />
-        
-        {/* Subtle Grid */}
-        <div className="absolute inset-0 opacity-[0.15] bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:50px_50px]" />
-        
-        {/* Circuit Traces (Simulated with radial gradients and repeating lines) */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,rgba(255,0,0,0.8)_0%,transparent_60%)]" />
-        
-        {/* Animated Scanlines Effect */}
-        <motion.div 
-          animate={{ backgroundPosition: ['0px 0px', '0px 100px'] }}
-          transition={{ repeat: Infinity, duration: 4, ease: 'linear' }}
-          className="absolute inset-0 opacity-30 pointer-events-none mix-blend-overlay bg-[linear-gradient(rgba(0,0,0,0)_50%,rgba(0,0,0,0.5)_50%)] bg-[size:100%_4px]" 
+    <section id="home" className="relative flex min-h-screen items-center overflow-hidden px-5 pb-20 pt-32 sm:px-8">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black to-transparent" />
+        <motion.div
+          className="absolute left-[8%] top-[18%] h-56 w-56 rounded-full bg-neon-red/20 blur-[90px]"
+          animate={{ scale: [1, 1.18, 1], opacity: [0.34, 0.58, 0.34] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
         />
-        
-        {/* Red Beam Spotlight from top */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60vw] h-[100vh] bg-[conic-gradient(from_180deg_at_50%_0%,transparent_0deg,rgba(255,0,0,0.15)_160deg,rgba(255,0,0,0.3)_180deg,rgba(255,0,0,0.15)_200deg,transparent_360deg)] opacity-70 blur-xl" />
+        <motion.div
+          className="absolute right-[8%] top-[22%] h-72 w-72 rounded-full bg-accent-cyan/15 blur-[100px]"
+          animate={{ y: [0, 26, 0], opacity: [0.28, 0.5, 0.28] }}
+          transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:72px_72px] opacity-70 [mask-image:radial-gradient(circle_at_50%_28%,black,transparent_72%)]" />
       </div>
 
-      {/* Hero Content */}
-      <div className="relative z-20 flex flex-col items-center w-full max-w-7xl px-4">
-        
-        {/* The Hero Logo with Morphing Wrapper */}
-        <div id="reactor-logo" className="relative w-48 h-48 sm:w-64 sm:h-64 mb-10 z-30 perspective-1000">
-          <motion.div
-            className="w-full h-full"
-            animate={{ 
-              y: [-10, 10, -10],
-              scale: [1, 1.02, 1],
-            }}
-            transition={{ 
-              duration: 6, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
-            }}
-          >
-            {/* Soft Neon Pulse behind logo */}
-            <motion.div 
-              animate={{ opacity: [0.5, 0.8, 0.5], scale: [1, 1.1, 1] }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute inset-[-20%] rounded-full bg-neon-red/30 blur-[30px] z-0 pointer-events-none"
-            />
-            
-            {/* The Logo itself */}
-            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-neon-red/60 shadow-[0_0_40px_rgba(255,0,0,0.8)] z-10 bg-black">
-              <img 
-                src="/LogoOmnikon.jpeg" 
-                alt="Omnikon Logo" 
-                className="w-full h-full object-cover opacity-90"
-              />
-              {/* Inner Scanline on Logo */}
-              <motion.div 
-                animate={{ y: ['-100%', '100%'] }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                className="absolute inset-0 h-1 bg-white/50 shadow-[0_0_10px_#fff] mix-blend-overlay"
-              />
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Typography */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+      <div className="section-inner grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="text-center w-full z-20"
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="max-w-4xl"
         >
-          <div className="inline-block relative">
-            <GlitchText 
-              text="OMNIKON NATIONAL HACKATHON 2026" 
-              as="h1" 
-              className="text-white text-shadow-[0_0_15px_rgba(255,0,0,0.5)] text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-bold tracking-tighter uppercase mb-4 max-w-5xl leading-[1.1]" 
-            />
-          </div>
-          
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="flex items-center justify-center gap-4 mt-2"
-          >
-            <div className="w-8 sm:w-12 h-[1px] bg-neon-red/50" />
-            <p className="text-lg sm:text-xl text-text-secondary tracking-[6px] sm:tracking-[10px] uppercase font-mono text-shadow-[0_0_8px_rgba(255,0,0,0.4)]">
-              Build. Innovate. Impact.
-            </p>
-            <div className="w-8 sm:w-12 h-[1px] bg-neon-red/50" />
-          </motion.div>
+          <div className="eyebrow">National Hackathon 2026</div>
+          <h1 className="mt-6 max-w-5xl text-[clamp(3.4rem,10vw,7.8rem)] font-black uppercase leading-[0.86] text-white">
+            Omnikon
+            <span className="block bg-gradient-to-r from-accent-gold via-neon-red-light to-accent-cyan bg-clip-text text-transparent">
+              Hackathon
+            </span>
+          </h1>
+          <p className="mt-7 max-w-2xl text-xl leading-8 text-text-secondary sm:text-2xl">
+            A polished 48-hour build arena for web, full stack, AI, cloud, and security teams ready to ship projects with real-world impact.
+          </p>
 
-          {/* Static Stat Badges */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.7 }}
-            className="flex flex-wrap justify-center gap-4 sm:gap-8 mt-8"
-          >
-            {[
-              { label: 'DURATION', value: '48H' },
-              { label: 'PRIZE POOL', value: '₹10K' },
-              { label: 'HACKERS', value: '500+' }
-            ].map((stat) => (
-              <div key={stat.label} className="flex flex-col items-center bg-black/40 border border-white/10 px-6 py-2 rounded-sm backdrop-blur-sm">
-                <span className="text-white font-mono font-bold text-2xl">{stat.value}</span>
-                <span className="text-text-secondary font-mono text-[10px] uppercase tracking-widest">{stat.label}</span>
+          <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-text-secondary sm:text-base">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2">
+              <CalendarDays size={18} className="text-accent-gold" />
+              Aug 15 - Sep 5, 2026
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2">
+              <MapPin size={18} className="text-accent-cyan" />
+              Online on Unstop
+            </span>
+          </div>
+
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <a href="#register" className="magnetic-button primary-button">
+              Register now <ArrowRight size={18} />
+            </a>
+            <a href="/rulebook" className="magnetic-button secondary-button">
+              View rulebook
+            </a>
+          </div>
+
+          <div className="mt-12 grid max-w-2xl grid-cols-3 gap-3">
+            {stats.map((stat) => (
+              <div key={stat.label} className="border-l border-white/14 pl-4">
+                <div className="code-font text-2xl font-bold text-white sm:text-4xl">{stat.value}</div>
+                <div className="mt-1 text-sm leading-4 text-text-muted">{stat.label}</div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </motion.div>
 
-        {/* Action Buttons */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="flex flex-wrap gap-6 mt-12 justify-center z-20"
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94, y: 26 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.14, ease: 'easeOut' }}
+          className="relative mx-auto w-full max-w-[460px]"
         >
-          <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="#register" className="tier-1-glow relative group px-8 py-4 bg-black overflow-hidden transition-all">
-            <span className="relative z-10 font-mono text-neon-red font-bold uppercase tracking-widest group-hover:text-black transition-colors duration-300">
-              Initialize Registration
-            </span>
-            <div className="absolute inset-0 bg-neon-red scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out" />
-          </motion.a>
-          
-          <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="/rulebook" className="tier-3-glass relative group px-8 py-4 bg-transparent overflow-hidden transition-all">
-            <span className="relative z-10 font-mono text-text-secondary group-hover:text-white uppercase tracking-widest transition-colors duration-300">
-              Access Rulebook
-            </span>
-            <div className="absolute inset-0 bg-white/10 scale-y-0 group-hover:scale-y-100 origin-bottom transition-transform duration-300 ease-out" />
-          </motion.a>
+          <div className="absolute -inset-10 rounded-full bg-[conic-gradient(from_180deg,var(--neon-red),var(--accent-cyan),var(--accent-gold),var(--neon-red))] opacity-20 blur-3xl" />
+          <div className="premium-card p-5 sm:p-6">
+            <div className="relative aspect-square overflow-hidden rounded-lg border border-white/12 bg-black">
+              <Image
+                src="/HackathonLogo.png"
+                alt="Omnikon National Hackathon"
+                fill
+                priority
+                sizes="(max-width: 640px) 330px, 418px"
+                className="object-contain p-6"
+              />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,transparent,rgba(0,0,0,0.5))]" />
+            </div>
+            <div className="mt-5 flex items-center justify-between gap-4">
+              <div>
+                <div className="eyebrow text-[0.68rem]">Registration closes</div>
+                <div className="mt-1 text-2xl font-bold text-white">August 15</div>
+              </div>
+              <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-white/12 bg-white/7 text-accent-gold">
+                <Sparkles size={24} />
+              </div>
+            </div>
+            <div className="mt-5">
+              <Countdown />
+            </div>
+          </div>
         </motion.div>
-
-        <Countdown />
       </div>
     </section>
   );
